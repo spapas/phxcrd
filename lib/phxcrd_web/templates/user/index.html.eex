@@ -1,4 +1,4 @@
-<h1>Λίστα χρηστών</h1>
+<h1><%= gettext "User list" %></h1>
 
 <table>
   <thead>

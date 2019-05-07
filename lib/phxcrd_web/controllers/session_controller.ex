@@ -52,7 +52,7 @@ defmodule PhxcrdWeb.SessionController do
           if user.authority_id && user.authority, do: user.authority.name, else: nil
 
         conn
-        |> put_flash(:info, "Καλώς ήρθατε #{username}!")
+        |> put_flash(:info, gettext("Welcome %{username}!", username: username))
         |> put_session(:user_id, user.id)
         |> put_session(:username, user.username)
         |> put_session(:permissions, user.permissions |> Enum.map(& &1.name))
@@ -65,7 +65,7 @@ defmodule PhxcrdWeb.SessionController do
         Logger.info("Cannot login #{username}: #{reason}")
 
         conn
-        |> put_flash(:error, "Εσφαλμένα στοιχεία σύνδεσης: " <> reason)
+        |> put_flash(:error, gettext("Cannot login: ") <> reason)
         |> redirect(to: Routes.session_path(conn, :new))
     end
   end

@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Δ Ο Δ</title>
+  <title>P·H·X·C·R·D</title>
 
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,700">
 
@@ -18,8 +18,8 @@
 
   <script src='<%= Routes.static_path(@conn, "/js/jquery-3.4.0.slim.min.js") %>'></script>
   <script src='<%= Routes.static_path(@conn, "/js/select2.min.js") %>'></script>
-<script src='<%= Routes.static_path(@conn, "/js/main.js") %>'></script>
-  
+  <script src='<%= Routes.static_path(@conn, "/js/main.js") %>'></script>
+
 </head>
 
 <body>
@@ -27,20 +27,21 @@
 
     <nav class="navigation">
       <section class="container"><a class="navigation-title" href="/">
-          <h1 class="title">ΔΟΔ</h1>
+          <h1 class="title">P·H·X·C·R·D</h1>
         </a>
         <ul class="navigation-list float-right">
 
           <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
 
-          <li class="navigation-item"><a class="navigation-link" href="#popover-admin" data-popover="">Διαχείριση</a>
+          <li class="navigation-item"><a class="navigation-link" href="#popover-admin"
+              data-popover=""><%= gettext "Administration" %></a>
             <div class="popover" id="popover-admin">
               <ul class="popover-list">
                 <li class="popover-item">
-                  <%= link "Υπηρεσίες",
+                  <%= link gettext("Authorities"),
                         to: Routes.authority_path(@conn, :index),
                         class: "popover-link",
-                        title: "Υπηρεσίες"
+                        title: gettext "Υπηρεσίες"
                   %>
                 </li>
 
@@ -88,10 +89,10 @@
           <li class="navigation-item"><a class="navigation-link" href="/">
               <%= if @user_signed_in? do %>
               <%= form_for @conn, Routes.session_path(@conn, :delete), [method: :delete, as: :user], fn _ -> %>
-              <%= submit @username <> " | Αποσύνδεση", class: "button button-outline" %>
+              <%= submit @username <> " | " <> gettext "Log out", class: "button button-outline" %>
               <% end %>
               <% else %>
-              <%= link "Σύνδεση", to: Routes.session_path(@conn, :new), class: "button button-outline" %>
+              <%= link gettext("Log in"), to: Routes.session_path(@conn, :new), class: "button button-outline" %>
               <% end %>
 
             </a></li>

@@ -25,14 +25,6 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-# Exldap settings
-config :exldap, :settings,
-  server: "login1.yen.gr",
-  base: "OU=People,DC=yen,DC=gr",
-  port: 389,
-  ssl: false,
-  search_timeout: 5_000
-
 # Track changes
 config :ex_audit,
   version_schema: Phxcrd.Audit.Version,

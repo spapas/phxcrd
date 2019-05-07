@@ -1,15 +1,15 @@
-<h1>Σύνδεση</h1>
+<h1><%= gettext "Login" %></h1>
 
 <%= form_for @conn, Routes.session_path(@conn, :create), [method: :post, as: :user], fn f -> %>
 <div class="form-group">
-    <%= text_input f, :username, placeholder: "Όνομα χρήστη", autofocus: true, autocomplete: "username" %>
+    <%= text_input f, :username, placeholder: gettext "Username", autofocus: true, autocomplete: "username" %>
 </div>
 
 <div class="form-group">
-    <%= password_input f, :password, placeholder: "Κωδικός", autocomplete: "current-password" %>
+    <%= password_input f, :password, placeholder: gettext "Password", autocomplete: "current-password" %>
 </div>
 
 <div class="form-group">
-    <%= submit "Υποβολή" %>
+    <%= submit gettext "Submit" %>
 </div>
 <% end %>
