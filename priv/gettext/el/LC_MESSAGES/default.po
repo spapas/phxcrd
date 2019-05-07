@@ -12,16 +12,20 @@ msgstr ""
 "Plural-Forms: nplurals=2\n"
 
 #, elixir-format
+#: lib/phxcrd_web/templates/layout/app.html.eex:37
 #: lib/phxcrd_web/templates/page/index.html.eex:19
 msgid "Administration"
 msgstr "Κεντρική διαχείριση"
 
 #, elixir-format
+#: lib/phxcrd_web/templates/layout/app.html.eex:41
+#: lib/phxcrd_web/templates/layout/app.html.eex:44
 #: lib/phxcrd_web/templates/page/index.html.eex:40
 msgid "Authorities"
 msgstr "Υπηρεσίες"
 
 #, elixir-format
+#: lib/phxcrd_web/templates/authority/show.html.eex:1
 #: lib/phxcrd_web/templates/page/index.html.eex:11
 msgid "Authority"
 msgstr "Υπηρεσία"
@@ -32,17 +36,25 @@ msgid "Management"
 msgstr "Διαχείριση"
 
 #, elixir-format
+#: lib/phxcrd_web/templates/layout/app.html.eex:59
+#: lib/phxcrd_web/templates/layout/app.html.eex:62
 #: lib/phxcrd_web/templates/page/index.html.eex:6
 #: lib/phxcrd_web/templates/page/index.html.eex:25
 msgid "Permissions"
 msgstr "Δικαιώματα"
 
 #, elixir-format
+#: lib/phxcrd_web/templates/authority/form.html.eex:19
+#: lib/phxcrd_web/templates/authority/show.html.eex:17
+#: lib/phxcrd_web/templates/layout/app.html.eex:51
+#: lib/phxcrd_web/templates/layout/app.html.eex:54
 #: lib/phxcrd_web/templates/page/index.html.eex:22
 msgid "Users"
 msgstr "Χρήστες"
 
 #, elixir-format
+#: lib/phxcrd_web/templates/layout/app.html.eex:67
+#: lib/phxcrd_web/templates/layout/app.html.eex:70
 #: lib/phxcrd_web/templates/page/index.html.eex:28
 msgid "Versions"
 msgstr "Εκδόσεις"
@@ -50,4 +62,153 @@ msgstr "Εκδόσεις"
 #, elixir-format
 #: lib/phxcrd_web/templates/page/index.html.eex:2
 msgid "Welcome to %{name}"
+msgstr ""
+
+#, elixir-format, fuzzy
+#: lib/phxcrd_web/templates/authority/index.html.eex:7
+msgid "Authority kind"
+msgstr "Υπηρεσία"
+
+#, elixir-format, fuzzy
+#: lib/phxcrd_web/templates/authority/index.html.eex:1
+msgid "Authority list"
+msgstr "Υπηρεσία"
+
+#, elixir-format, fuzzy
+#: lib/phxcrd_web/templates/authority/index.html.eex:4
+msgid "Authority name"
+msgstr "Υπηρεσία"
+
+#, elixir-format
+#: lib/phxcrd_web/controllers/session_controller.ex:68
+msgid "Cannot login: "
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/authority/index.html.eex:39
+#: lib/phxcrd_web/templates/authority/show.html.eex:32
+msgid "Edit"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/authority/index.html.eex:14
+msgid "Filter"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/authority/form.html.eex:12
+#: lib/phxcrd_web/templates/authority/index.html.eex:23
+#: lib/phxcrd_web/templates/authority/show.html.eex:9
+msgid "Kind"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/layout/app.html.eex:86
+msgid "Log in"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/layout/app.html.eex:83
+msgid "Log out"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/session/new.html.eex:1
+msgid "Login"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/authority/show.html.eex:26
+msgid "N/A"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/authority/form.html.eex:8
+#: lib/phxcrd_web/templates/authority/index.html.eex:24
+#: lib/phxcrd_web/templates/authority/show.html.eex:13
+msgid "Name"
+msgstr ""
+
+#, elixir-format, fuzzy
+#: lib/phxcrd_web/templates/authority/index.html.eex:49
+msgid "New Authority"
+msgstr "Υπηρεσία"
+
+#, elixir-format, fuzzy
+#: lib/phxcrd_web/templates/authority/new.html.eex:1
+msgid "New authority"
+msgstr "Υπηρεσία"
+
+#, elixir-format
+#: lib/phxcrd_web/templates/session/new.html.eex:9
+msgid "Password"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/user/form.html.eex:4
+msgid "Problems while saving"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/authority/index.html.eex:15
+#: lib/phxcrd_web/templates/version/index.html.eex:15
+msgid "Reset"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/authority/new.html.eex:5
+#: lib/phxcrd_web/templates/authority/show.html.eex:33
+msgid "Return"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/authority/form.html.eex:29
+#: lib/phxcrd_web/templates/user/form.html.eex:23
+msgid "Save"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/controllers/authority_controller.ex:68
+msgid "Saved!"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/controllers/authority_controller.ex:93
+msgid "Saved!."
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/session/new.html.eex:13
+msgid "Submit"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/authority/form.html.eex:4
+msgid "There was an error!"
+msgstr ""
+
+#, elixir-format, fuzzy
+#: lib/phxcrd_web/templates/user/index.html.eex:1
+msgid "User list"
+msgstr "Χρήστες"
+
+#, elixir-format
+#: lib/phxcrd_web/templates/session/new.html.eex:5
+msgid "Username"
+msgstr ""
+
+#, elixir-format, fuzzy
+#: lib/phxcrd_web/templates/version/show.html.eex:1
+msgid "Version info"
+msgstr "Εκδόσεις"
+
+#, elixir-format, fuzzy
+#: lib/phxcrd_web/templates/version/index.html.eex:1
+#: lib/phxcrd_web/templates/version/index.html.eex:14
+msgid "Version list"
+msgstr "Εκδόσεις"
+
+#, elixir-format, fuzzy
+#: lib/phxcrd_web/controllers/session_controller.ex:55
+msgid "Welcome %{username}!"
 msgstr ""
