@@ -3,6 +3,7 @@ defmodule Phxcrd.Auth.Permission do
   import Ecto.Changeset
   alias Phxcrd.Auth.User
   alias Phxcrd.Auth.UserPermission
+  import PhxcrdWeb.Gettext
 
   schema "permissions" do
     field :name, :string
@@ -23,6 +24,6 @@ defmodule Phxcrd.Auth.Permission do
     permission
     |> cast(attrs, [:name, :verbose_name])
     |> validate_required([:name, :verbose_name])
-    |> unique_constraint(:name, message: "The name exists!")
+    |> unique_constraint(:name, message: gettext("The name exists!"))
   end
 end
