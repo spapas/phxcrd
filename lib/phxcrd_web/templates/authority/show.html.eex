@@ -1,4 +1,4 @@
-<h1>Εμφάνιση Υπηρεσίας</h1>
+<h1><%= gettext "Authority" %></h1>
 
 <ul>
   <li>
@@ -6,15 +6,15 @@
     <%= @authority.id %>
   </li>
   <li>
-    <strong>Είδος:</strong>
+    <strong><%= gettext "Kind" %>:</strong>
     <%= @authority.authority_kind.name %>
   </li>
   <li>
-    <strong>Όνομα:</strong>
+    <strong><%= gettext "Name" %>:</strong>
     <%= @authority.name %>
   </li>
   <li>
-    <strong>Χρήστες:</strong>
+    <strong><%= gettext "Users" %>:</strong>
     <br />
     <%= if @authority.users && length(@authority.users)>0 do %>
     <%= for u <- @authority.users do %>
@@ -23,11 +23,11 @@
     <% end %>
     <%= # @authority.users |> Enum.map(& "#{&1.name} (#{&1.username} - #{&1.email})") |> Enum.join("<br />") %>
     <% else %>
-    Δ/Υ
+    <%= gettext "N/A" %>
     <% end %>
   </li>
 
 </ul>
 
-<span><%= link "Επεξεργασία", to: Routes.authority_path(@conn, :edit, @authority), class: "button button-primary" %></span>
-<span><%= link "Επιστροφή", to: Routes.authority_path(@conn, :index), class: "button button-secondary" %></span>
+<span><%= link gettext("Edit"), to: Routes.authority_path(@conn, :edit, @authority), class: "button button-primary" %></span>
+<span><%= link gettext("Return"), to: Routes.authority_path(@conn, :index), class: "button button-secondary" %></span>

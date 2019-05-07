@@ -37,10 +37,10 @@ defmodule PhxcrdWeb.AuthorityController do
         on: [id: a.authority_kind_id],
         preload: [authority_kind: ak]
       )
-      |> QueryFilter.filter(%Authority{}, Map.fetch!(changeset, :changes), [
+      |> QueryFilter.filter(%Authority{}, Map.fetch!(changeset, :changes),
         name: :ilike,
         authority_kind_id: :exact
-      ])
+      )
       # |> Repo.all()
       |> Repo.paginate(params)
 
@@ -65,7 +65,7 @@ defmodule PhxcrdWeb.AuthorityController do
     case Auth.create_authority(authority_params) do
       {:ok, authority} ->
         conn
-        |> put_flash(:info, "Επιτυχής αποθήκευση.")
+        |> put_flash(:info, gettext("Saved!"))
         |> redirect(to: Routes.authority_path(conn, :show, authority))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -90,7 +90,7 @@ defmodule PhxcrdWeb.AuthorityController do
     case Auth.update_authority(authority, authority_params) do
       {:ok, authority} ->
         conn
-        |> put_flash(:info, "Επιτυχής αποθήκευση.")
+        |> put_flash(:info, gettext("Saved!."))
         |> redirect(to: Routes.authority_path(conn, :show, authority))
 
       {:error, %Ecto.Changeset{} = changeset} ->

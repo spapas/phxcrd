@@ -23,6 +23,6 @@ defmodule Phxcrd.Auth.Permission do
     permission
     |> cast(attrs, [:name, :verbose_name])
     |> validate_required([:name, :verbose_name])
-    |> unique_constraint(:name, message: "Το όνομα υπάρχει!")
+    |> unique_constraint(:name, message: "The name exists!")
   end
 end

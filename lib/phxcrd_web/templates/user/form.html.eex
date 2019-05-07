@@ -1,32 +1,32 @@
 <%= form_for @changeset, @action, fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Σφάλμα κατά την αποθήκευση!</p>
-    </div>
-  <% end %>
+<%= if @changeset.action do %>
+<div class="alert alert-danger">
+  <p><%= gettext("Problems while saving") %></p>
+</div>
+<% end %>
 
-  <%= label f, :name %>
-  <%= text_input f, :name, readonly: true %>
-  <%= error_tag f, :name %>
+<%= label f, :name %>
+<%= text_input f, :name, readonly: true %>
+<%= error_tag f, :name %>
 
-  <%= label f, :permissions %>
-  <%= multiple_select(f, 
-                    :permissions, 
+<%= label f, :permissions %>
+<%= multiple_select(f,
+                    :permissions,
                     (Phxcrd.Auth.list_permissions |> Enum.map(&{&1.name, &1.id})),
                     selected: Enum.map(@user.permissions, &(&1.id)),
                     style: "width: 100%")
                     %>
-  <%= error_tag f, :permissions %>
+<%= error_tag f, :permissions %>
 
 
-  <div>
-    <%= submit "Αποθήκευση" %>
-  </div>
+<div>
+  <%= submit gettext("Save") %>
+</div>
 <% end %>
 
 <script>
-$(function() {
+  $(function () {
 
-  $('#user_permissions').select2();
-})
+    $('#user_permissions').select2();
+  })
 </script>

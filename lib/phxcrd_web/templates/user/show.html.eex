@@ -1,4 +1,4 @@
-<h1>Στοιχεία χρήστη</h1>
+<h1>User data</h1>
 
 <div class="row">
   <div class="column">
@@ -44,7 +44,7 @@
       </li>
 
       <li>
-        <strong>ΑΜ ΔΟΔ:</strong>
+        <strong>AM PHXCRD:</strong>
         <%= @user.am_phxcrd %>
       </li>
 

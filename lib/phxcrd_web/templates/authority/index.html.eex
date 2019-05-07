@@ -1,18 +1,18 @@
-<h1>Λίστα Υπηρεσιών</h1>
+<h1><%= gettext "Authority list" %></h1>
 
 <%= form_for @changeset, Routes.authority_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
-<%= label f, "Όνομα Υπηρεσίας" %>
+<%= label f, gettext "Authority name" %>
 <%= text_input f, :name  %>
 
-<%= label f, "Είδος Υπηρεσίας" %>
+<%= label f, gettext "Authority kind" %>
 <%= select f,
         :authority_kind_id,
         [{"---", ""}] ++ (Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id}) )
       %>
 
 
-<%= submit "Φίλτρο", class: "ml-5" %>
-<%= link "Επαναφορά", to: Routes.authority_path(@conn, :index), class: "button button-outline ml-2" %>
+<%= submit gettext("Filter"), class: "ml-5" %>
+<%= link gettext("Reset"), to: Routes.authority_path(@conn, :index), class: "button button-outline ml-2" %>
 
 <% end %>
 </form>
@@ -20,8 +20,8 @@
   <thead>
     <tr>
       <th>Id</th>
-      <th>Είδος</th>
-      <th>Όνομα</th>
+      <th><%= gettext "Kind" %></th>
+      <th><%= gettext "Name" %></th>
 
       <th></th>
     </tr>
@@ -36,7 +36,7 @@
       <td><%= authority.name %></td>
 
       <td>
-        <%= link "Επεξεργασία", to: Routes.authority_path(@conn, :edit, authority), class: "mb-0 px-3 button button-outline" %>
+        <%= link gettext("Edit"), to: Routes.authority_path(@conn, :edit, authority), class: "mb-0 px-3 button button-outline" %>
         <%= # link "Delete", to: Routes.authority_path(@conn, :delete, authority), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
     </tr>
@@ -46,4 +46,4 @@
 
 <%= pagination_links @page, @conn.params |> get_query_params%>
 
-<span><%= link "Νέα Υπηρεσία", to: Routes.authority_path(@conn, :new), class: "button button-primary" %></span>
+<span><%= link gettext("New Authority"), to: Routes.authority_path(@conn, :new), class: "button button-primary" %></span>

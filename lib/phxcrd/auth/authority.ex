@@ -17,8 +17,8 @@ defmodule Phxcrd.Auth.Authority do
   def changeset(authority, attrs) do
     authority
     |> cast(attrs, [:name, :authority_kind_id])
-    |> validate_required([:name, :authority_kind_id], message: "Το πεδίο είναι απαραίτητο")
+    |> validate_required([:name, :authority_kind_id], message: "The field is required")
     |> foreign_key_constraint(:authority_kind_id)
-    |> unique_constraint(:name, message: "Το όνομα υπάρχει!")
+    |> unique_constraint(:name, message: "The name already exists!")
   end
 end

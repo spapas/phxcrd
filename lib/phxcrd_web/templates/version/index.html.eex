@@ -1,4 +1,4 @@
-<h1>Λίστα εκδόσεων</h1>
+<h1><%= gettext "Version list" %></h1>
 
 <%= form_for @changeset, Routes.version_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
 
@@ -11,8 +11,8 @@
 <%= label f, "Entity id" %>
 <%= text_input f, :entity_id  %>
 
-<%= submit "Φίλτρο", class: "ml-5" %>
-<%= link "Επαναφορά", to: Routes.version_path(@conn, :index), class: "button button-outline ml-2" %>
+<%= submit gettext("Version list"), class: "ml-5" %>
+<%= link gettext("Reset"), to: Routes.version_path(@conn, :index), class: "button button-outline ml-2" %>
 
 <% end %>
 <table class='condensed'>
@@ -45,4 +45,3 @@
 </table>
 
 <%= pagination_links @page, @conn.params |> get_query_params%>
-

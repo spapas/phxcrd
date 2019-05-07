@@ -41,33 +41,33 @@
                   <%= link gettext("Authorities"),
                         to: Routes.authority_path(@conn, :index),
                         class: "popover-link",
-                        title: gettext "Υπηρεσίες"
+                        title: gettext "Authorities"
                   %>
                 </li>
 
                 <%= if @perms |> Enum.any?(&( &1 == "superuser")) do %>
 
                 <li class="popover-item">
-                  <%= link "Χρήστες",
+                  <%= link gettext("Users"),
                         to: Routes.user_path(@conn, :index),
                         class: "popover-link",
-                        title: "Χρήστες"
+                        title: gettext "Users"
                   %>
                 </li>
 
                 <li class="popover-item">
-                  <%= link "Δικαιώματα",
+                  <%= link gettext("Permissions"),
                         to: Routes.permission_path(@conn, :index),
                         class: "popover-link",
-                        title: "Δικαιώματα"
+                        title: gettext "Permissions"
                   %>
                 </li>
 
                 <li class="popover-item">
-                  <%= link "Εκδόσεις",
+                  <%= link gettext("Versions"),
                         to: Routes.version_path(@conn, :index),
                         class: "popover-link",
-                        title: "Εκδόσεις"
+                        title: gettext "Versions"
                   %>
                 </li>
                 <% end %>
@@ -76,16 +76,7 @@
             </div>
           </li>
           <% end %>
-          <li class="navigation-item"><a class="navigation-link" href="#popover-support" data-popover="">Support</a>
-            <div class="popover" id="popover-support">
-              <ul class="popover-list">
-                <li class="popover-item"><a class="popover-link" target="blank"
-                    href="https://github.com/milligram/milligram" title="On Github">On Github</a></li>
-                <li class="popover-item"><a class="popover-link" target="blank" href="https://codepen.io/milligramcss"
-                    title="On Codepen">On Codepen</a></li>
-              </ul>
-            </div>
-          </li>
+
           <li class="navigation-item"><a class="navigation-link" href="/">
               <%= if @user_signed_in? do %>
               <%= form_for @conn, Routes.session_path(@conn, :delete), [method: :delete, as: :user], fn _ -> %>
@@ -99,7 +90,6 @@
         </ul>
       </section>
     </nav>
-
 
     <header>
       <section class="container">
