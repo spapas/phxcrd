@@ -10,7 +10,6 @@ defmodule PhxcrdWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug Phxcrd.Plugs.SetCurrentUser
-    
   end
 
   pipeline :api do
@@ -34,6 +33,7 @@ defmodule PhxcrdWeb.Router do
     get "/", PageController, :index
     get "/test-sentry", PageController, :test_sentry
     get "/test-mail", PageController, :test_mail
+    get "/test-pdf", PageController, :test_pdf
   end
 
   # Other scopes may use custom stacks.

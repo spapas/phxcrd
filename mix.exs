@@ -23,10 +23,11 @@ defmodule Phxcrd.MixProject do
       extra_applications: [
         :sentry,
         :logger,
-        :bamboo, 
+        :bamboo,
         :bamboo_smtp,
         :runtime_tools,
         :exldap,
+        :pdf_generator,
         # :scrivener,
         :scrivener_ecto,
         :scrivener_html
@@ -63,7 +64,8 @@ defmodule Phxcrd.MixProject do
       {:scrivener_ecto, "~> 2.0"},
       {:scrivener_html, "~> 1.8"},
       {:sentry, "~> 6.3.0"},
-      {:bamboo_smtp, "~> 1.6.0"}
+      {:bamboo_smtp, "~> 1.6.0"},
+      {:pdf_generator, "== 0.5.2"}
     ]
   end
 
