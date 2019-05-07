@@ -1,0 +1,49 @@
+<h1>Λίστα Υπηρεσιών</h1>
+
+<%= form_for @changeset, Routes.authority_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
+<%= label f, "Όνομα Υπηρεσίας" %>
+<%= text_input f, :name  %>
+
+<%= label f, "Είδος Υπηρεσίας" %>
+<%= select f,
+        :authority_kind_id,
+        [{"---", ""}] ++ (Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id}) )
+      %>
+
+
+<%= submit "Φίλτρο", class: "ml-5" %>
+<%= link "Επαναφορά", to: Routes.authority_path(@conn, :index), class: "button button-outline ml-2" %>
+
+<% end %>
+</form>
+<table class='condensed'>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Είδος</th>
+      <th>Όνομα</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for authority <- @page do %>
+    <tr>
+      <td>
+        <%= link  authority.id, to: Routes.authority_path(@conn, :show, authority), class: "mb-0 px-3 button button-outline" %>
+      </td>
+      <td><%= authority.authority_kind.name %></td>
+      <td><%= authority.name %></td>
+
+      <td>
+        <%= link "Επεξεργασία", to: Routes.authority_path(@conn, :edit, authority), class: "mb-0 px-3 button button-outline" %>
+        <%= # link "Delete", to: Routes.authority_path(@conn, :delete, authority), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= pagination_links @page, @conn.params |> get_query_params%>
+
+<span><%= link "Νέα Υπηρεσία", to: Routes.authority_path(@conn, :new), class: "button button-primary" %></span>

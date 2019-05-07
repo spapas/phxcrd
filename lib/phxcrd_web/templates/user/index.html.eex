@@ -1,0 +1,40 @@
+<h1>Λίστα χρηστών</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Name</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Am / Am phxcrd</th>
+      <th>Kind</th>
+
+      <th>Last login</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for user <- @users do %>
+    <tr>
+      <td><%= user.username %></td>
+      <td><%= user.name %></td>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.am %> / <%= user.am_phxcrd %></td>
+      <td><%= user.kind %></td>
+
+      <td><%= user.last_login %></td>
+
+      <td>
+        <%= link "Show", to: Routes.user_path(@conn, :show, user) %>
+        <%= link "Edit", to: Routes.user_path(@conn, :edit, user) %>
+
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

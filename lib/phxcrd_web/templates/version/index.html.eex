@@ -1,0 +1,48 @@
+<h1>Λίστα εκδόσεων</h1>
+
+<%= form_for @changeset, Routes.version_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
+
+<%= label f, "Entity schema" %>
+<%= select f,
+        :entity_schema,
+        [{"---", ""}] ++ (schemas() |> Enum.map(&{&1, &1}) )
+      %>
+
+<%= label f, "Entity id" %>
+<%= text_input f, :entity_id  %>
+
+<%= submit "Φίλτρο", class: "ml-5" %>
+<%= link "Επαναφορά", to: Routes.version_path(@conn, :index), class: "button button-outline ml-2" %>
+
+<% end %>
+<table class='condensed'>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Entity schema</th>
+      <th>Entity id</th>
+      <th>Action</th>
+      <th>Actor</th>
+      <th>Recorded at</th>
+      <th>Rollback</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for version <- @versions do %>
+    <tr>
+      <td>
+        <%= link version.id, to: Routes.version_path(@conn, :show, version), class: 'mb-0 px-3 button button-outline' %>
+      </td>
+      <td><%= version.entity_schema %></td>
+      <td><%= version.entity_id %></td>
+      <td><%= version.action %></td>
+      <td><%= if version.actor, do: version.actor.username, else: "-" %></td>
+      <td><%= version.recorded_at %></td>
+      <td><%= version.rollback %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= pagination_links @page, @conn.params |> get_query_params%>
+

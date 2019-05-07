@@ -1,0 +1,184 @@
+.wrapper {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+  .wrapper > .container {
+    padding-bottom: 7.5rem;
+    padding-top: 7.5rem;
+  }
+
+.header {
+  background-color: #f4f5f6;
+  padding-top: 1rem; }
+  @media (min-width: 40rem) {
+    .header {
+      padding-top: 5rem; } }
+  .header + section {
+    border-top: 0; }
+  .header .container {
+    border-top: 0;
+    padding-bottom: 7.5rem;
+    padding-top: 7.5rem;
+    position: relative;
+    text-align: center; }
+
+  .header .img {
+    height: 15.0rem;
+    margin-bottom: 2rem; }
+    .header .img path {
+      animation: 7s anilligram forwards;
+      fill: #9b4dca;
+      stroke: #9b4dca;
+      stroke-dasharray: 38321;
+      stroke-miterlimit: 10;
+      stroke-width: 15px; }
+  .header .button {
+    margin-bottom: 4rem;
+    margin-top: 2rem; }
+    @media (min-width: 40rem) {
+      .header .button {
+        margin-bottom: 4rem;
+        margin-top: 2rem; } }
+
+
+.navigation {
+  background: #f4f5f6;
+  border-bottom: 0.1rem solid #d1d1d1;
+  display: block;
+  height: 5.2rem;
+  left: 0;
+  max-width: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 99; }
+  .navigation .container {
+    padding-bottom: 0;
+    padding-top: 0; }
+  .navigation .navigation-list {
+    list-style: none;
+    margin-bottom: 0;
+    margin-right: 5.0rem; }
+    @media (min-width: 80rem) {
+      .navigation .navigation-list {
+        margin-right: 0; } }
+  .navigation .navigation-item {
+    float: left;
+    margin-bottom: 0;
+    margin-left: 2.5rem;
+    position: relative; }
+  .navigation .img {
+    fill: #9b4dca;
+    height: 2.0rem;
+    position: relative;
+    top: .3rem; }
+  .navigation .title,
+  .navigation .navigation-title {
+    color: #606c76;
+    display: inline;
+    font-size: 1.6rem;
+    line-height: 5.2rem;
+    padding: 0;
+    position: relative;
+    text-decoration: none; }
+  .navigation .navigation-link {
+    display: inline;
+    font-size: 1.6rem;
+    line-height: 5.2rem;
+    padding: 0;
+    text-decoration: none; }
+    .navigation .navigation-link.active {
+      color: #606c76; }
+
+
+
+.popover {
+  background: #fff;
+  border: 0.1rem solid #d1d1d1;
+  border-radius: .4rem;
+  display: none;
+  filter: drop-shadow(0 0 0.6rem rgba(0, 0, 0, 0.1));
+  left: 50%;
+  min-width: 13.4rem;
+  position: absolute;
+  top: 94%;
+  transform: translateX(-50%); }
+  .popover.popover-open {
+    display: block; }
+  .popover:after, .popover:before {
+    border: solid transparent;
+    border-color: transparent;
+    border-width: 1.0rem;
+    content: ' ';
+    height: 0;
+    left: 50%;
+    pointer-events: none;
+    position: absolute;
+    right: 1.7rem;
+    top: 0;
+    width: 0; }
+  .popover:after {
+    border-bottom-color: #fff;
+    transform: translate(-50%, -100%); }
+  .popover:before {
+    border-bottom-color: #d1d1d1;
+    transform: translate(-50%, -102%); }
+  .popover .popover-list {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+  .popover .popover-item {
+    margin: 0;
+    padding: 0; }
+    .popover .popover-item:first-child .popover-link {
+      border-radius: .4rem .4rem 0 0; }
+    .popover .popover-item:last-child .popover-link {
+      border-bottom-width: 0;
+      border-radius: 0 0 .4rem .4rem; }
+  .popover .popover-link {
+    border-bottom: 0.1rem solid #d1d1d1;
+    color: #606c76;
+    display: block;
+    font-size: 1.2rem;
+    padding: .8rem 2.0rem;
+    position: relative;
+    text-align: center;
+    text-decoration: none; }
+    .popover .popover-link:hover {
+      background: #9b4dca;
+      border-bottom-color: #9b4dca;
+      color: #fff; }
+
+.share,
+.share-list,
+.share-list a {
+  position: relative;
+  text-decoration: none; }
+
+.share-item {
+  display: inline-block;
+  margin: 1.0rem 0; }
+  .share-item:nth-child(n +1) {
+    margin-left: .5rem; }
+
+.share-dialog {
+  background-color: #9b4dca;
+  border-radius: .4rem;
+  color: #fff;
+  display: block;
+  height: 2.2rem;
+  text-align: center;
+  width: 5.0rem; }
+  .share-dialog:hover {
+    background-color: #606c76; }
+  .share-dialog .share-icon {
+    fill: #fff;
+    height: 1.5rem; }
+
+@media (min-width: 40rem) {
+  .only-mobile {
+    display: none; } }

@@ -1,0 +1,28 @@
+<h1>Listing Permissions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Verbose name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for permission <- @permissions do %>
+    <tr>
+      <td><%= permission.name %></td>
+      <td><%= permission.verbose_name %></td>
+
+      <td>
+        <%= link "Show", to: Routes.permission_path(@conn, :show, permission) %>
+        <%= link "Edit", to: Routes.permission_path(@conn, :edit, permission) %>
+        <%= link "Delete", to: Routes.permission_path(@conn, :delete, permission), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Permission", to: Routes.permission_path(@conn, :new) %></span>

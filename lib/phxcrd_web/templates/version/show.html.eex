@@ -1,0 +1,51 @@
+<h1>Στοιχεία έκδοσης</h1>
+
+<div class="row">
+  <div class="column">
+    <ul>
+      <li>
+        <strong>Id:</strong>
+        <%= @version.id %>
+      </li>
+
+      <li>
+        <strong>Entity schema:</strong>
+        <%= @version.entity_schema %>
+      </li>
+
+      <li>
+        <strong>Entity id:</strong>
+        <%= @version.entity_id %>
+      </li>
+
+      <li>
+        <strong>Action:</strong>
+        <%= @version.action %>
+      </li>
+
+      <li>
+        <strong>Actor:</strong>
+        <%= if @version.actor, do: @version.actor.username, else: "-" %>
+      </li>
+      <li>
+        <strong>Recorded at:</strong>
+        <%= @version.recorded_at %>
+      </li>
+      <li>
+        <strong>Rollback:</strong>
+        <%= @version.rollback %>
+      </li>
+
+    </ul>
+  </div>
+  <div class="column">
+      <strong>Patch:</strong>
+      <p>
+      <%= "#{inspect @version.patch}" %>
+      </p>
+
+  </div>
+</div>
+
+
+<span><%= link "Back", to: Routes.version_path(@conn, :index), class: "button button-secondary" %></span>

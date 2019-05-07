@@ -1,0 +1,5 @@
+<h1>Νέα Υπηρεσία</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.authority_path(@conn, :create)) %>
+
+<span><%= link "Επιστροφή", to: Routes.authority_path(@conn, :index), class: "button button-secondary" %></span>

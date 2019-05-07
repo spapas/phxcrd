@@ -1,0 +1,76 @@
+<h1>Στοιχεία χρήστη</h1>
+
+<div class="row">
+  <div class="column">
+    <ul>
+      <li>
+        <strong>Username:</strong>
+        <%= @user.username %>
+      </li>
+
+      <li>
+        <strong>Name:</strong>
+        <%= @user.name %>
+      </li>
+
+      <li>
+        <strong>Permissions:</strong>
+        <%= for p <- @user.permissions, do: "#{p.name} " %>
+      </li>
+
+      <li>
+        <strong>First name:</strong>
+        <%= @user.first_name %>
+      </li>
+
+      <li>
+        <strong>Last name:</strong>
+        <%= @user.last_name %>
+      </li>
+
+      <li>
+        <strong>Email:</strong>
+        <%= @user.email %>
+      </li>
+
+    </ul>
+  </div>
+  <div class="column">
+    <ul>
+
+      <li>
+        <strong>AM:</strong>
+        <%= @user.am %>
+      </li>
+
+      <li>
+        <strong>ΑΜ ΔΟΔ:</strong>
+        <%= @user.am_phxcrd %>
+      </li>
+
+      <li>
+        <strong>Dsn:</strong>
+        <%= @user.dsn %>
+      </li>
+
+      <li>
+        <strong>Kind:</strong>
+        <%= @user.kind %>
+      </li>
+
+      <li>
+        <strong>Extra:</strong>
+        <%= @user.extra %>
+      </li>
+
+      <li>
+        <strong>Obj cls:</strong>
+        <%= @user.obj_cls %>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<span><%= link "Edit", to: Routes.user_path(@conn, :edit, @user), class: "button button-primary" %></span>
+<span><%= link "Back", to: Routes.user_path(@conn, :index), class: "button button-secondary" %></span>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Δ Ο Δ</title>
+
+  <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+
+  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/milligram.min.css") %>" />
+  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/main.css") %>" />
+  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,700">
+  
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <nav class="navigation">
+      <section class="container"><a class="navigation-title" href="/">
+          <h1 class="title">Phxcrd</h1>
+        </a>
+        
+      </section>
+    </nav>
+    <main role="main" class="container">
+      <h2>Not found</h2>
+
+      <p>The page you requested was not found!</p>
+      <a href='/' class='button button-primary'>Home</a>
+    </main>
+    <div class="push"></div>
+  </div>
+  <footer class="footer">
+    <section class="container">
+      Copyright © 2019 &lt;Serafeim Papastefanos&gt;
+      
+    </section>
+  </footer>
+  </body>
+
+</html>

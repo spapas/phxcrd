@@ -1,0 +1,33 @@
+<h1>Εμφάνιση Υπηρεσίας</h1>
+
+<ul>
+  <li>
+    <strong>Id:</strong>
+    <%= @authority.id %>
+  </li>
+  <li>
+    <strong>Είδος:</strong>
+    <%= @authority.authority_kind.name %>
+  </li>
+  <li>
+    <strong>Όνομα:</strong>
+    <%= @authority.name %>
+  </li>
+  <li>
+    <strong>Χρήστες:</strong>
+    <br />
+    <%= if @authority.users && length(@authority.users)>0 do %>
+    <%= for u <- @authority.users do %>
+    <%= "#{u.name} (#{u.username} - #{u.email})" %>
+    <br />
+    <% end %>
+    <%= # @authority.users |> Enum.map(& "#{&1.name} (#{&1.username} - #{&1.email})") |> Enum.join("<br />") %>
+    <% else %>
+    Δ/Υ
+    <% end %>
+  </li>
+
+</ul>
+
+<span><%= link "Επεξεργασία", to: Routes.authority_path(@conn, :edit, @authority), class: "button button-primary" %></span>
+<span><%= link "Επιστροφή", to: Routes.authority_path(@conn, :index), class: "button button-secondary" %></span>

@@ -1,0 +1,47 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}", name: "Phxcrd" %></h1>
+</section>
+
+<%= if length(@perms) > 0 do %>
+<p><strong><%= gettext "Permissions" %>: 
+<%= @perms |> Enum.join %>
+</strong></p>
+<% end %>
+<%= if @authority_id do %>
+<p><strong><%= gettext "Authority" %>: 
+<%= "#{@authority_name} (#{@authority_id})" %>
+</strong></p>
+<% end %>
+
+<section class="row">
+  <%= if @perms |> Enum.member?("superuser") do %>
+  <article class="column">
+    <h2><%= gettext "Administration" %></h2>
+    <ul>
+      <li>
+        <%= link gettext("Users"), to: Routes.user_path(@conn, :index)%>
+      </li>
+      <li>
+        <%= link gettext("Permissions"), to: Routes.permission_path(@conn, :index)%>
+      </li>
+      <li>
+        <%= link gettext("Versions"), to: Routes.version_path(@conn, :index) %>
+      </li>
+    </ul>
+  </article>
+  <% end %>
+
+  <section class="row">
+    <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
+    <article class="column">
+      <h2><%= gettext "Management" %></h2>
+      <ul>
+        <li>
+          <%= link gettext("Authorities"), to: Routes.authority_path(@conn, :index)%>
+        </li>
+
+      </ul>
+    </article>
+
+    <% end %>
+  </section>
