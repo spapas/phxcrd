@@ -25,13 +25,43 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-# Track changes
+# Track changes with ExAudit
 config :ex_audit,
   version_schema: Phxcrd.Audit.Version,
   tracked_schemas: [
     Phxcrd.Auth.Authority,
     Phxcrd.Auth.User
   ]
+
+# Exldap settings
+config :exldap, :settings,
+  # cfg server and base through a secret
+  port: 389,
+  ssl: false,
+  search_timeout: 5_000
+
+# Sentry settings
+config :sentry,
+  # dsn should be configured through a secret
+  environment_name: Mix.env(),
+  enable_source_code_context: true,
+  root_source_code_path: File.cwd!,
+  tags: %{
+    env: Mix.env()|> Atom.to_string
+  },
+  included_environments: [:prod, :dev]
+
+# Bamboo smtp settings 
+config :phxcrd, Phxcrd.Mailer,
+  # configure server, hostname, username and password through a secret
+  adapter: Bamboo.SMTPAdapter,
+  port: 587,
+  tls: :if_available,
+  allowed_tls_versions: [:tlsv1, :"tlsv1.1", :"tlsv1.2"],
+  ssl: false,
+  retries: 1,
+  no_mx_lookups: false,
+  auth: :always
 
 # set config for env
 config :phxcrd, env: Mix.env()
