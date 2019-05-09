@@ -15,4 +15,6 @@ config :phxcrd, Phxcrd.Repo,
   password: "",
   database: "phxcrd_test",
   hostname: "localhost",
+  template: "template0",
   pool: Ecto.Adapters.SQL.Sandbox
+  
