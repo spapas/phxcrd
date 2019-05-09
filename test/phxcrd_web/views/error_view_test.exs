@@ -1,9 +1,10 @@
 defmodule PhxcrdWeb.ErrorViewTest do
   use PhxcrdWeb.ConnCase, async: true
+  @moduletag :skip
 
   # Bring render/3 and render_to_string/3 for testing custom views
   import Phoenix.View
-
+  
   test "renders 404.html" do
     assert render_to_string(PhxcrdWeb.ErrorView, "404.html", []) == "Not Found"
   end

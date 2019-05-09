@@ -105,6 +105,7 @@ defmodule PhxcrdWeb.UserControllerTest do
     end
   end
 
+  @tag :skip
   describe "delete user" do
     setup [:create_user]
 

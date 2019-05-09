@@ -76,7 +76,8 @@ defmodule Phxcrd.AuthTest do
       last_name: "some last_name",
       name: "some name",
       obj_cls: "some obj_cls",
-      username: "some username"
+      username: "some username",
+      last_login: DateTime.utc_now()
     }
     @update_attrs %{
       am: "some updated am",

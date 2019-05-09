@@ -1,6 +1,5 @@
 defmodule PhxcrdWeb.AuthorityControllerTest do
   use PhxcrdWeb.ConnCase
-
   alias Phxcrd.Auth
 
   @create_attrs %{name: "some name"}
@@ -15,7 +14,7 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
   describe "index" do
     test "lists all authorities", %{conn: conn} do
       conn = get(conn, Routes.authority_path(conn, :index))
-      assert html_response(conn, 200) =~ "Listing Authorities"
+      assert html_response(conn, 200) =~ "Authority list"
     end
   end
 
@@ -66,19 +65,6 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
     test "renders errors when data is invalid", %{conn: conn, authority: authority} do
       conn = put(conn, Routes.authority_path(conn, :update, authority), authority: @invalid_attrs)
       assert html_response(conn, 200) =~ "Edit Authority"
-    end
-  end
-
-  describe "delete authority" do
-    setup [:create_authority]
-
-    test "deletes chosen authority", %{conn: conn, authority: authority} do
-      conn = delete(conn, Routes.authority_path(conn, :delete, authority))
-      assert redirected_to(conn) == Routes.authority_path(conn, :index)
-
-      assert_error_sent 404, fn ->
-        get(conn, Routes.authority_path(conn, :show, authority))
-      end
     end
   end
 
