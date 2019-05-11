@@ -49,7 +49,9 @@ config :sentry,
   tags: %{
     env: Mix.env()|> Atom.to_string
   },
-  included_environments: [:prod, :dev]
+  # :dev is here only for testing, remove it after you confirm it works
+  included_environments: [:prod, :uat, :dev]
+  
 
 # Bamboo smtp settings 
 config :phxcrd, Phxcrd.Mailer,
@@ -64,6 +66,7 @@ config :phxcrd, Phxcrd.Mailer,
   auth: :always
 
 # set config for env
+# for example to use <%= Application.get_env(:phxcrd, :env) %> in your templates
 config :phxcrd, env: Mix.env()
 
 # set config for default locale
