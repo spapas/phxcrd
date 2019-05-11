@@ -7,8 +7,6 @@ defmodule PhxcrdWeb.PageController do
   end
 
   def test_sentry(conn, _params) do
-    username = conn.assigns[:username]
-
     if conn.assigns[:perms] |> Enum.member?("superuser") do
       try do
         ThisWillError.reall()
@@ -31,18 +29,19 @@ defmodule PhxcrdWeb.PageController do
   end
 
   def test_mail(conn, _params) do
-    username = conn.assigns[:username]
     # More info: https://phoenixframework.org/blog/sending-email-with-smtp
-
     if conn.assigns[:perms] |> Enum.member?("superuser") do
       new_email(
-        to: "spapas@gmail.com",
-        from: "noreply@hcg.gr",
+        to: "foo@bar.com",
+        from: "bar@bar.gr",
         subject: "Testing email",
         html_body: "<strong>Thanks for testing!</strong>",
         text_body: "Thanks for testing!"
       )
-      |> Phxcrd.Mailer.deliver_now()
+      |> Phxcrd.Mailer.deliver_later()
+
+      # or use deliver now to block (and raise exception) until mail has been sent
+      # |> Phxcrd.Mailer.deliver_now()
 
       conn
       |> put_flash(:info, "Message  sent!")
