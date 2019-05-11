@@ -65,7 +65,8 @@ defmodule Phxcrd.MixProject do
       {:scrivener_html, "~> 1.8"},
       {:sentry, "~> 6.3.0"},
       {:bamboo_smtp, "~> 1.6.0"},
-      {:pdf_generator, "== 0.5.2"}
+      {:pdf_generator, "== 0.5.2"},
+      {:elixlsx, "~> 0.4.1"}
     ]
   end
 

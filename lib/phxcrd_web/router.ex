@@ -34,6 +34,7 @@ defmodule PhxcrdWeb.Router do
     get "/test-sentry", PageController, :test_sentry
     get "/test-mail", PageController, :test_mail
     get "/test-pdf", PageController, :test_pdf
+    get "/test-xlsx", PageController, :test_xlsx
   end
 
   # Other scopes may use custom stacks.
