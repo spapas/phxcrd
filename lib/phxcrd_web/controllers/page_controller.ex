@@ -9,7 +9,7 @@ defmodule PhxcrdWeb.PageController do
   def test_sentry(conn, _params) do
     username = conn.assigns[:username]
 
-    if username == "spapas" do
+    if conn.assigns[:perms] |> Enum.member?("superuser") do
       try do
         ThisWillError.reall()
       rescue
@@ -25,14 +25,16 @@ defmodule PhxcrdWeb.PageController do
       |> redirect(to: Routes.page_path(conn, :index))
     else
       conn
+      |> put_flash(:error, "Please login as superuser!")
       |> redirect(to: Routes.page_path(conn, :index))
     end
   end
 
   def test_mail(conn, _params) do
     username = conn.assigns[:username]
+    # More info: https://phoenixframework.org/blog/sending-email-with-smtp
 
-    if username == "spapas" do
+    if conn.assigns[:perms] |> Enum.member?("superuser") do
       new_email(
         to: "spapas@gmail.com",
         from: "noreply@hcg.gr",
@@ -47,6 +49,7 @@ defmodule PhxcrdWeb.PageController do
       |> redirect(to: Routes.page_path(conn, :index))
     else
       conn
+      |> put_flash(:error, "Please login as superuser!")
       |> redirect(to: Routes.page_path(conn, :index))
     end
   end
@@ -165,10 +168,8 @@ defmodule PhxcrdWeb.PageController do
             </tr>
 
             <tr class="heading"><td>Payment Method</td><td>Check #</td></tr>
-
             <tr class="details"><td>Check</td><td>1000</td></tr>
             <tr class="details"><td>Check 2</td><td>10100</td></tr>
-
             <tr class="heading"><td>Item</td><td>Price</td></tr>
             <tr class="item"><td>Website design</td><td>$300.00</td></tr>
             <tr class="item"><td>Hosting (3 months)</td><td>$75.00</td></tr>
@@ -177,7 +178,6 @@ defmodule PhxcrdWeb.PageController do
             <tr class="item"><td>Domain name (1 year)</td><td>$10.00</td></tr>
             <tr class="item"><td>Domain name (1 year)</td><td>$10.00</td></tr>
             <tr class="item last"><td>Domain name (1 year)</td><td>$10.00</td></tr>
-
             <tr class="total"><td></td><td>Total: $385.00</td></tr>
         </table>
     </div>
