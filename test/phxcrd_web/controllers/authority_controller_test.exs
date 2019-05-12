@@ -48,6 +48,24 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
       conn = get(conn |> fake_sign_in, Routes.authority_path(conn, :index))
       assert html_response(conn, 200) =~ "Authority list"
     end
+
+    test "does not allow anonymous access", %{conn: conn} do
+      conn = get(conn, Routes.authority_path(conn, :index))
+      assert html_response(conn, 302) =~ "redirected"
+    end
+
+    test "does not allow access without permissions", %{conn: conn} do
+      conn =
+        conn
+        |> Plug.Test.init_test_session(%{})
+        |> Plug.Conn.put_session(:permissions, [])
+        |> Plug.Conn.put_session(:user_signed_in?, true)
+        |> Plug.Conn.put_session(:user_id, 1)
+        |> Plug.Conn.put_session(:username, "test")
+
+      conn = get(conn, Routes.authority_path(conn, :index))
+      assert html_response(conn, 302) =~ "redirected"
+    end
   end
 
   describe "new authority" do
