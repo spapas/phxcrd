@@ -54,6 +54,10 @@ defmodule PhxcrdWeb.SessionController do
     |> redirect(to: "/")
   end
 
+  defp is_disabled?(username) do
+    # with {:ok, user} <- Auth.get_user_by_username(username)
+  end
+
   defp ldap_login(username, password) do
     with {:ok, user_entry} <- Phxcrd.Ldap.authenticate(username, password) do
       user =
@@ -85,7 +89,11 @@ defmodule PhxcrdWeb.SessionController do
     #  {:error, reason} -> {:error, reason}
     # end
     # With is more idiomatic
-    with {:ok, user} <- Auth.get_user_by_username(username), do: Argon2.check_pass(user, password)
+    with {:ok, user} <- Auth.get_user_by_username(username) do
+      user
+      |> Argon2.check_pass(password)
+      |> Auth.update_user(%{last_login: DateTime.utc_now()})
+    end
   end
 
   defp login_successfull(conn, user) do
@@ -95,7 +103,6 @@ defmodule PhxcrdWeb.SessionController do
     #    %{authority: %{name: name}} -> name
     #    _ -> nil
     #  end
-
     conn
     |> put_flash(:info, gettext("Welcome %{username}!", username: user.username))
     |> put_session(:user_id, user.id)

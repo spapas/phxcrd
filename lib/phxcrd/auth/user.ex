@@ -21,6 +21,7 @@ defmodule Phxcrd.Auth.User do
     field :password_hash, :string
     field :password, :string, virtual: true
     field :last_login, :utc_datetime
+    field :is_enabled, :boolean
 
     many_to_many(
       :permissions,
@@ -49,13 +50,12 @@ defmodule Phxcrd.Auth.User do
       :kind,
       :extra,
       :obj_cls,
-      :last_login
+      :last_login,
+      :is_enabled
     ])
     |> validate_required([
       :username,
       :name,
-      :first_name,
-      :last_name,
       :email,
       :dsn,
       :kind,
@@ -72,13 +72,12 @@ defmodule Phxcrd.Auth.User do
       :first_name,
       :last_name,
       :email,
-      :password
+      :password,
+      :is_enabled
     ])
     |> validate_required([
       :username,
       :name,
-      :first_name,
-      :last_name,
       :email,
       :password
     ])
