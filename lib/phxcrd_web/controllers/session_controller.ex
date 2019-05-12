@@ -32,15 +32,17 @@ defmodule PhxcrdWeb.SessionController do
         login_successfull(conn, user)
 
       {:error, reason} ->
-        Logger.info("Cannot login #{username} through LDAP: #{reason}")
+        Logger.info("Cannot login #{username} through LDAP: #{reason}. Will try DB login.")
 
         case db_login(username, password) do
           {:ok, user} ->
             login_successfull(conn, user)
 
           {:error, reason} ->
+            Logger.info("Cannot login #{username} through DB: #{reason}.")
+
             conn
-            |> put_flash(:error, gettext("Cannot login: ") <> reason)
+            |> put_flash(:error, gettext("Cannot login"))
             |> redirect(to: Routes.session_path(conn, :new))
         end
     end
