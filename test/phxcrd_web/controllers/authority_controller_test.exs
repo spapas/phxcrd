@@ -37,7 +37,7 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
   defp fake_sign_in(conn, user_id \\ 1) do
     conn
     |> Plug.Test.init_test_session(%{})
-    |> Plug.Conn.put_session(:permissions, ["superuser"])
+    |> Plug.Conn.put_session(:permissions, ["admin"])
     |> Plug.Conn.put_session(:user_signed_in?, true)
     |> Plug.Conn.put_session(:user_id, user_id)
     |> Plug.Conn.put_session(:username, "test")
