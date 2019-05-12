@@ -67,7 +67,8 @@ defmodule Phxcrd.MixProject do
       {:bamboo_smtp, "~> 1.6.0"},
       {:pdf_generator, "== 0.5.2"},
       {:elixlsx, "~> 0.4.1"},
-      {:argon2_elixir, "~> 2.0"}
+      {:argon2_elixir, "~> 2.0"},
+      {:accessible, "~> 0.2.1"}
     ]
   end
 

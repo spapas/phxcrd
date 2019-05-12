@@ -1,5 +1,6 @@
 defmodule Phxcrd.Auth.Authority do
   use Ecto.Schema
+
   import Ecto.Changeset
   alias Phxcrd.Auth.AuthorityKind
   alias Phxcrd.Auth.User
@@ -21,4 +22,6 @@ defmodule Phxcrd.Auth.Authority do
     |> foreign_key_constraint(:authority_kind_id)
     |> unique_constraint(:name, message: "The name already exists!")
   end
+
+  use Accessible
 end

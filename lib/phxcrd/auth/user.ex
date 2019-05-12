@@ -1,5 +1,6 @@
 defmodule Phxcrd.Auth.User do
   use Ecto.Schema
+
   import Ecto.Changeset
   alias Phxcrd.Auth.Permission
   alias Phxcrd.Auth.UserPermission
@@ -90,4 +91,6 @@ defmodule Phxcrd.Auth.User do
   end
 
   defp put_pass_hash(changeset), do: changeset
+
+  use Accessible
 end

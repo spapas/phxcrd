@@ -90,11 +90,11 @@ defmodule PhxcrdWeb.SessionController do
 
   defp login_successfull(conn, user) do
     # authority_name = if user.authority_id && user.authority, do: user.authority.name, else: nil
-    authority_name =
-      case user do
-        %{authority: %{name: name}} -> name
-        _ -> nil
-      end
+    # authority_name =
+    #  case user do
+    #    %{authority: %{name: name}} -> name
+    #    _ -> nil
+    #  end
 
     conn
     |> put_flash(:info, gettext("Welcome %{username}!", username: user.username))
@@ -102,7 +102,7 @@ defmodule PhxcrdWeb.SessionController do
     |> put_session(:username, user.username)
     |> put_session(:permissions, user.permissions |> Enum.map(& &1.name))
     |> put_session(:authority_id, user.authority_id)
-    |> put_session(:authority_name, authority_name)
+    |> put_session(:authority_name, get_in(user, [:authority, :name]))
     |> configure_session(renew: true)
     |> redirect(to: "/")
   end

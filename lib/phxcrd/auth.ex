@@ -159,7 +159,7 @@ defmodule Phxcrd.Auth do
   def get_user_by_username(username) do
     case Repo.get_by(User, username: username) do
       nil -> {:error, "Not found"}
-      user -> {:ok, user |> Repo.preload([:permissions])}
+      user -> {:ok, user |> Repo.preload([:permissions, :authority])}
     end
   end
 
