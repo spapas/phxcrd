@@ -25,9 +25,6 @@ defmodule PhxcrdWeb.AuthorityController do
   end
 
   def index(conn, params) do
-    IO.inspect(conn)
-    IO.inspect(params)
-
     changeset =
       case params do
         %{"authority" => authority_params} -> Authority.changeset(%Authority{}, authority_params)

@@ -68,6 +68,12 @@ defmodule Phxcrd.Auth do
     |> Repo.insert()
   end
 
+  def create_authority_kind(attrs \\ %{}) do
+    %AuthorityKind{}
+    |> AuthorityKind.changeset(attrs)
+    |> Repo.insert()
+  end
+
   @doc """
   Updates a authority.
 
