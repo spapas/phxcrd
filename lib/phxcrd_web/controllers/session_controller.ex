@@ -55,39 +55,37 @@ defmodule PhxcrdWeb.SessionController do
   end
 
   defp ldap_login(username, password) do
-    case Phxcrd.Ldap.authenticate(username, password) do
-      {:ok, user_entry} ->
-        user =
-          case Repo.one(
-                 from u in Auth.User,
-                   where: u.username == ^username,
-                   left_join: permissions in assoc(u, :permissions),
-                   left_join: authority in assoc(u, :authority),
-                   preload: [:permissions, :authority]
-               ) do
-            nil ->
-              {:ok, created_user} = user_entry |> get_user_changeset |> Auth.create_user()
-              created_user
+    with {:ok, user_entry} <- Phxcrd.Ldap.authenticate(username, password) do
+      user =
+        case Repo.one(
+               from u in Auth.User,
+                 where: u.username == ^username,
+                 left_join: permissions in assoc(u, :permissions),
+                 left_join: authority in assoc(u, :authority),
+                 preload: [:permissions, :authority]
+             ) do
+          nil ->
+            {:ok, created_user} = user_entry |> get_user_changeset |> Auth.create_user()
+            created_user
 
-            existing_user ->
-              {:ok, updated_user} =
-                existing_user |> Auth.update_user(user_entry |> get_user_changeset)
+          existing_user ->
+            {:ok, updated_user} =
+              existing_user |> Auth.update_user(user_entry |> get_user_changeset)
 
-              updated_user
-          end
+            updated_user
+        end
 
-        {:ok, user}
-
-      {:error, reason} ->
-        {:error, reason}
+      {:ok, user}
     end
   end
 
   defp db_login(username, password) do
-    case Auth.get_user_by_username(username) do
-      {:ok, user} -> user |> Argon2.check_pass(password)
-      {:error, reason} -> {:error, reason}
-    end
+    # case Auth.get_user_by_username(username) do
+    #  {:ok, user} -> user |> Argon2.check_pass(password)
+    #  {:error, reason} -> {:error, reason}
+    # end
+    # With is more idiomatic
+    with {:ok, user} <- Auth.get_user_by_username(username), do: Argon2.check_pass(user, password)
   end
 
   defp login_successfull(conn, user) do
