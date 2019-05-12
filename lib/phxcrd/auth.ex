@@ -169,6 +169,15 @@ defmodule Phxcrd.Auth do
     end
   end
 
+  def create_db_user(attrs \\ %{}) do
+    case %User{}
+         |> User.db_user_changeset(attrs)
+         |> Repo.insert() do
+      {:ok, user} -> {:ok, user |> Repo.preload([:permissions])}
+      error -> error
+    end
+  end
+
   @doc """
   Updates a user.
 
@@ -193,7 +202,7 @@ defmodule Phxcrd.Auth do
 
     user
     |> Repo.preload(:permissions)
-    |> User.changeset(attrs)
+    |> User.db_user_changeset(attrs)
     |> Ecto.Changeset.put_assoc(:permissions, perms)
     |> Repo.update()
   end

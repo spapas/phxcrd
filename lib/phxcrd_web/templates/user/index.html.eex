@@ -38,3 +38,5 @@
     <% end %>
   </tbody>
 </table>
+
+<span><%= link gettext("New User"), to: Routes.user_path(@conn, :new), class: "button button-primary" %></span>

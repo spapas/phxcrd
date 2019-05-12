@@ -21,7 +21,7 @@ defmodule PhxcrdWeb.Router do
 
     scope "/admin" do
       resources "/authorities", AuthorityController, except: [:delete]
-      resources "/users", UserController, only: [:index, :show, :edit, :update]
+      resources "/users", UserController, except: [:delete]
       resources "/permissions", PermissionController
       resources "/versions", VersionController, only: [:index, :show]
     end

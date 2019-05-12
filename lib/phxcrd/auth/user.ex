@@ -17,7 +17,8 @@ defmodule Phxcrd.Auth.User do
     field :name, :string
     field :obj_cls, :string
     field :username, :string
-
+    field :password_hash, :string
+    field :password, :string, virtual: true
     field :last_login, :utc_datetime
 
     many_to_many(
@@ -60,4 +61,33 @@ defmodule Phxcrd.Auth.User do
       :last_login
     ])
   end
+
+  @doc false
+  def db_user_changeset(user, attrs) do
+    user
+    |> cast(attrs, [
+      :username,
+      :name,
+      :first_name,
+      :last_name,
+      :email,
+      :password
+    ])
+    |> validate_required([
+      :username,
+      :name,
+      :first_name,
+      :last_name,
+      :email,
+      :password
+    ])
+    |> validate_length(:password, min: 3, max: 16)
+    |> put_pass_hash
+  end
+
+  defp put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    change(changeset, Argon2.add_hash(password))
+  end
+
+  defp put_pass_hash(changeset), do: changeset
 end
