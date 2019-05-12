@@ -150,6 +150,13 @@ defmodule Phxcrd.Auth do
   """
   def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:permissions])
 
+  def get_user_by_username(username) do
+    case Repo.get_by(User, username: username) do
+      nil -> {:error, "Not found"}
+      user -> {:ok, user |> Repo.preload([:permissions])}
+    end
+  end
+
   @doc """
   Creates a user.
 

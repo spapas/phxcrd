@@ -34,9 +34,15 @@ defmodule PhxcrdWeb.SessionController do
       {:error, reason} ->
         Logger.info("Cannot login #{username} through LDAP: #{reason}")
 
-        conn
-        |> put_flash(:error, gettext("Cannot login: ") <> reason)
-        |> redirect(to: Routes.session_path(conn, :new))
+        case db_login(username, password) do
+          {:ok, user} ->
+            login_successfull(conn, user)
+
+          {:error, reason} ->
+            conn
+            |> put_flash(:error, gettext("Cannot login: ") <> reason)
+            |> redirect(to: Routes.session_path(conn, :new))
+        end
     end
   end
 
@@ -76,6 +82,10 @@ defmodule PhxcrdWeb.SessionController do
   end
 
   defp db_login(username, password) do
+    case Auth.get_user_by_username(username) do
+      {:ok, user} -> user |> Argon2.check_pass(password)
+      {:error, reason} -> {:error, reason}
+    end
   end
 
   defp login_successfull(conn, user) do
