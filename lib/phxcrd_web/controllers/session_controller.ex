@@ -27,6 +27,26 @@ defmodule PhxcrdWeb.SessionController do
   end
 
   def create(conn, %{"user" => %{"username" => username, "password" => password}}) do
+    case ldap_login(username, password) do
+      {:ok, user} ->
+        login_successfull(conn, user)
+
+      {:error, reason} ->
+        Logger.info("Cannot login #{username} through LDAP: #{reason}")
+
+        conn
+        |> put_flash(:error, gettext("Cannot login: ") <> reason)
+        |> redirect(to: Routes.session_path(conn, :new))
+    end
+  end
+
+  def delete(conn, _) do
+    conn
+    |> configure_session(drop: true)
+    |> redirect(to: "/")
+  end
+
+  defp ldap_login(username, password) do
     case Phxcrd.Ldap.authenticate(username, password) do
       {:ok, user_entry} ->
         user =
@@ -48,31 +68,32 @@ defmodule PhxcrdWeb.SessionController do
               updated_user
           end
 
-        authority_name =
-          if user.authority_id && user.authority, do: user.authority.name, else: nil
-
-        conn
-        |> put_flash(:info, gettext("Welcome %{username}!", username: username))
-        |> put_session(:user_id, user.id)
-        |> put_session(:username, user.username)
-        |> put_session(:permissions, user.permissions |> Enum.map(& &1.name))
-        |> put_session(:authority_id, user.authority_id)
-        |> put_session(:authority_name, authority_name)
-        |> configure_session(renew: true)
-        |> redirect(to: "/")
+        {:ok, user}
 
       {:error, reason} ->
-        Logger.info("Cannot login #{username}: #{reason}")
-
-        conn
-        |> put_flash(:error, gettext("Cannot login: ") <> reason)
-        |> redirect(to: Routes.session_path(conn, :new))
+        {:error, reason}
     end
   end
 
-  def delete(conn, _) do
+  defp db_login(username, password) do
+  end
+
+  defp login_successfull(conn, user) do
+    # authority_name = if user.authority_id && user.authority, do: user.authority.name, else: nil
+    authority_name =
+      case user do
+        %{authority: %{name: name}} -> name
+        _ -> nil
+      end
+
     conn
-    |> configure_session(drop: true)
+    |> put_flash(:info, gettext("Welcome %{username}!", username: user.username))
+    |> put_session(:user_id, user.id)
+    |> put_session(:username, user.username)
+    |> put_session(:permissions, user.permissions |> Enum.map(& &1.name))
+    |> put_session(:authority_id, user.authority_id)
+    |> put_session(:authority_name, authority_name)
+    |> configure_session(renew: true)
     |> redirect(to: "/")
   end
 end

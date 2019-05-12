@@ -17,7 +17,5 @@ defmodule Phxcrd.Audit do
       order_by: [desc: v.recorded_at]
   end
 
-
   def get_version!(id), do: Repo.get!(Version, id) |> Repo.preload([:actor])
-
 end

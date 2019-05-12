@@ -45,13 +45,12 @@ config :sentry,
   # dsn should be configured through a secret
   environment_name: Mix.env(),
   enable_source_code_context: true,
-  root_source_code_path: File.cwd!,
+  root_source_code_path: File.cwd!(),
   tags: %{
-    env: Mix.env()|> Atom.to_string
+    env: Mix.env() |> Atom.to_string()
   },
   # :dev is here only for testing, remove it after you confirm it works
   included_environments: [:prod, :uat, :dev]
-  
 
 # Bamboo smtp settings 
 config :phxcrd, Phxcrd.Mailer,
