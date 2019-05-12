@@ -13,7 +13,19 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
 
   describe "index" do
     test "lists all authorities", %{conn: conn} do
+      # Fake sign in
+      conn =
+        conn
+        |> Plug.Test.init_test_session(%{})
+        |> Plug.Conn.put_session(:permissions, ["superuser"])
+        |> Plug.Conn.put_session(:user_signed_in?, true)
+        |> Plug.Conn.put_session(:user_id, 1)
+        |> Plug.Conn.put_session(:username, "test")
+
+      IO.inspect(conn)
+
       conn = get(conn, Routes.authority_path(conn, :index))
+      # IO.inspect(html_response(conn, 200))
       assert html_response(conn, 200) =~ "Authority list"
     end
   end

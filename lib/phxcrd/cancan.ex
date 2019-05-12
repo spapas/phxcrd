@@ -7,7 +7,7 @@ defimpl Canada.Can, for: Phxcrd.Auth.User do
   alias Phxcrd.Auth.{User, Permission, Authority}
   alias Phxcrd.Audit.Version
 
-  # B careful here: I am passing a fake User struct that has the perms set as a string 
+  # B careful here: I am passing a fake User struct that has the perms set as a string
   # (take from the current session) to avoid the extra query; this is a hack and
   # may need 2b chagned in the future
   def can?(%User{permissions: permissions}, :index, User) do
