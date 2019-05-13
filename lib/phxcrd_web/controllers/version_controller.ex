@@ -35,6 +35,7 @@ defmodule PhxcrdWeb.VersionController do
       case params do
         %{"version" => %{"entity_schema" => ""} = version_params} ->
           Version.changeset(%Version{}, version_params)
+
         %{"version" => version_params} ->
           Version.changeset(%Version{}, version_params)
           |> Ecto.Changeset.put_change(

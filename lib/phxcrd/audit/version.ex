@@ -25,13 +25,13 @@ defmodule Phxcrd.Audit.Version do
     belongs_to :actor, Phxcrd.Auth.User
   end
 
-  #defp fix_usecs(changeset) do
+  # defp fix_usecs(changeset) do
   #  put_change(
   #    changeset,
   #    :recorded_at,
   #    DateTime.truncate(get_field(changeset, :recorded_at), :second)
   #  )
-  #end
+  # end
 
   def changeset(struct, params \\ %{}) do
     struct

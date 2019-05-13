@@ -16,6 +16,7 @@
 
 <% end %>
 </form>
+<%= if  @page.total_entries > 0 do %>
 <table class='condensed'>
   <thead>
     <tr>
@@ -27,6 +28,7 @@
     </tr>
   </thead>
   <tbody>
+
     <%= for authority <- @page do %>
     <tr>
       <td>
@@ -41,9 +43,15 @@
       </td>
     </tr>
     <% end %>
+
   </tbody>
 </table>
 
 <%= pagination_links @page, @conn.params |> get_query_params%>
+<%= else %>
+  <p><%= gettext "No authorities found" %></p>
+<% end %>
+
+
 
 <span><%= link gettext("New Authority"), to: Routes.authority_path(@conn, :new), class: "button button-primary" %></span>

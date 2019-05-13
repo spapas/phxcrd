@@ -114,7 +114,7 @@
       Copyright © 2019 &lt;Serafeim Papastefanos&gt;
       <%= if Application.get_env(:phxcrd, :env) != :prod do %>
       <span style='padding: 8px; font-weight:900; color: red; background-color:#661111'>
-        WARNING: TEST VERSION (<%=Application.get_env(:phxcrd, :env)%>)
+        WARNING: TEST VERSION (<%= Application.get_env(:phxcrd, :env) %>)
       </span>
       <% end %>
     </section>

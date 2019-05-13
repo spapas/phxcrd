@@ -7,9 +7,7 @@ defmodule PhxcrdWeb.PageController do
   end
 
   def test_sentry(conn, _params) do
-    username = conn.assigns[:username]
-
-    if username == "spapas" do
+    if conn.assigns[:perms] |> Enum.member?("superuser") do
       try do
         ThisWillError.reall()
       rescue
@@ -25,30 +23,41 @@ defmodule PhxcrdWeb.PageController do
       |> redirect(to: Routes.page_path(conn, :index))
     else
       conn
+      |> put_flash(:error, "Please login as superuser!")
       |> redirect(to: Routes.page_path(conn, :index))
     end
   end
 
   def test_mail(conn, _params) do
-    username = conn.assigns[:username]
-
-    if username == "spapas" do
+    # More info: https://phoenixframework.org/blog/sending-email-with-smtp
+    if conn.assigns[:perms] |> Enum.member?("superuser") do
       new_email(
-        to: "spapas@gmail.com",
-        from: "noreply@hcg.gr",
+        to: "foo@bar.com",
+        from: "bar@bar.gr",
         subject: "Testing email",
         html_body: "<strong>Thanks for testing!</strong>",
         text_body: "Thanks for testing!"
       )
-      |> Phxcrd.Mailer.deliver_now()
+      |> Phxcrd.Mailer.deliver_later()
+
+      # or use deliver now to block (and raise exception) until mail has been sent
+      # |> Phxcrd.Mailer.deliver_now()
 
       conn
       |> put_flash(:info, "Message  sent!")
       |> redirect(to: Routes.page_path(conn, :index))
     else
       conn
+      |> put_flash(:error, "Please login as superuser!")
       |> redirect(to: Routes.page_path(conn, :index))
     end
+  end
+
+  def test_xlsx(conn, _params) do
+    conn
+    |> put_resp_content_type("text/xlsx")
+    |> put_resp_header("content-disposition", "attachment; filename=\"report.xlsx\"")
+    |> render("report.xlsx", %{posts: ["a", "b", "c"]})
   end
 
   def test_pdf(conn, _params) do
@@ -158,10 +167,8 @@ defmodule PhxcrdWeb.PageController do
             </tr>
 
             <tr class="heading"><td>Payment Method</td><td>Check #</td></tr>
-
             <tr class="details"><td>Check</td><td>1000</td></tr>
             <tr class="details"><td>Check 2</td><td>10100</td></tr>
-
             <tr class="heading"><td>Item</td><td>Price</td></tr>
             <tr class="item"><td>Website design</td><td>$300.00</td></tr>
             <tr class="item"><td>Hosting (3 months)</td><td>$75.00</td></tr>
@@ -170,7 +177,6 @@ defmodule PhxcrdWeb.PageController do
             <tr class="item"><td>Domain name (1 year)</td><td>$10.00</td></tr>
             <tr class="item"><td>Domain name (1 year)</td><td>$10.00</td></tr>
             <tr class="item last"><td>Domain name (1 year)</td><td>$10.00</td></tr>
-
             <tr class="total"><td></td><td>Total: $385.00</td></tr>
         </table>
     </div>

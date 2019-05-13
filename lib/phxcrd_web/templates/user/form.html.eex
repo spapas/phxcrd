@@ -4,19 +4,62 @@
   <p><%= gettext("Problems while saving") %></p>
 </div>
 <% end %>
+<div class='row'>
+  <div class='column'>
+    <%= label f, :username %>
+    <%= text_input f, :username %>
+    <%= error_tag f, :username %>
+  </div>
+  <div class='column'>
+    <%= label f, :password %>
+    <%= password_input f, :password %>
+    <%= error_tag f, :password %>
+  </div>
+</div>
 
-<%= label f, :name %>
-<%= text_input f, :name, readonly: true %>
-<%= error_tag f, :name %>
+<div class='row'>
+  <div class='column'>
+    <%= label f, :name %>
+    <%= text_input f, :name %>
+    <%= error_tag f, :name %>
+  </div>
+  <div class='column'>
+    <%= label f, :email %>
+    <%= text_input f, :email %>
+    <%= error_tag f, :email %>
+  </div>
+</div>
 
-<%= label f, :permissions %>
-<%= multiple_select(f,
+<div class='row'>
+  <div class='column'>
+    <%= label f, :first_name %>
+    <%= text_input f, :first_name %>
+    <%= error_tag f, :first_name %>
+  </div>
+  <div class='column'>
+    <%= label f, :last_name %>
+    <%= text_input f, :last_name %>
+    <%= error_tag f, :last_name %>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='column'>
+    <%= label f, :permissions %>
+    <%= multiple_select(f,
                     :permissions,
                     (Phxcrd.Auth.list_permissions |> Enum.map(&{&1.name, &1.id})),
-                    selected: Enum.map(@user.permissions, &(&1.id)),
+                    selected: if(assigns[:user], do: Enum.map(@user.permissions, &(&1.id)), else: []),
                     style: "width: 100%")
                     %>
-<%= error_tag f, :permissions %>
+    <%= error_tag f, :permissions %>
+  </div>
+  <div class='column'>
+    <%= label f, :is_enabled %>
+    <%= checkbox f, :is_enabled %>
+    <%= error_tag f, :is_enabled %>
+  </div>
+</div>
 
 
 <div>

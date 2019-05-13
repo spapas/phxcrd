@@ -1,5 +1,6 @@
 defmodule Phxcrd.Auth.User do
   use Ecto.Schema
+
   import Ecto.Changeset
   alias Phxcrd.Auth.Permission
   alias Phxcrd.Auth.UserPermission
@@ -17,8 +18,10 @@ defmodule Phxcrd.Auth.User do
     field :name, :string
     field :obj_cls, :string
     field :username, :string
-
+    field :password_hash, :string
+    field :password, :string, virtual: true
     field :last_login, :utc_datetime
+    field :is_enabled, :boolean
 
     many_to_many(
       :permissions,
@@ -47,17 +50,44 @@ defmodule Phxcrd.Auth.User do
       :kind,
       :extra,
       :obj_cls,
-      :last_login
+      :last_login,
+      :is_enabled
     ])
     |> validate_required([
+      :username,
+      :name,
+      :email,
+      :last_login
+    ])
+  end
+
+  @doc false
+  def db_user_changeset(user, attrs) do
+    user
+    |> cast(attrs, [
       :username,
       :name,
       :first_name,
       :last_name,
       :email,
-      :dsn,
-      :kind,
-      :last_login
+      :password,
+      :is_enabled
     ])
+    |> validate_required([
+      :username,
+      :name,
+      :email,
+      :password
+    ])
+    |> validate_length(:password, min: 3, max: 16)
+    |> put_pass_hash
   end
+
+  defp put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    change(changeset, Argon2.add_hash(password))
+  end
+
+  defp put_pass_hash(changeset), do: changeset
+
+  use Accessible
 end

@@ -68,6 +68,12 @@ defmodule Phxcrd.Auth do
     |> Repo.insert()
   end
 
+  def create_authority_kind(attrs \\ %{}) do
+    %AuthorityKind{}
+    |> AuthorityKind.changeset(attrs)
+    |> Repo.insert()
+  end
+
   @doc """
   Updates a authority.
 
@@ -150,6 +156,13 @@ defmodule Phxcrd.Auth do
   """
   def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:permissions])
 
+  def get_for_db_login(username) do
+    case Repo.one(from u in User, where: u.username == ^username and not is_nil(u.password_hash)) do
+      nil -> {:error, "User not found"}
+      user -> {:ok, user |> Repo.preload([:permissions, :authority])}
+    end
+  end
+
   @doc """
   Creates a user.
 
@@ -164,6 +177,15 @@ defmodule Phxcrd.Auth do
   """
   def create_user(attrs \\ %{}) do
     case %User{} |> User.changeset(attrs) |> Repo.insert() do
+      {:ok, user} -> {:ok, user |> Repo.preload([:permissions])}
+      error -> error
+    end
+  end
+
+  def create_db_user(attrs \\ %{}) do
+    case %User{}
+         |> User.db_user_changeset(attrs)
+         |> Repo.insert() do
       {:ok, user} -> {:ok, user |> Repo.preload([:permissions])}
       error -> error
     end
@@ -193,7 +215,7 @@ defmodule Phxcrd.Auth do
 
     user
     |> Repo.preload(:permissions)
-    |> User.changeset(attrs)
+    |> User.db_user_changeset(attrs)
     |> Ecto.Changeset.put_assoc(:permissions, perms)
     |> Repo.update()
   end

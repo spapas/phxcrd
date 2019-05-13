@@ -9,7 +9,8 @@ config :phxcrd, PhxcrdWeb.Endpoint,
   http: [
     port: 4000,
     protocol_options: [
-      idle_timeout: 3_600_000 # increase idle timeout to allow IEx.pry to work for more time than 1 minute!
+      # increase idle timeout to allow IEx.pry to work for more time than 1 minute!
+      idle_timeout: 3_600_000
     ]
   ],
   debug_errors: true,

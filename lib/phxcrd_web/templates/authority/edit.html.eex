@@ -1,4 +1,4 @@
-<h1>Edit Authority</h1>
+<h1><%= gettext "Edit authority" %></h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.authority_path(@conn, :update, @authority)) %>
 

@@ -45,11 +45,12 @@ config :sentry,
   # dsn should be configured through a secret
   environment_name: Mix.env(),
   enable_source_code_context: true,
-  root_source_code_path: File.cwd!,
+  root_source_code_path: File.cwd!(),
   tags: %{
-    env: Mix.env()|> Atom.to_string
+    env: Mix.env() |> Atom.to_string()
   },
-  included_environments: [:prod, :dev]
+  # :dev is here only for testing, remove it after you confirm it works
+  included_environments: [:prod, :uat]
 
 # Bamboo smtp settings 
 config :phxcrd, Phxcrd.Mailer,
@@ -64,7 +65,10 @@ config :phxcrd, Phxcrd.Mailer,
   auth: :always
 
 # set config for env
-config :phxcrd, env: Mix.env()
+# for example to use <%= Application.get_env(:phxcrd, :env) %> in your templates
+config :phxcrd, 
+  env: Mix.env(),
+  local_timezone: "Europe/Athens"
 
 # set config for default locale
 config :phxcrd, PhxcrdWeb.Gettext, default_locale: "en"

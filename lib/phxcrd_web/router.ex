@@ -21,7 +21,7 @@ defmodule PhxcrdWeb.Router do
 
     scope "/admin" do
       resources "/authorities", AuthorityController, except: [:delete]
-      resources "/users", UserController, only: [:index, :show, :edit, :update]
+      resources "/users", UserController, except: [:delete]
       resources "/permissions", PermissionController
       resources "/versions", VersionController, only: [:index, :show]
     end
@@ -34,6 +34,7 @@ defmodule PhxcrdWeb.Router do
     get "/test-sentry", PageController, :test_sentry
     get "/test-mail", PageController, :test_mail
     get "/test-pdf", PageController, :test_pdf
+    get "/test-xlsx", PageController, :test_xlsx
   end
 
   # Other scopes may use custom stacks.
