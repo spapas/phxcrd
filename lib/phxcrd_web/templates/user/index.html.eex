@@ -27,7 +27,7 @@
       <td><%= user.am %> / <%= user.am_phxcrd %></td>
       <td><%= user.kind %></td>
 
-      <td><%= user.last_login %></td>
+      <td><%= to_local_time_str user.last_login %></td>
 
       <td>
         <%= link "Show", to: Routes.user_path(@conn, :show, user) %>

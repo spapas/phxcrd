@@ -1,11 +1,9 @@
 # Phxcrd
 
-Run this:
+To compile requirements: https://github.com/riverrun/comeonin/wiki/Requirements
 
-```
-cmd /K "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
-```
 
-and then `mix compile`
+TL;DR: You'll need to install the MS VS Build tools and then run vcvarsall.bat amd64. Notice that the location of vcvaralls.bat is different for different versions so just search it.
 
-to properly compile argon.
+
+Then run `mix compile` to properly compile argon.

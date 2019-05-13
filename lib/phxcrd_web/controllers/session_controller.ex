@@ -4,6 +4,7 @@ defmodule PhxcrdWeb.SessionController do
   alias Phxcrd.Repo
   require Logger
   import Ecto.Query, only: [from: 2]
+  import IEx
 
   def new(conn, _) do
     render(conn, "new.html")
@@ -29,14 +30,14 @@ defmodule PhxcrdWeb.SessionController do
   def create(conn, %{"user" => %{"username" => username, "password" => password}}) do
     case ldap_login(username, password) do
       {:ok, user} ->
-        login_successfull(conn, user)
+        auth_successfull(conn, user)
 
       {:error, reason} ->
         Logger.info("Cannot login #{username} through LDAP: #{reason}. Will try DB login.")
 
         case db_login(username, password) do
           {:ok, user} ->
-            login_successfull(conn, user)
+            auth_successfull(conn, user)
 
           {:error, reason} ->
             Logger.info("Cannot login #{username} through DB: #{reason}.")
@@ -54,8 +55,8 @@ defmodule PhxcrdWeb.SessionController do
     |> redirect(to: "/")
   end
 
-  defp is_disabled?(username) do
-    # with {:ok, user} <- Auth.get_user_by_username(username)
+  defp is_disabled?(user) do
+    !(user |> Map.fetch!(:is_enabled))
   end
 
   defp ldap_login(username, password) do
@@ -89,28 +90,39 @@ defmodule PhxcrdWeb.SessionController do
     #  {:error, reason} -> {:error, reason}
     # end
     # With is more idiomatic
+
     with {:ok, user} <- Auth.get_user_by_username(username) do
       user
       |> Argon2.check_pass(password)
+      |> elem(1)
       |> Auth.update_user(%{last_login: DateTime.utc_now()})
     end
   end
 
-  defp login_successfull(conn, user) do
+  defp auth_successfull(conn, user) do
     # authority_name = if user.authority_id && user.authority, do: user.authority.name, else: nil
     # authority_name =
     #  case user do
     #    %{authority: %{name: name}} -> name
     #    _ -> nil
     #  end
-    conn
-    |> put_flash(:info, gettext("Welcome %{username}!", username: user.username))
-    |> put_session(:user_id, user.id)
-    |> put_session(:username, user.username)
-    |> put_session(:permissions, user.permissions |> Enum.map(& &1.name))
-    |> put_session(:authority_id, user.authority_id)
-    |> put_session(:authority_name, get_in(user, [:authority, :name]))
-    |> configure_session(renew: true)
-    |> redirect(to: "/")
+    # IEx.pry
+    case user |> is_disabled? do
+      true ->
+        conn
+        |> put_flash(:error, gettext("Cannot login (user is disabled)"))
+        |> redirect(to: Routes.session_path(conn, :new))
+
+      false ->
+        conn
+        |> put_flash(:info, gettext("Welcome %{username}!", username: user.username))
+        |> put_session(:user_id, user.id)
+        |> put_session(:username, user.username)
+        |> put_session(:permissions, user.permissions |> Enum.map(& &1.name))
+        |> put_session(:authority_id, user.authority_id)
+        |> put_session(:authority_name, get_in(user, [:authority, :name]))
+        |> configure_session(renew: true)
+        |> redirect(to: "/")
+    end
   end
 end

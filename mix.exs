@@ -30,7 +30,8 @@ defmodule Phxcrd.MixProject do
         :pdf_generator,
         # :scrivener,
         :scrivener_ecto,
-        :scrivener_html
+        :scrivener_html,
+        :timex
       ]
     ]
   end
@@ -68,6 +69,7 @@ defmodule Phxcrd.MixProject do
       {:pdf_generator, "== 0.5.2"},
       {:elixlsx, "~> 0.4.1"},
       {:argon2_elixir, "~> 2.0"},
+      {:timex, "~> 3.1"},
       {:accessible, "~> 0.2.1"}
     ]
   end

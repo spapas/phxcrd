@@ -66,7 +66,9 @@ config :phxcrd, Phxcrd.Mailer,
 
 # set config for env
 # for example to use <%= Application.get_env(:phxcrd, :env) %> in your templates
-config :phxcrd, env: Mix.env()
+config :phxcrd, 
+  env: Mix.env(),
+  local_timezone: "Europe/Athens"
 
 # set config for default locale
 config :phxcrd, PhxcrdWeb.Gettext, default_locale: "en"

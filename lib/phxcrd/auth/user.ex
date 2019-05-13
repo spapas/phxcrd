@@ -57,8 +57,6 @@ defmodule Phxcrd.Auth.User do
       :username,
       :name,
       :email,
-      :dsn,
-      :kind,
       :last_login
     ])
   end

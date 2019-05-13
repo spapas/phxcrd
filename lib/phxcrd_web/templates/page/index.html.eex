@@ -1,5 +1,5 @@
 <section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}", name: "Phxcrd" %></h1>
+  <h1><%= gettext "Welcome to %{name}", name: "P·H·X·C·R·D" %></h1>
 </section>
 
 <%= if length(@perms) > 0 do %>
