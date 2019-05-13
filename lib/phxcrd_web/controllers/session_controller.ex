@@ -10,7 +10,7 @@ defmodule PhxcrdWeb.SessionController do
     render(conn, "new.html")
   end
 
-  defp get_user_changeset(user_entry) do
+  defp get_ldap_user_changeset(user_entry) do
     %{
       username: user_entry[:uid],
       name: user_entry[:cn],
@@ -23,6 +23,7 @@ defmodule PhxcrdWeb.SessionController do
       am: user_entry[:employeeNumber],
       am_phxcrd: user_entry[:postOfficeBox],
       obj_cls: user_entry[:objectClass],
+      password_hash: nil,
       last_login: DateTime.utc_now()
     }
   end
@@ -51,7 +52,9 @@ defmodule PhxcrdWeb.SessionController do
 
   def delete(conn, _) do
     conn
-    |> configure_session(drop: true)
+    #|> configure_session(drop: true)
+    |> clear_session()
+    |> put_flash(:info, gettext("You've been logged out"))
     |> redirect(to: "/")
   end
 
@@ -70,12 +73,12 @@ defmodule PhxcrdWeb.SessionController do
                  preload: [:permissions, :authority]
              ) do
           nil ->
-            {:ok, created_user} = user_entry |> get_user_changeset |> Auth.create_user()
+            {:ok, created_user} = user_entry |> get_ldap_user_changeset |> Auth.create_user()
             created_user
 
           existing_user ->
             {:ok, updated_user} =
-              existing_user |> Auth.update_user(user_entry |> get_user_changeset)
+              existing_user |> Auth.update_user(user_entry |> get_ldap_user_changeset)
 
             updated_user
         end
@@ -91,7 +94,7 @@ defmodule PhxcrdWeb.SessionController do
     # end
     # With is more idiomatic
 
-    with {:ok, user} <- Auth.get_user_by_username(username) do
+    with {:ok, user} <- Auth.get_for_db_login(username) do
       user
       |> Argon2.check_pass(password)
       |> elem(1)

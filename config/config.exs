@@ -50,7 +50,7 @@ config :sentry,
     env: Mix.env() |> Atom.to_string()
   },
   # :dev is here only for testing, remove it after you confirm it works
-  included_environments: [:prod, :uat, :dev]
+  included_environments: [:prod, :uat]
 
 # Bamboo smtp settings 
 config :phxcrd, Phxcrd.Mailer,

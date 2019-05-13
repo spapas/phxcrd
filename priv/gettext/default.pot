@@ -19,7 +19,7 @@ msgstr ""
 #, elixir-format
 #: lib/phxcrd_web/templates/layout/app.html.eex:41
 #: lib/phxcrd_web/templates/layout/app.html.eex:44
-#: lib/phxcrd_web/templates/page/index.html.eex:40
+#: lib/phxcrd_web/templates/page/index.html.eex:39
 msgid "Authorities"
 msgstr ""
 
@@ -30,7 +30,7 @@ msgid "Authority"
 msgstr ""
 
 #, elixir-format
-#: lib/phxcrd_web/templates/page/index.html.eex:37
+#: lib/phxcrd_web/templates/page/index.html.eex:36
 msgid "Management"
 msgstr ""
 
@@ -79,12 +79,7 @@ msgid "Authority name"
 msgstr ""
 
 #, elixir-format
-#: lib/phxcrd_web/controllers/session_controller.ex:68
-msgid "Cannot login: "
-msgstr ""
-
-#, elixir-format
-#: lib/phxcrd_web/templates/authority/index.html.eex:39
+#: lib/phxcrd_web/templates/authority/index.html.eex:41
 #: lib/phxcrd_web/templates/authority/show.html.eex:32
 msgid "Edit"
 msgstr ""
@@ -96,7 +91,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/phxcrd_web/templates/authority/form.html.eex:12
-#: lib/phxcrd_web/templates/authority/index.html.eex:23
+#: lib/phxcrd_web/templates/authority/index.html.eex:24
 #: lib/phxcrd_web/templates/authority/show.html.eex:9
 msgid "Kind"
 msgstr ""
@@ -123,13 +118,13 @@ msgstr ""
 
 #, elixir-format
 #: lib/phxcrd_web/templates/authority/form.html.eex:8
-#: lib/phxcrd_web/templates/authority/index.html.eex:24
+#: lib/phxcrd_web/templates/authority/index.html.eex:25
 #: lib/phxcrd_web/templates/authority/show.html.eex:13
 msgid "Name"
 msgstr ""
 
 #, elixir-format
-#: lib/phxcrd_web/templates/authority/index.html.eex:49
+#: lib/phxcrd_web/templates/authority/index.html.eex:57
 msgid "New Authority"
 msgstr ""
 
@@ -155,6 +150,7 @@ msgid "Reset"
 msgstr ""
 
 #, elixir-format
+#: lib/phxcrd_web/templates/authority/edit.html.eex:5
 #: lib/phxcrd_web/templates/authority/new.html.eex:5
 #: lib/phxcrd_web/templates/authority/show.html.eex:33
 msgid "Return"
@@ -162,7 +158,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/phxcrd_web/templates/authority/form.html.eex:29
-#: lib/phxcrd_web/templates/user/form.html.eex:23
+#: lib/phxcrd_web/templates/user/form.html.eex:66
 msgid "Save"
 msgstr ""
 
@@ -208,6 +204,66 @@ msgid "Version list"
 msgstr ""
 
 #, elixir-format
-#: lib/phxcrd_web/controllers/session_controller.ex:55
+#: lib/phxcrd_web/controllers/session_controller.ex:121
 msgid "Welcome %{username}!"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/controllers/session_controller.ex:47
+msgid "Cannot login"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/controllers/session_controller.ex:116
+msgid "Cannot login (user is disabled)"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/authority/edit.html.eex:1
+msgid "Edit authority"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/user/index.html.eex:42
+msgid "New User"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/authority/index.html.eex:52
+msgid "No authorities found"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/page/index.html.eex:55
+msgid "Test PDF"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/page/index.html.eex:58
+msgid "Test XLSX"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/page/index.html.eex:46
+msgid "Test features"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/page/index.html.eex:52
+msgid "Test mail"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/templates/page/index.html.eex:49
+msgid "Test sentry"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd/auth/permission.ex:27
+msgid "The name exists!"
+msgstr ""
+
+#, elixir-format
+#: lib/phxcrd_web/controllers/session_controller.ex:57
+msgid "You've been logged out"
 msgstr ""
