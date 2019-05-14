@@ -6,31 +6,37 @@ defmodule Phxcrd.AuthTest do
   describe "authorities" do
     alias Phxcrd.Auth.Authority
 
-    @valid_attrs %{name: "some name"}
+    @valid_attrs %{name: "some name", authority_kind_id: nil}
     @update_attrs %{name: "some updated name"}
     @invalid_attrs %{name: nil}
 
     def authority_fixture(attrs \\ %{}) do
+      {:ok, ak} = Auth.create_authority_kind(%{name: "name"})
+
       {:ok, authority} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Auth.create_authority()
+        Auth.create_authority(
+          attrs
+          |> Enum.into(@valid_attrs)
+          |> Enum.into(%{authority_kind_id: ak.id})
+        )
 
       authority
     end
 
     test "list_authorities/0 returns all authorities" do
       authority = authority_fixture()
-      assert Auth.list_authorities() == [authority]
+
+      assert Auth.list_authorities() |> Enum.map(& &1.id) == [authority] |> Enum.map(& &1.id)
     end
 
     test "get_authority!/1 returns the authority with given id" do
       authority = authority_fixture()
-      assert Auth.get_authority!(authority.id) == authority
+      assert Auth.get_authority!(authority.id).id == authority.id
     end
 
     test "create_authority/1 with valid data creates a authority" do
-      assert {:ok, %Authority{} = authority} = Auth.create_authority(@valid_attrs)
+      {:ok, ak} = Auth.create_authority_kind(%{name: "name"})
+      assert {:ok, %Authority{} = authority} = Auth.create_authority(%{@valid_attrs | authority_kind_id: ak.id})
       assert authority.name == "some name"
     end
 

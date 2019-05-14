@@ -6,9 +6,6 @@ defmodule Phxcrd.Plugs.UserSignedIn do
   end
 
   def call(conn, _params) do
-    IO.inspect(conn)
-    IO.inspect(_params)
-
     if conn.assigns[:user_signed_in?] do
       conn
     else

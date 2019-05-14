@@ -11,7 +11,7 @@ config :logger, level: :warn
 
 # Configure your database
 config :phxcrd, Phxcrd.Repo,
-  username: "serafeim",
+  username: "Serafeim",
   password: "",
   database: "phxcrd_test",
   hostname: "localhost",

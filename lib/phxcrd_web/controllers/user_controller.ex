@@ -39,7 +39,7 @@ defmodule PhxcrdWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "#{user.name} created!")
-        |> redirect(to: Routes.user_path(conn, :index))
+        |> redirect(to: Routes.user_path(conn, :show, user))
 
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
