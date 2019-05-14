@@ -45,11 +45,11 @@ defmodule Phxcrd.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.4"},
+      {:phoenix, "~> 1.4.6"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
-      {:ecto_sql, "~> 3.1"},
-      {:postgrex, ">= 0.0.0"},
+      {:ecto_sql, "~> 3.1.2"},
+      {:postgrex, ">=  0.14.3"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
@@ -69,7 +69,7 @@ defmodule Phxcrd.MixProject do
       {:pdf_generator, "== 0.5.2"},
       {:elixlsx, "~> 0.4.1"},
       {:argon2_elixir, "~> 2.0"},
-      {:timex, "~> 3.1"},
+      {:timex, "~> 3.5"},
       {:accessible, "~> 0.2.1"}
     ]
   end
