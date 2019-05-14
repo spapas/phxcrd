@@ -25,6 +25,11 @@ This doesn't include webpack or any other JS bundlers; just use good ol vanilla 
 * Configuration using secrets and a secret template
 * Multiple environments (dev/uat/prod) each with its own secret (copy the template and rename it)
 
+## Missing stuff
+
+* Fix all tests
+* Various refactoring decisions
+
 ## Compiling comeonin-argon
 
 Read this first: https://github.com/riverrun/comeonin/wiki/Requirements
