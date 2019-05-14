@@ -39,7 +39,6 @@ defmodule PhxcrdWeb.Router do
     get "/test-xlsx", PageController, :test_xlsx
   end
 
-  # Other scopes may use custom stacks.
   scope "/api", PhxcrdWeb do
     pipe_through :api
 
