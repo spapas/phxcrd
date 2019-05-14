@@ -26,7 +26,7 @@ defmodule Phxcrd.AuthTest do
     test "list_authorities/0 returns all authorities" do
       authority = authority_fixture()
 
-      assert Auth.list_authorities() |> Enum.map(& &1.id) == [authority] |> Enum.map(& &1.id)
+      assert (Auth.list_authorities() |> Enum.map(& &1.id)) == ([authority] |> Enum.map(& &1.id))
     end
 
     test "get_authority!/1 returns the authority with given id" do
