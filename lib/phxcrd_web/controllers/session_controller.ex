@@ -52,7 +52,7 @@ defmodule PhxcrdWeb.SessionController do
 
   def delete(conn, _) do
     conn
-    #|> configure_session(drop: true)
+    # |> configure_session(drop: true)
     |> clear_session()
     |> put_flash(:info, gettext("You've been logged out"))
     |> redirect(to: "/")

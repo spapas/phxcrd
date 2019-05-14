@@ -14,6 +14,8 @@ defmodule PhxcrdWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
+    plug Phxcrd.Plugs.SetCurrentUser
   end
 
   scope "/", PhxcrdWeb do
