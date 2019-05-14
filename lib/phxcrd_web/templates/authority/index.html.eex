@@ -48,8 +48,8 @@
 </table>
 
 <%= pagination_links @page, @conn.params |> get_query_params%>
-<%= else %>
-  <p><%= gettext "No authorities found" %></p>
+<% else %>
+<p><%= gettext "No authorities found" %></p>
 <% end %>
 
 

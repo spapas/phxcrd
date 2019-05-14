@@ -1,8 +1,5 @@
 defmodule PhxcrdWeb.ApiController do
   use PhxcrdWeb, :controller
-  alias Phxcrdweb.QueryFilter
-  alias Phxcrd.Plugs
-  alias Phxcrd.Auth
   alias Phxcrd.Auth.{Authority, User, AuthorityKind}
   alias Phxcrd.Repo
   import Canada, only: [can?: 2]

@@ -1,5 +1,4 @@
 defmodule Phxcrdweb.QueryFilter do
-  import IEx
   import Ecto.Query
 
   def filter(query, model, params, filters) do
