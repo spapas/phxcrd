@@ -7,17 +7,16 @@ defmodule Phxcrd.AuthTest do
     alias Phxcrd.Auth.Authority
 
     @valid_attrs %{name: "some name", authority_kind_id: nil}
-    @update_attrs %{name: "some updated name"}
+    @update_attrs %{name: "some updated name",  authority_kind_id: nil}
     @invalid_attrs %{name: nil}
 
     def authority_fixture(attrs \\ %{}) do
-      {:ok, ak} = Auth.create_authority_kind(%{name: "name"})
-
+      {:ok, ak} = Auth.create_authority_kind(%{name: DateTime.utc_now |> DateTime.to_string })
       {:ok, authority} =
         Auth.create_authority(
           attrs
           |> Enum.into(@valid_attrs)
-          |> Enum.into(%{authority_kind_id: ak.id})
+          |> Map.merge(%{authority_kind_id: ak.id})
         )
 
       authority
@@ -46,14 +45,16 @@ defmodule Phxcrd.AuthTest do
 
     test "update_authority/2 with valid data updates the authority" do
       authority = authority_fixture()
-      assert {:ok, %Authority{} = authority} = Auth.update_authority(authority, @update_attrs)
+      {:ok, ak} = Auth.create_authority_kind(%{name: "name"})
+      
+      assert {:ok, %Authority{} = authority} = Auth.update_authority(authority, %{@update_attrs | authority_kind_id: ak.id})
       assert authority.name == "some updated name"
     end
 
     test "update_authority/2 with invalid data returns error changeset" do
       authority = authority_fixture()
       assert {:error, %Ecto.Changeset{}} = Auth.update_authority(authority, @invalid_attrs)
-      assert authority == Auth.get_authority!(authority.id)
+      assert authority.id == Auth.get_authority!(authority.id).id
     end
 
     test "delete_authority/1 deletes the authority" do
@@ -83,7 +84,8 @@ defmodule Phxcrd.AuthTest do
       name: "some name",
       obj_cls: "some obj_cls",
       username: "some username",
-      last_login: DateTime.utc_now()
+      last_login: DateTime.utc_now(),
+      is_enabled: true
     }
     @update_attrs %{
       am: "some updated am",
@@ -109,7 +111,8 @@ defmodule Phxcrd.AuthTest do
       last_name: nil,
       name: nil,
       obj_cls: nil,
-      username: nil
+      username: nil,
+      is_enabled: true
     }
 
     def user_fixture(attrs \\ %{}) do
@@ -123,7 +126,7 @@ defmodule Phxcrd.AuthTest do
 
     test "list_users/0 returns all users" do
       user = user_fixture()
-      assert Auth.list_users() == [user]
+      assert (Auth.list_users() |> Enum.map(& &1.id)) == ([user] |> Enum.map(& &1.id))
     end
 
     test "get_user!/1 returns the user with given id" do
