@@ -97,11 +97,22 @@ mix run mix run priv/repo/seeds.exs # to seed the database
 mix phx.server # to make sure that everything works fine
 ```
 
+To auto-start the server I use supervisord; just copy `/etc/phxcrd-supervisor.conf` to your `/etc/supervisord.d/` directory.
+
 ## Deploying changes
 
-I've provided a simple fabric script for that. Just run `fab env full_deploy` (env = uat or prod) and you should be good to go. Notice that I use fabric 1.x (because fabric 2.x does not support various things) thus you'll need to have python 2.x installed.
+I've provided a simple fabric script for that: The script will
+
+* Add / commit and push local changes
+* Retrieve and merge changes to server
+* Install deps and run migrations
+* Restart server (using supervisorctl)
+
+Just run `fab env full_deploy` (env = uat or prod) and you should be good to go. Notice that I use fabric 1.x (because fabric 2.x does not support various things) thus you'll need to have python 2.x installed.
 
 ## Signal handling
 
-http://erlang.org/doc/man/kernel_app.html#erl_signal_server
-https://medium.com/@ellispritchard/graceful-shutdown-on-kubernetes-with-signals-erlang-otp-20-a22325e8ae98
+It may be worth it to respond to signals for restarting using `:init.restart`.
+
+* http://erlang.org/doc/man/kernel_app.html#erl_signal_server
+* https://medium.com/@ellispritchard/graceful-shutdown-on-kubernetes-with-signals-erlang-otp-20-a22325e8ae98
