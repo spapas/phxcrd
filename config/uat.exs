@@ -15,4 +15,8 @@ config :phxcrd, Phxcrd.Repo,
   template: "template0",
   pool_size: 10
 
+config :pdf_generator,
+  wkhtml_path: "/usr/local/bin/wkhtmltopdf"
+
 import_config "uat.secret.exs"
+
