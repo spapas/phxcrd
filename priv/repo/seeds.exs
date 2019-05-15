@@ -46,21 +46,43 @@ permission_data = [
   }
 ]
 
+user_data = %{
+  name: "root",
+  username: "root",
+  password: "toor",
+  email: "r@r.gr"
+}
+
 case Repo.one(from p in Permission, select: count(p.id)) do
   0 ->
-    Enum.each(permission_data, fn data ->
-      Phxcrd.Repo.insert!(data)
-    end)
+    IO.puts("** Seeding Permissions")
 
-    IO.puts("** Seeding Permission")
+    Enum.each(permission_data, fn data ->
+      Repo.insert!(data)
+    end)
 
   _ ->
     IO.puts("** Will not seed Permission")
 end
 
+case Repo.one(from u in User, select: count(u.id)) do
+  0 ->
+    IO.puts("** Seeding User")
+    {:ok, user} = Phxcrd.Auth.create_db_user(user_data)
+
+    {:ok, user} =
+      Phxcrd.Auth.update_user_password(user, %{
+        password: user_data.password,
+        password_confirmation: user_data.password
+      })
+
+  _ ->
+    IO.puts("** Will not seed User")
+end
+
 case Repo.one(from p in UserPermission, select: count(p.id)) do
   0 ->
-    user = Repo.one(from u in User, where: u.username == "spapas")
+    user = Repo.one(from u in User, where: u.username == "root")
     perm = Repo.one(from u in Permission, where: u.name == "superuser")
 
     if user && perm do
