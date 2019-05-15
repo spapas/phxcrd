@@ -19,4 +19,3 @@ config :pdf_generator,
   wkhtml_path: "/usr/local/bin/wkhtmltopdf"
 
 import_config "uat.secret.exs"
-

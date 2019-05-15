@@ -43,7 +43,10 @@ defimpl Canada.Can, for: Phxcrd.Auth.User do
   end
 
   def can?(%User{permissions: permissions, authority_id: authority_id}, :search, Authority) do
-    if(permissions |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) or (authority_id && authority_id > 0)) do
+    if(
+      permissions |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) or
+        (authority_id && authority_id > 0)
+    ) do
       true
     else
       false

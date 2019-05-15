@@ -7,11 +7,12 @@ defmodule Phxcrd.AuthTest do
     alias Phxcrd.Auth.Authority
 
     @valid_attrs %{name: "some name", authority_kind_id: nil}
-    @update_attrs %{name: "some updated name",  authority_kind_id: nil}
+    @update_attrs %{name: "some updated name", authority_kind_id: nil}
     @invalid_attrs %{name: nil}
 
     def authority_fixture(attrs \\ %{}) do
-      {:ok, ak} = Auth.create_authority_kind(%{name: DateTime.utc_now |> DateTime.to_string })
+      {:ok, ak} = Auth.create_authority_kind(%{name: DateTime.utc_now() |> DateTime.to_string()})
+
       {:ok, authority} =
         Auth.create_authority(
           attrs
@@ -25,7 +26,7 @@ defmodule Phxcrd.AuthTest do
     test "list_authorities/0 returns all authorities" do
       authority = authority_fixture()
 
-      assert (Auth.list_authorities() |> Enum.map(& &1.id)) == ([authority] |> Enum.map(& &1.id))
+      assert Auth.list_authorities() |> Enum.map(& &1.id) == [authority] |> Enum.map(& &1.id)
     end
 
     test "get_authority!/1 returns the authority with given id" do
@@ -35,7 +36,10 @@ defmodule Phxcrd.AuthTest do
 
     test "create_authority/1 with valid data creates a authority" do
       {:ok, ak} = Auth.create_authority_kind(%{name: "name"})
-      assert {:ok, %Authority{} = authority} = Auth.create_authority(%{@valid_attrs | authority_kind_id: ak.id})
+
+      assert {:ok, %Authority{} = authority} =
+               Auth.create_authority(%{@valid_attrs | authority_kind_id: ak.id})
+
       assert authority.name == "some name"
     end
 
@@ -46,8 +50,10 @@ defmodule Phxcrd.AuthTest do
     test "update_authority/2 with valid data updates the authority" do
       authority = authority_fixture()
       {:ok, ak} = Auth.create_authority_kind(%{name: "name"})
-      
-      assert {:ok, %Authority{} = authority} = Auth.update_authority(authority, %{@update_attrs | authority_kind_id: ak.id})
+
+      assert {:ok, %Authority{} = authority} =
+               Auth.update_authority(authority, %{@update_attrs | authority_kind_id: ak.id})
+
       assert authority.name == "some updated name"
     end
 
@@ -126,7 +132,7 @@ defmodule Phxcrd.AuthTest do
 
     test "list_users/0 returns all users" do
       user = user_fixture()
-      assert (Auth.list_users() |> Enum.map(& &1.id)) == ([user] |> Enum.map(& &1.id))
+      assert Auth.list_users() |> Enum.map(& &1.id) == [user] |> Enum.map(& &1.id)
     end
 
     test "get_user!/1 returns the user with given id" do

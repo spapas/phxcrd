@@ -75,7 +75,7 @@ defmodule Phxcrd.Auth.User do
     |> validate_required([
       :username,
       :name,
-      :email,
+      :email
     ])
   end
 
