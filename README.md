@@ -24,6 +24,8 @@ This doesn't include webpack or any other JS bundlers; just use good ol vanilla 
 * Sentry integration for error reporting
 * Configuration using secrets and a secret template
 * Multiple environments (dev/uat/prod) each with its own secret (copy the template and rename it)
+* A fabric (https://www.fabfile.org/ for fabric 1.x) script to quickly deploy changes
+* A config file for supervisord (http://supervisord.org)
 
 ## Missing stuff
 
@@ -92,7 +94,12 @@ output. So try running:
 mix ecto.create # to create the env's db
 mix ecto.migrate # to create tables in the database
 mix run mix run priv/repo/seeds.exs # to seed the database
+mix phx.server # to make sure that everything works fine
 ```
+
+## Deploying changes
+
+I've provided a simple fabric script for that. Just run `fab env full_deploy` (env = uat or prod) and you should be good to go. Notice that I use fabric 1.x (because fabric 2.x does not support various things) thus you'll need to have python 2.x installed.
 
 ## Signal handling
 

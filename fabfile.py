@@ -38,8 +38,9 @@ def work():
 def restart():
     print("Restarting server");
     if env.env == 'uat':
-        run('fuser -k 4000/tcp')
-        run('MIX_ENV='+env.env+' mix phx.server')
+        run(r'supervisorctl restart phxcrd') 
+        #run('fuser -k 4000/tcp')
+        #run('MIX_ENV='+env.env+' mix phx.server')
 
 
 def full_deploy():
