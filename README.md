@@ -31,6 +31,7 @@ This doesn't include webpack or any other JS bundlers; just use good ol vanilla 
 
 * Fix all tests
 * Various refactoring decisions
+* Check out `phx mix.digest`
 
 ## Compiling comeonin-argon
 
