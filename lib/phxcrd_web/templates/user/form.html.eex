@@ -11,9 +11,9 @@
     <%= error_tag f, :username %>
   </div>
   <div class='column'>
-    <%= label f, :password %>
-    <%= password_input f, :password %>
-    <%= error_tag f, :password %>
+    <%= label f, :is_enabled %>
+    <%= checkbox f, :is_enabled %>
+    <%= error_tag f, :is_enabled %>
   </div>
 </div>
 
@@ -54,11 +54,7 @@
                     %>
     <%= error_tag f, :permissions %>
   </div>
-  <div class='column'>
-    <%= label f, :is_enabled %>
-    <%= checkbox f, :is_enabled %>
-    <%= error_tag f, :is_enabled %>
-  </div>
+
 </div>
 
 

@@ -220,6 +220,12 @@ defmodule Phxcrd.Auth do
     |> Repo.update()
   end
 
+  def update_user_password(%User{} = user, attrs) do
+    user
+    |> User.user_password_changeset(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Deletes a User.
 

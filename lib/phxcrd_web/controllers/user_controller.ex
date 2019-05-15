@@ -65,4 +65,24 @@ defmodule PhxcrdWeb.UserController do
         render(conn, "edit.html", user: user, changeset: changeset)
     end
   end
+
+  def change_password_get(conn, %{"id" => id}) do
+    user = Auth.get_user!(id)
+    changeset = Auth.change_user(user)
+    render(conn, "change_password.html", user: user, changeset: changeset)
+  end
+
+  def change_password_post(conn, %{"id" => id, "user" => user_params}) do
+    user = Auth.get_user!(id)
+
+    case Auth.update_user_password(user, user_params) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:info, "User password updated successfully.")
+        |> redirect(to: Routes.user_path(conn, :show, user))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "change_password.html", user: user, changeset: changeset)
+    end
+  end
 end

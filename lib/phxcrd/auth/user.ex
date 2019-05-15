@@ -70,15 +70,25 @@ defmodule Phxcrd.Auth.User do
       :first_name,
       :last_name,
       :email,
-      :password,
       :is_enabled
     ])
     |> validate_required([
       :username,
       :name,
       :email,
+    ])
+  end
+
+  @doc false
+  def user_password_changeset(user, attrs) do
+    user
+    |> cast(attrs, [
       :password
     ])
+    |> validate_required([
+      :password
+    ])
+    |> validate_confirmation(:password)
     |> validate_length(:password, min: 3, max: 16)
     |> put_pass_hash
   end

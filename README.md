@@ -41,3 +41,8 @@ Then run `mix compile` to properly compile argon.
 ## Deploying
 
 I propose deploying with a fabric script or something similar; i.e pull the changes from your VCS and run required commands. This doesn't support distillery yet.
+
+## Signal handling
+
+http://erlang.org/doc/man/kernel_app.html#erl_signal_server
+https://medium.com/@ellispritchard/graceful-shutdown-on-kubernetes-with-signals-erlang-otp-20-a22325e8ae98
