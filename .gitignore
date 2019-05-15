@@ -39,3 +39,4 @@ phxcrd-*.tar
 
 .elixir_ls/*
 tags*
+fabfile.pyc
