@@ -70,7 +70,8 @@ defmodule Phxcrd.MixProject do
       {:elixlsx, "~> 0.4.1"},
       {:argon2_elixir, "~> 2.0"},
       {:timex, "~> 3.5"},
-      {:accessible, "~> 0.2.1"}
+      {:accessible, "~> 0.2.1"},
+      {:csv, "~> 2.3"}
     ]
   end
 
