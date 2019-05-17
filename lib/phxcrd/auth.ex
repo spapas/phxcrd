@@ -177,7 +177,7 @@ defmodule Phxcrd.Auth do
   """
   def create_user(attrs \\ %{}) do
     case %User{} |> User.changeset(attrs) |> Repo.insert() do
-      {:ok, user} -> {:ok, user |> Repo.preload([:permissions])}
+      {:ok, user} -> {:ok, user |> Repo.preload([:permissions, :authority])}
       error -> error
     end
   end
