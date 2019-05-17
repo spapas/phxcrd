@@ -100,6 +100,21 @@ mix phx.server # to make sure that everything works fine
 
 To auto-start the server I use supervisord; just copy `/etc/phxcrd-supervisor.conf` to your `/etc/supervisord.d/` directory.
 
+## Templating
+
+You can use the `renameproj.bat` file to create a project with different name than dod. The script is for windows cmd but you can take a look
+at it and convert it to unix/bash or take a look at this gist: https://gist.github.com/krystofbe/92aed7cd03c9a631eb3c7af490525c4e
+
+Before starting the script you must set the following variables like so:
+
+```
+set CURRENT_NAME="Dod"
+set CURRENT_OTP="dod"
+
+set NEW_NAME="NewName"
+set NEW_OTP="new_name"
+``` 
+
 ## Deploying changes
 
 I've provided a simple fabric script for that: The script will
