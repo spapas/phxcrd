@@ -37,7 +37,7 @@
       <td><%= version.entity_id %></td>
       <td><%= version.action %></td>
       <td><%= if version.actor, do: version.actor.username, else: "-" %></td>
-      <td><%= version.recorded_at %></td>
+      <td><%= to_local_time_str version.recorded_at %></td>
       <td><%= version.rollback %></td>
     </tr>
     <% end %>
