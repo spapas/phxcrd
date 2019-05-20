@@ -3,7 +3,7 @@
   "argon2_elixir": {:hex, :argon2_elixir, "2.0.5", "0073a87d755c7e63fc4f9d08b1d1646585b93f144cecde126e15061b24240b20", [:make, :mix], [{:comeonin, "~> 5.1", [hex: :comeonin, repo: "hexpm", optional: false]}, {:elixir_make, "~> 0.5", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
   "bamboo": {:hex, :bamboo, "1.2.0", "8aebd24f7c606c32d0163c398004a11608ca1028182a169b2e527793bfab7561", [:mix], [{:hackney, ">= 1.13.0", [hex: :hackney, repo: "hexpm", optional: false]}, {:plug, "~> 1.0", [hex: :plug, repo: "hexpm", optional: false]}, {:poison, ">= 1.5.0", [hex: :poison, repo: "hexpm", optional: true]}], "hexpm"},
   "bamboo_smtp": {:hex, :bamboo_smtp, "1.6.0", "0a3607b77f22554af58c547350c1c73ebba6f4fb2c4bd0b11713ab5b4081588f", [:mix], [{:bamboo, "~> 1.0", [hex: :bamboo, repo: "hexpm", optional: false]}, {:gen_smtp, "~> 0.12.0", [hex: :gen_smtp, repo: "hexpm", optional: false]}], "hexpm"},
-  "canada": {:hex, :canada, "1.0.2", "040e4c47609b0a67d5773ac1fbe5e99f840cef173d69b739beda7c98453e0770", [:mix], [], "hexpm"},
+  "canada": {:hex, :canada, "2.0.0", "ce5e058f576a0625959fc5427fcde15311fb28a5ebc13775eafd13468ad16553", [:mix], [], "hexpm"},
   "certifi": {:hex, :certifi, "2.5.1", "867ce347f7c7d78563450a18a6a28a8090331e77fa02380b4a21962a65d36ee5", [:rebar3], [{:parse_trans, "~>3.3", [hex: :parse_trans, repo: "hexpm", optional: false]}], "hexpm"},
   "combine": {:hex, :combine, "0.10.0", "eff8224eeb56498a2af13011d142c5e7997a80c8f5b97c499f84c841032e429f", [:mix], [], "hexpm"},
   "comeonin": {:hex, :comeonin, "5.1.2", "fbbbbbfcf0f0e9900c0336d16c8d462edf838ba1759577e29cc5fbd7c28a4540", [:mix], [], "hexpm"},
