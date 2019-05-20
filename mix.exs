@@ -58,7 +58,7 @@ defmodule Phxcrd.MixProject do
 
       # Extra deps
       {:exldap, "~> 0.6"},
-      {:canada, "~> 1.0.2"},
+      {:canada, "~> 2.0.0"},
       {:ex_audit, "~> 0.6"},
       {:validate_greek_tax_number, github: "spapas/validate_greek_tax_number", app: false},
       # {:scrivener, "~> 2.0"},
