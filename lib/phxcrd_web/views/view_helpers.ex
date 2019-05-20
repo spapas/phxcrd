@@ -12,6 +12,9 @@ defmodule PhxcrdWeb.ViewHelpers do
   end
 
   def to_local_time_str(dt) do
-    dt |> to_local_time |> Timex.format!("{0D}/{0M}/{YYYY} {h24}:{0m}")
+    case dt do
+      nil -> "-"
+      _ -> dt |> to_local_time |> Timex.format!("{0D}/{0M}/{YYYY} {h24}:{0m}")
+    end
   end
 end
