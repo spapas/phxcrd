@@ -23,7 +23,7 @@ case Repo.one(from p in Authority, select: count(p.id)) do
       data |> Map.merge(%{authority_kind_id: authority_kinds[data[:authority_kind]]})
     end)
     # And add each line
-    |> Enum.each(fn data -> IO.inspect(Auth.create_authority(data)) end)
+    |> Enum.each(fn data -> Auth.create_authority(data) end)
 
   _ ->
     IO.puts("** Will not seed Authority")
