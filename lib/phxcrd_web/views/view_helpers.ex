@@ -17,4 +17,8 @@ defmodule PhxcrdWeb.ViewHelpers do
       _ -> dt |> to_local_time |> Timex.format!("{0D}/{0M}/{YYYY} {h24}:{0m}")
     end
   end
+
+  def action_name(conn) do
+    Phoenix.Controller.action_name(conn)
+  end
 end

@@ -25,14 +25,6 @@
                   %>
 <%= error_tag f, :users %>
 
-
 <%= submit gettext("Save") %>
 
-
-<script>
-  $(function () {
-
-    $('#authority_users').select2();
-  })
-</script>
 <% end %>
