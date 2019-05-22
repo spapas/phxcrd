@@ -10,12 +10,12 @@
 	document.addEventListener('click', closePopover)
 
 	// Close Popover
-	function closePopover (event) {
+	function closePopover(event) {
 		for (i = 0; i < $popovers.length; i++) $popovers[i].classList.remove('popover-open')
 	}
 
 	// Open Popover
-	function openPopover (event) {
+	function openPopover(event) {
 		event.preventDefault()
 		if (document.querySelector(this.getAttribute('href')).classList.contains('popover-open')) {
 			document.querySelector(this.getAttribute('href')).classList.remove('popover-open')
@@ -25,4 +25,11 @@
 		}
 		event.stopImmediatePropagation()
 	}
+
+	if (typeof console == "object") {
+		setTimeout(function () {
+			console.log("%cWhy so curious?", "font:24px 'Calibri',sans-serif; color:#ac0408;");
+		}, 1);
+	}
+
 })()
