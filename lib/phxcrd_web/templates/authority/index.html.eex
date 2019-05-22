@@ -39,7 +39,7 @@
 
       <td>
         <%= link gettext("Edit"), to: AdminRoutes.authority_path(@conn, :edit, authority), class: "mb-0 px-3 button button-outline" %>
-        <%= # link "Delete", to: Routes.authority_path(@conn, :delete, authority), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= # link "Delete", to: AdminRoutes.authority_path(@conn, :delete, authority), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
     </tr>
     <% end %>
