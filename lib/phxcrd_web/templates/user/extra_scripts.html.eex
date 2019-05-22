@@ -1,0 +1,8 @@
+<%= if action_name(@conn) in [:edit, :new] do %>
+<script>
+    // Render me on :new and :edit
+    $(function () {
+        $('#user_permissions').select2();
+    })
+</script>
+<% end %>

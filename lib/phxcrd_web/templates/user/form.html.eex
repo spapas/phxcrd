@@ -57,15 +57,7 @@
 
 </div>
 
-
 <div>
   <%= submit gettext("Save") %>
 </div>
 <% end %>
-
-<script>
-  $(function () {
-
-    $('#user_permissions').select2();
-  })
-</script>
