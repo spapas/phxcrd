@@ -1,6 +1,6 @@
 <h1><%= gettext "Authority list" %></h1>
 
-<%= form_for @changeset, Routes.authority_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
+<%= form_for @changeset, AdminRoutes.authority_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
 <%= label f, gettext "Authority name" %>
 <%= text_input f, :name  %>
 
@@ -12,7 +12,7 @@
 
 
 <%= submit gettext("Filter"), class: "ml-5" %>
-<%= link gettext("Reset"), to: Routes.authority_path(@conn, :index), class: "button button-outline ml-2" %>
+<%= link gettext("Reset"), to: AdminRoutes.authority_path(@conn, :index), class: "button button-outline ml-2" %>
 
 <% end %>
 </form>
@@ -32,13 +32,13 @@
     <%= for authority <- @page do %>
     <tr>
       <td>
-        <%= link  authority.id, to: Routes.authority_path(@conn, :show, authority), class: "mb-0 px-3 button button-outline" %>
+        <%= link  authority.id, to: AdminRoutes.authority_path(@conn, :show, authority), class: "mb-0 px-3 button button-outline" %>
       </td>
       <td><%= authority.authority_kind.name %></td>
       <td><%= authority.name %></td>
 
       <td>
-        <%= link gettext("Edit"), to: Routes.authority_path(@conn, :edit, authority), class: "mb-0 px-3 button button-outline" %>
+        <%= link gettext("Edit"), to: AdminRoutes.authority_path(@conn, :edit, authority), class: "mb-0 px-3 button button-outline" %>
         <%= # link "Delete", to: Routes.authority_path(@conn, :delete, authority), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
     </tr>
@@ -54,4 +54,4 @@
 
 
 
-<span><%= link gettext("New Authority"), to: Routes.authority_path(@conn, :new), class: "button button-primary" %></span>
+<span><%= link gettext("New Authority"), to: AdminRoutes.authority_path(@conn, :new), class: "button button-primary" %></span>

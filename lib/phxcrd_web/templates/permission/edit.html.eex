@@ -1,5 +1,5 @@
 <h1>Edit Permission</h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.permission_path(@conn, :update, @permission)) %>
+<%= render "form.html", Map.put(assigns, :action, AdminRoutes.permission_path(@conn, :update, @permission)) %>
 
-<span><%= link "Back", to: Routes.permission_path(@conn, :index) %></span>
+<span><%= link "Back", to: AdminRoutes.permission_path(@conn, :index), class: "button button-secondary" %></span>

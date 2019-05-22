@@ -81,6 +81,6 @@
 </div>
 
 
-<span><%= link "Edit", to: Routes.user_path(@conn, :edit, @user), class: "button button-primary" %></span>
-<span><%= link "Change password", to: Routes.user_path(@conn, :change_password_get, @user), class: "button button-primary" %></span>
-<span><%= link "Back", to: Routes.user_path(@conn, :index), class: "button button-secondary" %></span>
+<span><%= link "Edit", to: AdminRoutes.user_path(@conn, :edit, @user), class: "button button-primary" %></span>
+<span><%= link "Change password", to: AdminRoutes.user_path(@conn, :change_password_get, @user), class: "button button-primary" %></span>
+<span><%= link "Back", to: AdminRoutes.user_path(@conn, :index), class: "button button-secondary" %></span>

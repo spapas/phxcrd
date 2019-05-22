@@ -10,19 +10,19 @@
     </tr>
   </thead>
   <tbody>
-<%= for permission <- @permissions do %>
+    <%= for permission <- @permissions do %>
     <tr>
       <td><%= permission.name %></td>
       <td><%= permission.verbose_name %></td>
 
       <td>
-        <%= link "Show", to: Routes.permission_path(@conn, :show, permission) %>
-        <%= link "Edit", to: Routes.permission_path(@conn, :edit, permission) %>
-        <%= link "Delete", to: Routes.permission_path(@conn, :delete, permission), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= link "Show", to: AdminRoutes.permission_path(@conn, :show, permission) %>
+        <%= link "Edit", to: AdminRoutes.permission_path(@conn, :edit, permission) %>
+        <%= link "Delete", to: AdminRoutes.permission_path(@conn, :delete, permission), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
     </tr>
-<% end %>
+    <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Permission", to: Routes.permission_path(@conn, :new) %></span>
+<span><%= link "New Permission", to: AdminRoutes.permission_path(@conn, :new) %></span>

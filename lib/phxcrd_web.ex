@@ -42,6 +42,7 @@ defmodule PhxcrdWeb do
       import PhxcrdWeb.ErrorHelpers
       import PhxcrdWeb.Gettext
       alias PhxcrdWeb.Router.Helpers, as: Routes
+      alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
 
       # Custom helper
       import PhxcrdWeb.ViewHelpers

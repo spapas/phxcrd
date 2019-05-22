@@ -1,6 +1,6 @@
 <h1><%= gettext "Version list" %></h1>
 
-<%= form_for @changeset, Routes.version_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
+<%= form_for @changeset, AdminRoutes.version_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
 
 <%= label f, "Entity schema" %>
 <%= select f,
@@ -12,7 +12,7 @@
 <%= text_input f, :entity_id  %>
 
 <%= submit gettext("Version list"), class: "ml-5" %>
-<%= link gettext("Reset"), to: Routes.version_path(@conn, :index), class: "button button-outline ml-2" %>
+<%= link gettext("Reset"), to: AdminRoutes.version_path(@conn, :index), class: "button button-outline ml-2" %>
 
 <% end %>
 <table class='condensed'>
@@ -31,7 +31,7 @@
     <%= for version <- @versions do %>
     <tr>
       <td>
-        <%= link version.id, to: Routes.version_path(@conn, :show, version), class: 'mb-0 px-3 button button-outline' %>
+        <%= link version.id, to: AdminRoutes.version_path(@conn, :show, version), class: 'mb-0 px-3 button button-outline' %>
       </td>
       <td><%= version.entity_schema %></td>
       <td><%= version.entity_id %></td>

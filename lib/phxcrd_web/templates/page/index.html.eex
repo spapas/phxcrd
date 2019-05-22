@@ -19,13 +19,13 @@
     <h2><%= gettext "Administration" %></h2>
     <ul>
       <li>
-        <%= link gettext("Users"), to: Routes.user_path(@conn, :index)%>
+        <%= link gettext("Users"), to: AdminRoutes.user_path(@conn, :index)%>
       </li>
       <li>
-        <%= link gettext("Permissions"), to: Routes.permission_path(@conn, :index)%>
+        <%= link gettext("Permissions"), to: AdminRoutes.permission_path(@conn, :index)%>
       </li>
       <li>
-        <%= link gettext("Versions"), to: Routes.version_path(@conn, :index) %>
+        <%= link gettext("Versions"), to: AdminRoutes.version_path(@conn, :index) %>
       </li>
     </ul>
   </article>
@@ -36,7 +36,7 @@
     <h2><%= gettext "Management" %></h2>
     <ul>
       <li>
-        <%= link gettext("Authorities"), to: Routes.authority_path(@conn, :index)%>
+        <%= link gettext("Authorities"), to: AdminRoutes.authority_path(@conn, :index)%>
       </li>
 
     </ul>

@@ -48,4 +48,4 @@
 </div>
 
 
-<span><%= link "Back", to: Routes.version_path(@conn, :index), class: "button button-secondary" %></span>
+<span><%= link "Back", to: AdminRoutes.version_path(@conn, :index), class: "button button-secondary" %></span>

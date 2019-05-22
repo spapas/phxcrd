@@ -30,8 +30,8 @@
       <td><%= to_local_time_str user.last_login %></td>
 
       <td>
-        <%= link "Show", to: Routes.user_path(@conn, :show, user) %>
-        <%= link "Edit", to: Routes.user_path(@conn, :edit, user) %>
+        <%= link "Show", to: AdminRoutes.user_path(@conn, :show, user) %>
+        <%= link "Edit", to: AdminRoutes.user_path(@conn, :edit, user) %>
 
       </td>
     </tr>
@@ -39,4 +39,4 @@
   </tbody>
 </table>
 
-<span><%= link gettext("New User"), to: Routes.user_path(@conn, :new), class: "button button-primary" %></span>
+<span><%= link gettext("New User"), to: AdminRoutes.user_path(@conn, :new), class: "button button-primary" %></span>

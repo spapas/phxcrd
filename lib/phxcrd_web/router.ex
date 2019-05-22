@@ -21,14 +21,10 @@ defmodule PhxcrdWeb.Router do
   scope "/", PhxcrdWeb do
     pipe_through :browser
 
-    scope "/admin" do
-      resources "/authorities", AuthorityController, except: [:delete]
-      resources "/permissions", PermissionController
-      resources "/versions", VersionController, only: [:index, :show]
-      resources "/users", UserController, except: [:delete]
-      get "/users/:id/change-password", UserController, :change_password_get
-      put "/users/:id/change-password", UserController, :change_password_post
-    end
+    forward "/admin", AdminRouter
+    # scope "/admin" do
+
+    # end
 
     resources "/sessions", SessionController,
       only: [:new, :create, :delete],
