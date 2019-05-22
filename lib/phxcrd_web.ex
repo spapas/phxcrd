@@ -24,6 +24,7 @@ defmodule PhxcrdWeb do
       import Plug.Conn
       import PhxcrdWeb.Gettext
       alias PhxcrdWeb.Router.Helpers, as: Routes
+      alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
     end
   end
 

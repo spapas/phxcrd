@@ -39,7 +39,7 @@ defmodule PhxcrdWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "#{user.name} created!")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> redirect(to: AdminRoutes.user_path(conn, :show, user))
 
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -59,7 +59,7 @@ defmodule PhxcrdWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> redirect(to: AdminRoutes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
@@ -79,7 +79,7 @@ defmodule PhxcrdWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User password updated successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> redirect(to: AdminRoutes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "change_password.html", user: user, changeset: changeset)

@@ -36,7 +36,7 @@ defmodule PhxcrdWeb.PermissionController do
       {:ok, permission} ->
         conn
         |> put_flash(:info, "Permission created successfully.")
-        |> redirect(to: Routes.permission_path(conn, :show, permission))
+        |> redirect(to: AdminRoutes.permission_path(conn, :show, permission))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -61,7 +61,7 @@ defmodule PhxcrdWeb.PermissionController do
       {:ok, permission} ->
         conn
         |> put_flash(:info, "Permission updated successfully.")
-        |> redirect(to: Routes.permission_path(conn, :show, permission))
+        |> redirect(to: AdminRoutes.permission_path(conn, :show, permission))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", permission: permission, changeset: changeset)
@@ -74,6 +74,6 @@ defmodule PhxcrdWeb.PermissionController do
 
     conn
     |> put_flash(:info, "Permission deleted successfully.")
-    |> redirect(to: Routes.permission_path(conn, :index))
+    |> redirect(to: AdminRoutes.permission_path(conn, :index))
   end
 end

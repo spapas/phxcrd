@@ -66,7 +66,7 @@ defmodule PhxcrdWeb.AuthorityController do
       {:ok, authority} ->
         conn
         |> put_flash(:info, gettext("Saved!"))
-        |> redirect(to: Routes.authority_path(conn, :show, authority))
+        |> redirect(to: AdminRoutes.authority_path(conn, :show, authority))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -91,7 +91,7 @@ defmodule PhxcrdWeb.AuthorityController do
       {:ok, authority} ->
         conn
         |> put_flash(:info, gettext("Saved!."))
-        |> redirect(to: Routes.authority_path(conn, :show, authority))
+        |> redirect(to: AdminRoutes.authority_path(conn, :show, authority))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", authority: authority, changeset: changeset)
@@ -104,6 +104,6 @@ defmodule PhxcrdWeb.AuthorityController do
 
     conn
     |> put_flash(:info, "Authority deleted successfully.")
-    |> redirect(to: Routes.authority_path(conn, :index))
+    |> redirect(to: AdminRoutes.authority_path(conn, :index))
   end
 end
