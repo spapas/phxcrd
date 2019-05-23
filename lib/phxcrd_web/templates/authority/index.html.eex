@@ -47,11 +47,9 @@
   </tbody>
 </table>
 
-<%= pagination_links @page, @conn.params |> get_query_params%>
+<%= pagination_links @page, get_query_params(@conn.params, @changeset.required) %>
 <% else %>
 <p><%= gettext "No authorities found" %></p>
 <% end %>
-
-
 
 <span><%= link gettext("New Authority"), to: AdminRoutes.authority_path(@conn, :new), class: "button button-primary" %></span>

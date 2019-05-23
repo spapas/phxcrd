@@ -1,8 +1,8 @@
 defmodule PhxcrdWeb.ViewHelpers do
   use Timex
 
-  def get_query_params(params) do
-    params |> Map.delete("page") |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
+  def get_query_params(params, allowed_keys) do
+    params |> Map.take(allowed_keys) |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
   end
 
   def to_local_time(dt) do
