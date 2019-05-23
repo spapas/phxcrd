@@ -26,6 +26,7 @@ This doesn't include webpack or any other JS bundlers; just use good ol vanilla 
 * Multiple environments (dev/uat/prod) each with its own secret (copy the template and rename it)
 * A fabric (https://www.fabfile.org/ for fabric 1.x) script to quickly deploy changes
 * A config file for supervisord (http://supervisord.org)
+* Custom JS includes on specific controller actions
 
 ## Missing stuff
 
