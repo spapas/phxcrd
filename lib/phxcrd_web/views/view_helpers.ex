@@ -1,5 +1,7 @@
 defmodule PhxcrdWeb.ViewHelpers do
   use Timex
+  import PhxcrdWeb.Gettext
+  alias Phoenix.HTML.Form
 
   def get_query_params(params, allowed_keys) do
     params |> Map.take(allowed_keys) |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
@@ -20,5 +22,27 @@ defmodule PhxcrdWeb.ViewHelpers do
 
   def action_name(conn) do
     Phoenix.Controller.action_name(conn)
+  end
+
+  def localized_date_select(form, field, opts \\ []) do
+    opts =
+      Keyword.put(opts, :month,
+        options: [
+          {gettext("January"), "1"},
+          {gettext("March"), "3"},
+          {gettext("February"), "2"},
+          {gettext("April"), "4"},
+          {gettext("May"), "5"},
+          {gettext("June"), "6"},
+          {gettext("July"), "7"},
+          {gettext("August"), "8"},
+          {gettext("September"), "9"},
+          {gettext("October"), "10"},
+          {gettext("November"), "11"},
+          {gettext("December"), "12"}
+        ]
+      )
+
+    Form.date_select(form, field, opts)
   end
 end
