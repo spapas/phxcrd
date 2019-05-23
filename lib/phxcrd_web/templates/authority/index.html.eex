@@ -47,7 +47,7 @@
   </tbody>
 </table>
 
-<%= pagination_links @page, get_query_params(@conn.params, @changeset.required) %>
+<%= pagination_links @page, get_query_params(@conn.params, ["authority"]) %>
 <% else %>
 <p><%= gettext "No authorities found" %></p>
 <% end %>

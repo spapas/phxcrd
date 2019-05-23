@@ -44,4 +44,4 @@
   </tbody>
 </table>
 
-<%= pagination_links @page, get_query_params(@conn.params, @changeset.required) %>
+<%= pagination_links @page, get_query_params(@conn.params, ["version"]) %>
