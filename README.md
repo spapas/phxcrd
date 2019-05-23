@@ -27,6 +27,7 @@ This doesn't include webpack or any other JS bundlers; just use good ol vanilla 
 * A fabric (https://www.fabfile.org/ for fabric 1.x) script to quickly deploy changes
 * A config file for supervisord (http://supervisord.org)
 * Custom JS includes on specific controller actions
+* A i18n enabled Phoenix datepicker
 
 ## Missing stuff
 
