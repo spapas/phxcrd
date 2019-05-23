@@ -109,8 +109,8 @@ at it and convert it to unix/bash or take a look at this gist: https://gist.gith
 Before starting the script you must set the following variables like so:
 
 ```
-set CURRENT_NAME="Dod"
-set CURRENT_OTP="dod"
+set CURRENT_NAME="Phxcrd"
+set CURRENT_OTP="phxcrd"
 
 set NEW_NAME="NewName"
 set NEW_OTP="new_name"
