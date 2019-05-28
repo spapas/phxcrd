@@ -11,45 +11,22 @@ defimpl Canada.Can, for: Phxcrd.Auth.User do
   # (take from the current session) to avoid the extra query; this is a hack and
   # may need 2b chagned in the future
   def can?(%User{permissions: permissions}, :index, User) do
-    if(permissions |> Enum.member?("superuser")) do
-      true
-    else
-      false
-    end
+    permissions |> Enum.member?("superuser")
   end
 
   def can?(%User{permissions: permissions}, :index, Permission) do
-    if(permissions |> Enum.member?("superuser")) do
-      true
-    else
-      false
-    end
+    permissions |> Enum.member?("superuser")
   end
 
   def can?(%User{permissions: permissions}, :index, Version) do
-    if(permissions |> Enum.member?("superuser")) do
-      true
-    else
-      false
-    end
+    permissions |> Enum.member?("superuser")
   end
 
   def can?(%User{permissions: permissions}, :index, Authority) do
-    if(permissions |> Enum.any?(&(&1 == "superuser" || &1 == "admin"))) do
-      true
-    else
-      false
-    end
+    permissions |> Enum.any?(&(&1 == "superuser" || &1 == "admin"))
   end
 
   def can?(%User{permissions: permissions, authority_id: authority_id}, :search, Authority) do
-    if(
-      permissions |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) or
-        (authority_id && authority_id > 0)
-    ) do
-      true
-    else
-      false
-    end
+      permissions |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) or (authority_id && authority_id > 0)
   end
 end
