@@ -45,12 +45,12 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
 
   describe "index" do
     test "lists all authorities", %{conn: conn} do
-      conn = get(conn |> fake_sign_in, Routes.authority_path(conn, :index))
+      conn = get(conn |> fake_sign_in, AdminRoutes.authority_path(conn, :index))
       assert html_response(conn, 200) =~ "Authority list"
     end
 
     test "does not allow anonymous access", %{conn: conn} do
-      conn = get(conn, Routes.authority_path(conn, :index))
+      conn = get(conn, AdminRoutes.authority_path(conn, :index))
       assert html_response(conn, 302) =~ "redirected"
     end
 
@@ -63,14 +63,14 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
         |> Plug.Conn.put_session(:user_id, 1)
         |> Plug.Conn.put_session(:username, "test")
 
-      conn = get(conn, Routes.authority_path(conn, :index))
+      conn = get(conn, AdminRoutes.authority_path(conn, :index))
       assert html_response(conn, 302) =~ "redirected"
     end
   end
 
   describe "new authority" do
     test "renders form", %{conn: conn} do
-      conn = get(conn |> fake_sign_in, Routes.authority_path(conn, :new))
+      conn = get(conn |> fake_sign_in, AdminRoutes.authority_path(conn, :new))
       assert html_response(conn, 200) =~ "New authority"
     end
   end
@@ -84,12 +84,12 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
       user: user
     } do
       conn =
-        post(conn |> fake_sign_in(user.id), Routes.authority_path(conn, :create),
+        post(conn |> fake_sign_in(user.id), AdminRoutes.authority_path(conn, :create),
           authority: %{@create_attrs | authority_kind_id: authority_kind.id}
         )
 
       assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == Routes.authority_path(conn, :show, id)
+      assert redirected_to(conn) == AdminRoutes.authority_path(conn, :show, id)
 
       conn = get(conn, Routes.authority_path(conn, :show, id))
       assert html_response(conn, 200) =~ "Authority"
@@ -97,7 +97,7 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn =
-        post(conn |> fake_sign_in, Routes.authority_path(conn, :create), authority: @invalid_attrs)
+        post(conn |> fake_sign_in, AdminRoutes.authority_path(conn, :create), authority: @invalid_attrs)
 
       assert html_response(conn, 200) =~ "New authority"
     end
@@ -113,7 +113,7 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
       conn =
         get(
           conn |> fake_sign_in,
-          Routes.authority_path(conn, :edit, authority)
+          AdminRoutes.authority_path(conn, :edit, authority)
         )
 
       assert html_response(conn, 200) =~ "Edit authority"
@@ -129,7 +129,7 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
       user: %{id: user_id}
     } do
       conn =
-        put(conn |> fake_sign_in(user_id), Routes.authority_path(conn, :update, authority),
+        put(conn |> fake_sign_in(user_id), AdminRoutes.authority_path(conn, :update, authority),
           authority: @update_attrs
         )
 
@@ -141,7 +141,7 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, authority: authority} do
       conn =
-        put(conn |> fake_sign_in, Routes.authority_path(conn, :update, authority),
+        put(conn |> fake_sign_in, AdminRoutes.authority_path(conn, :update, authority),
           authority: @invalid_attrs
         )
 

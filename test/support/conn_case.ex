@@ -20,6 +20,7 @@ defmodule PhxcrdWeb.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
       alias PhxcrdWeb.Router.Helpers, as: Routes
+      alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
 
       # The default endpoint for testing
       @endpoint PhxcrdWeb.Endpoint
