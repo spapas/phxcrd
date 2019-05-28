@@ -94,11 +94,8 @@ defmodule PhxcrdWeb.SessionController do
     # end
     # With is more idiomatic
 
-    with {:ok, user} <- Auth.get_for_db_login(username) do
-      user
-      |> Argon2.check_pass(password)
-      |> elem(1)
-      |> Auth.update_user(%{last_login: DateTime.utc_now()})
+    with {:ok, user} <- Auth.get_for_db_login(username), {:ok, user} <- Argon2.check_pass(user, password) do
+      Auth.update_user(user, %{last_login: DateTime.utc_now()})
     end
   end
 
