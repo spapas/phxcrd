@@ -2,7 +2,7 @@
 
 <%= form_for @conn, Routes.session_path(@conn, :create), [method: :post, as: :user], fn f -> %>
 <div class="form-group">
-    <%= text_input f, :username, placeholder: gettext "Username", autofocus: true, autocomplete: "username" %>
+    <%= text_input f, :username, placeholder: gettext("Username"), autofocus: true, autocomplete: "username" %>
 </div>
 
 <div class="form-group">
