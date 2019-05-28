@@ -45,7 +45,8 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
 
   describe "index" do
     test "lists all authorities", %{conn: conn} do
-      conn = get(conn |> fake_sign_in, AdminRoutes.authority_path(conn, :index))
+      conn = get(conn |> fake_sign_in, "/admin/authorities")
+      #conn = get(conn |> fake_sign_in, AdminRoutes.authority_path(conn, :index))
       assert html_response(conn, 200) =~ "Authority list"
     end
 
@@ -91,7 +92,7 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == AdminRoutes.authority_path(conn, :show, id)
 
-      conn = get(conn, Routes.authority_path(conn, :show, id))
+      conn = get(conn, AdminRoutes.authority_path(conn, :show, id))
       assert html_response(conn, 200) =~ "Authority"
     end
 
@@ -133,9 +134,9 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
           authority: @update_attrs
         )
 
-      assert redirected_to(conn) == Routes.authority_path(conn, :show, authority)
+      assert redirected_to(conn) == AdminRoutes.authority_path(conn, :show, authority)
 
-      conn = get(conn, Routes.authority_path(conn, :show, authority))
+      conn = get(conn, AdminRoutes.authority_path(conn, :show, authority))
       assert html_response(conn, 200) =~ "some updated name"
     end
 

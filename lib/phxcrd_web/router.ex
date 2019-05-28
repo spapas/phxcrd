@@ -21,7 +21,8 @@ defmodule PhxcrdWeb.Router do
   scope "/", PhxcrdWeb do
     pipe_through :browser
 
-    forward "/admin", AdminRouter
+    #forward "/admin", AdminRouter
+    match :*, "/admin/*path", AdminRouter, :any
 
     resources "/sessions", SessionController,
       only: [:new, :create, :delete],

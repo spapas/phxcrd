@@ -1,7 +1,7 @@
 defmodule PhxcrdWeb.AdminRouter do
   use PhxcrdWeb, :router
 
-  scope "/", PhxcrdWeb do
+  scope "/admin", PhxcrdWeb do
     resources "/authorities", AuthorityController, except: [:delete]
     resources "/permissions", PermissionController
     resources "/versions", VersionController, only: [:index, :show]
