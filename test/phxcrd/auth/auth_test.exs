@@ -137,7 +137,7 @@ defmodule Phxcrd.AuthTest do
 
     test "get_user!/1 returns the user with given id" do
       user = user_fixture()
-      assert Auth.get_user!(user.id) == user
+      assert Auth.get_user!(user.id).id == user.id
     end
 
     test "create_user/1 with valid data creates a user" do
@@ -178,7 +178,7 @@ defmodule Phxcrd.AuthTest do
     test "update_user/2 with invalid data returns error changeset" do
       user = user_fixture()
       assert {:error, %Ecto.Changeset{}} = Auth.update_user(user, @invalid_attrs)
-      assert user == Auth.get_user!(user.id)
+      assert user.id == Auth.get_user!(user.id).id
     end
 
     test "delete_user/1 deletes the user" do
