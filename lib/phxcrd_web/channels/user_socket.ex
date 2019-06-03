@@ -2,7 +2,7 @@ defmodule PhxcrdWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", PhxcrdWeb.RoomChannel
+  channel "room:lobby", PhxcrdWeb.RoomChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
@@ -15,8 +15,22 @@ defmodule PhxcrdWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket, _connect_info) do
-    {:ok, socket}
+  def connect(params, socket, _connect_info) do
+    IO.inspect(params)
+    token = params["channel_token"]
+
+    case Phoenix.Token.verify(PhxcrdWeb.Endpoint, "user salt", token, max_age: 86400) do
+      {:ok, channel_params} ->
+        {:ok,
+         socket
+         |> assign(:user_id, channel_params[:user_id])
+         |> assign(:username, channel_params[:username])
+         |> assign(:authority_name, channel_params[:authority_name])}
+         |> assign(:perms, channel_params[:perms])}
+
+      {:error, _} ->
+        :error
+    end
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:

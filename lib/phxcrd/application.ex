@@ -11,7 +11,8 @@ defmodule Phxcrd.Application do
       # Start the Ecto repository
       Phxcrd.Repo,
       # Start the endpoint when the application starts
-      PhxcrdWeb.Endpoint
+      PhxcrdWeb.Endpoint,
+      PhxcrdWeb.Presence
       # Starts a worker by calling: Phxcrd.Worker.start_link(arg)
       # {Phxcrd.Worker, arg},
     ]

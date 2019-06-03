@@ -16,6 +16,14 @@
 
   <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/select2.min.css") %>' />
 
+  <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user salt", %{
+    user_id: @user_id,
+    username: @username,
+    authority_id: @authority_id,
+    authority_name: @authority_name,
+    perms: @perms,
+  }) %>
+
 </head>
 
 <body>

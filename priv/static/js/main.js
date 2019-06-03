@@ -32,4 +32,44 @@
 		}, 1);
 	}
 
+///// Presense
+
+function getMeta(metaName) {
+	const metas = document.getElementsByTagName('meta');
+  
+	for (let i = 0; i < metas.length; i++) {
+	  if (metas[i].getAttribute('name') === metaName) {
+		return metas[i].getAttribute('content');
+	  }
+	}
+  
+	return '';
+  }
+  
+  
+
+let socket = new Phoenix.Socket("/socket", {
+	params: {channel_token: getMeta('channel_token')}
+})
+
+let channel = socket.channel("room:lobby", {})
+let presence = new Phoenix.Presence(channel)
+
+function renderOnlineUsers(presence) {
+  let response = ""
+
+  presence.list((id, {metas: [first, ...rest]}) => {
+	//console.log("ID = " + id +".", first, rest  )
+    let count = rest.length + 1
+    response += `<br>${id} ${first.username} ${first.authority_name} (count: ${count})</br>`
+  })
+
+  console.log(response)
+  //document.querySelector("main[role=main]").innerHTML = response
+}
+
+socket.connect()
+presence.onSync(() => renderOnlineUsers(presence))
+channel.join()
+
 })()
