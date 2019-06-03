@@ -10,7 +10,7 @@ $(function() {
     window.presence.list((id, {metas: [first, ...rest]}) => {
       //console.log("ID = " + id +".", first, rest  )
       let count = rest.length + 1
-      response += `<br>${id} ${first.username} ${first.authority_name} (count: ${count})</br>`
+      response += `<br>${id} Username: ${first.username} Authority: ${first.authority_name} Count: ${count}</br>`
     })
 
     console.log(response)
