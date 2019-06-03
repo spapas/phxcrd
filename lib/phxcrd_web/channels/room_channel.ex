@@ -12,18 +12,19 @@ defmodule PhxcrdWeb.RoomChannel do
   end
 
   def handle_info(:after_join, socket) do
-    IO.inspect socket
-    
     if socket.assigns[:perms] |> Enum.member?("superuser") do
       push(socket, "presence_state", Presence.list(socket))
     end
-    {:ok, _} = Presence.track(socket, socket.assigns.user_id, %{
-      online_at: inspect(System.system_time(:second)),
-      username: socket.assigns[:username],
-      authority_name: socket.assigns[:authority_name]
-    })
+
+    {:ok, _} =
+      Presence.track(socket, socket.assigns.user_id, %{
+        online_at: inspect(System.system_time(:second)),
+        username: socket.assigns[:username],
+        authority_name: socket.assigns[:authority_name]
+      })
+
     {:noreply, socket}
-  end  
+  end
 
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
@@ -34,7 +35,7 @@ defmodule PhxcrdWeb.RoomChannel do
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (room:lobby).
   def handle_in("shout", payload, socket) do
-    broadcast socket, "shout", payload
+    broadcast(socket, "shout", payload)
     {:noreply, socket}
   end
 

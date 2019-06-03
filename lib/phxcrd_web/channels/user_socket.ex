@@ -16,7 +16,6 @@ defmodule PhxcrdWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(params, socket, _connect_info) do
-    IO.inspect(params)
     token = params["channel_token"]
 
     case Phoenix.Token.verify(PhxcrdWeb.Endpoint, "user salt", token, max_age: 86400) do
