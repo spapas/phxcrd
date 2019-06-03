@@ -6,6 +6,10 @@ defmodule PhxcrdWeb.PageController do
     render(conn, "index.html")
   end
 
+  def test_presence(conn, _params) do
+    render(conn, "test_presence.html")
+  end
+
   def test_sentry(conn, _params) do
     if conn.assigns[:perms] |> Enum.member?("superuser") do
       try do

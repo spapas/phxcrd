@@ -1,0 +1,21 @@
+<%= if action_name(@conn) in [:test_presence] do %>
+
+<script>
+$(function() {
+  window.presence.onSync(() => renderOnlineUsers(window.presence))
+
+  function renderOnlineUsers(presence) {
+    let response = ""
+
+    window.presence.list((id, {metas: [first, ...rest]}) => {
+      //console.log("ID = " + id +".", first, rest  )
+      let count = rest.length + 1
+      response += `<br>${id} ${first.username} ${first.authority_name} (count: ${count})</br>`
+    })
+
+    console.log(response)
+    document.getElementById("#presence").innerHTML = response
+  }
+});
+</script>
+<% end %>

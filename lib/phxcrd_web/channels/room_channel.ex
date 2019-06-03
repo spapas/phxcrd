@@ -13,7 +13,8 @@ defmodule PhxcrdWeb.RoomChannel do
 
   def handle_info(:after_join, socket) do
     IO.inspect socket
-    if socket.assigns[:username] == "root" do
+    
+    if socket.assigns[:perms] |> Enum.member?("superuser") do
       push(socket, "presence_state", Presence.list(socket))
     end
     {:ok, _} = Presence.track(socket, socket.assigns.user_id, %{

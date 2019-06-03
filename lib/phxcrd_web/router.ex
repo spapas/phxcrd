@@ -33,6 +33,7 @@ defmodule PhxcrdWeb.Router do
     get "/test-mail", PageController, :test_mail
     get "/test-pdf", PageController, :test_pdf
     get "/test-xlsx", PageController, :test_xlsx
+    get "/test-presence", PageController, :test_presence
   end
 
   scope "/api", PhxcrdWeb do

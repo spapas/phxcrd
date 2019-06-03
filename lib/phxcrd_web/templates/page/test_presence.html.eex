@@ -1,0 +1,5 @@
+<section class="phx-hero">
+  <h1>Testing phoenix presence</h1>
+</section>
+
+<div id='#presence'></div>

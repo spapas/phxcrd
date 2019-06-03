@@ -57,6 +57,9 @@
       <li>
         <%= link gettext("Test XLSX"), to: Routes.page_path(@conn, :test_xlsx)%>
       </li>
+      <li>
+        <%= link gettext("Test Presence"), to: Routes.page_path(@conn, :test_presence)%>
+      </li>
       <ul>
   </article>
 </section>
