@@ -154,7 +154,7 @@ defmodule Phxcrd.Auth do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:permissions])
+  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:permissions, :authority])
 
   def get_for_db_login(username) do
     case Repo.one(from u in User, where: u.username == ^username and not is_nil(u.password_hash)) do
@@ -205,7 +205,7 @@ defmodule Phxcrd.Auth do
   """
   def update_user(%User{} = user, attrs) do
     user
-    |> Repo.preload(:permissions)
+    |> Repo.preload(:permissions, :authority)
     |> User.changeset(attrs)
     |> Repo.update()
   end
