@@ -52,4 +52,12 @@ defmodule PhxcrdWeb.ViewHelpers do
 
     Form.date_select(form, field, [builder: builder] ++ opts)
   end
+
+  def get_select_value(cs, attr) do
+    case cs.changes[attr] do
+      nil -> Map.get(cs.data, attr)
+      z -> z
+      
+    end
+  end
 end
