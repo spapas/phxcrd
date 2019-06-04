@@ -64,8 +64,8 @@ defmodule Phxcrd.Auth.User do
 
   @doc false
   def db_user_changeset(user, attrs) do
-    #IO.inspect(user)
-    #IO.inspect(attrs)
+    # IO.inspect(user)
+    # IO.inspect(attrs)
     user
     |> cast(attrs, [
       :username,

@@ -88,7 +88,9 @@ defmodule PhxcrdWeb.UserControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn |> fake_sign_in, AdminRoutes.user_path(conn, :create), user: @invalid_attrs)
+      conn =
+        post(conn |> fake_sign_in, AdminRoutes.user_path(conn, :create), user: @invalid_attrs)
+
       assert html_response(conn, 200) =~ "New User"
     end
   end
@@ -106,7 +108,9 @@ defmodule PhxcrdWeb.UserControllerTest do
     setup [:create_user]
 
     test "redirects when data is valid", %{conn: conn, user: user} do
-      conn = put(conn |> fake_sign_in, AdminRoutes.user_path(conn, :update, user), user: @update_attrs)
+      conn =
+        put(conn |> fake_sign_in, AdminRoutes.user_path(conn, :update, user), user: @update_attrs)
+
       assert redirected_to(conn) == AdminRoutes.user_path(conn, :show, user)
 
       conn = get(conn, AdminRoutes.user_path(conn, :show, user))

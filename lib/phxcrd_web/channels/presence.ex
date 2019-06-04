@@ -69,6 +69,7 @@ defmodule PhxcrdWeb.Presence do
   original presence data.
   """
 
-  use Phoenix.Presence, otp_app: :phxcrd,
-                        pubsub_server: Phxcrd.PubSub
+  use Phoenix.Presence,
+    otp_app: :phxcrd,
+    pubsub_server: Phxcrd.PubSub
 end

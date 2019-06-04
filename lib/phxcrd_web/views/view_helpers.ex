@@ -57,7 +57,6 @@ defmodule PhxcrdWeb.ViewHelpers do
     case cs.changes[attr] do
       nil -> Map.get(cs.data, attr)
       z -> z
-      
     end
   end
 end

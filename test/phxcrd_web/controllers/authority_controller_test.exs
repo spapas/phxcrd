@@ -46,7 +46,7 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
   describe "index" do
     test "lists all authorities", %{conn: conn} do
       conn = get(conn |> fake_sign_in, "/admin/authorities")
-      #conn = get(conn |> fake_sign_in, AdminRoutes.authority_path(conn, :index))
+      # conn = get(conn |> fake_sign_in, AdminRoutes.authority_path(conn, :index))
       assert html_response(conn, 200) =~ "Authority list"
     end
 
@@ -98,7 +98,9 @@ defmodule PhxcrdWeb.AuthorityControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn =
-        post(conn |> fake_sign_in, AdminRoutes.authority_path(conn, :create), authority: @invalid_attrs)
+        post(conn |> fake_sign_in, AdminRoutes.authority_path(conn, :create),
+          authority: @invalid_attrs
+        )
 
       assert html_response(conn, 200) =~ "New authority"
     end

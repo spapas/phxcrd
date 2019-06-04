@@ -1,4 +1,4 @@
-IO.puts "Starting iex for Phxcrd"
+IO.puts("Starting iex for Phxcrd")
 
 alias Phxcrd.Auth.User
 alias Phxcrd.Auth.Authority

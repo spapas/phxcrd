@@ -25,8 +25,7 @@ defmodule PhxcrdWeb.UserSocket do
          |> assign(:user_id, channel_params[:user_id])
          |> assign(:username, channel_params[:username])
          |> assign(:authority_name, channel_params[:authority_name])
-         |> assign(:perms, channel_params[:perms])
-        }
+         |> assign(:perms, channel_params[:perms])}
 
       {:error, _} ->
         :error
