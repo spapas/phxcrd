@@ -123,7 +123,7 @@
       <% end %>
     </section>
   </footer>
-  <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/jquery-3.4.0.slim.min.js") %>'></script>
+  <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/jquery-3.4.1.min.js") %>'></script>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/select2.min.js") %>'></script>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix.js") %>'></script>
