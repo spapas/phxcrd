@@ -18,6 +18,11 @@
       </li>
 
       <li>
+          <strong>Authority:</strong>
+          <%= get_in(@user, [:authority, :name]) %>
+        </li>
+
+      <li>
         <strong>Name:</strong>
         <%= @user.name %>
       </li>
