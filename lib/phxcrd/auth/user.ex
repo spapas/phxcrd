@@ -51,6 +51,7 @@ defmodule Phxcrd.Auth.User do
       :extra,
       :obj_cls,
       :last_login,
+      :authority_id,
       :is_enabled
     ])
     |> validate_required([
@@ -63,6 +64,8 @@ defmodule Phxcrd.Auth.User do
 
   @doc false
   def db_user_changeset(user, attrs) do
+    #IO.inspect(user)
+    #IO.inspect(attrs)
     user
     |> cast(attrs, [
       :username,
@@ -70,6 +73,7 @@ defmodule Phxcrd.Auth.User do
       :first_name,
       :last_name,
       :email,
+      :authority_id,
       :is_enabled
     ])
     |> validate_required([
