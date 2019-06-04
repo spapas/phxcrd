@@ -55,6 +55,8 @@ defmodule PhxcrdWeb.UserController do
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = Auth.get_user!(id)
 
+    user_params = Map.merge(%{"authority_id" => nil}, user_params)
+
     case Auth.update_user_and_perms(user, user_params) do
       {:ok, user} ->
         conn

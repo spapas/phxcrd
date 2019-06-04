@@ -45,6 +45,17 @@
 
 <div class='row'>
   <div class='column'>
+    <%= label f, :authority %>
+    <%= select(f,
+                      :authority_id, [
+                        (with sv when not is_nil(sv) <- get_select_value(@changeset, :authority_id), a <- Phxcrd.Auth.get_authority!(sv), do: {a.name, a.id})
+                      ],
+                      style: "width: 100%")
+                      %>
+    <%= error_tag f, :authority_id %>
+  </div>
+
+  <div class='column'>
     <%= label f, :permissions %>
     <%= multiple_select(f,
                     :permissions,
@@ -60,4 +71,9 @@
 <div>
   <%= submit gettext("Save") %>
 </div>
+
+
+
+
+
 <% end %>

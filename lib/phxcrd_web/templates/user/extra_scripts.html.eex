@@ -1,8 +1,20 @@
-<%= if action_name(@conn) in [:edit, :new] do %>
+<%= if action_name(@conn) in [:edit, :new, :create, :update] do %>
 <script>
     // Render me on :new and :edit
     $(function () {
         $('#user_permissions').select2();
+
+        $('#user_authority_id').select2({
+          //language: "el",
+          allowClear: true,
+          placeholder: 'Select authority',
+          ajax: {
+            url: '<%= Routes.api_path(@conn, :search_authorities) %>',
+            dataType: 'json',
+            delay: 150,
+            minimumInputLength: 2
+          }
+        });
     })
 </script>
 <% end %>
