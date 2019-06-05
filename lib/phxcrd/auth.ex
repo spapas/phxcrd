@@ -205,7 +205,7 @@ defmodule Phxcrd.Auth do
   """
   def update_user(%User{} = user, attrs) do
     user
-    |> Repo.preload(:permissions, :authority)
+    |> Repo.preload([:permissions, :authority])
     |> User.changeset(attrs)
     |> Repo.update()
   end

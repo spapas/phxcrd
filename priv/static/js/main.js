@@ -48,14 +48,14 @@ function getMeta(metaName) {
   
   
 
-let socket = new Phoenix.Socket("/socket", {
+window.socket = new Phoenix.Socket("/socket", {
 	params: {channel_token: getMeta('channel_token')}
 })
 
-let channel = socket.channel("room:lobby", {})
-window.presence = new Phoenix.Presence(channel)
+window.channel = socket.channel("room:lobby", {})
+window.presence = new Phoenix.Presence(window.channel)
 
-socket.connect()
-channel.join()
+window.socket.connect()
+window.channel.join()
 
 })()

@@ -2,6 +2,8 @@ defmodule PhxcrdWeb.RoomChannel do
   use PhxcrdWeb, :channel
   alias PhxcrdWeb.Presence
 
+  intercept ["presence_diff"]
+
   def join("room:lobby", payload, socket) do
     if authorized?(payload) do
       send(self(), :after_join)
@@ -23,6 +25,11 @@ defmodule PhxcrdWeb.RoomChannel do
         authority_name: socket.assigns[:authority_name]
       })
 
+    {:noreply, socket}
+  end
+
+  def handle_out("presence_diff", msg, socket) do
+    if socket.assigns[:perms] |> Enum.member?("superuser"), do: push(socket, "presence_diff", msg)
     {:noreply, socket}
   end
 
