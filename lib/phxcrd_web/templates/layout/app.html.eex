@@ -7,8 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>P·H·X·C·R·D</title>
 
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,700">
-
   <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/normalize.css") %>' />
   <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/milligram.min.css") %>' />
   <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/main.css") %>' />

@@ -5,14 +5,12 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Δ Ο Δ</title>
+  <title>P·H·X·C·R·D</title>
 
-  <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
-
-  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/milligram.min.css") %>" />
-  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/main.css") %>" />
-  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>" />
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,700">
+  <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/normalize.css") %>' />
+  <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/milligram.min.css") %>' />
+  <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/main.css") %>' />
+  <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/app.css") %>' />
   
 </head>
 
