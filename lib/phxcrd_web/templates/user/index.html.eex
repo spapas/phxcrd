@@ -1,5 +1,13 @@
 <h1><%= gettext "User list" %></h1>
 
+<%= form_for @changeset, AdminRoutes.user_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
+<%= label f, gettext "Username" %>
+<%= text_input f, :username  %>
+
+<%= submit gettext("Filter"), class: "ml-5" %>
+<%= link gettext("Reset"), to: AdminRoutes.user_path(@conn, :index), class: "button button-outline ml-2" %>
+<% end %>
+
 <table>
   <thead>
     <tr>

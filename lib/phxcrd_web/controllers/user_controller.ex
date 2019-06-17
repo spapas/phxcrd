@@ -1,9 +1,12 @@
 defmodule PhxcrdWeb.UserController do
   use PhxcrdWeb, :controller
   alias Phxcrd.Auth
-  alias Phxcrd.Auth.User
+  alias Phxcrd.Auth.{User, Authority, Permission, UserPermission}
   alias Phxcrd.Plugs
+  alias Phxcrd.Repo
+  alias Phxcrdweb.QueryFilter
   import Canada, only: [can?: 2]
+  import Ecto.Query, only: [from: 1, from: 2]
 
   plug Plugs.UserSignedIn
   plug :cancan
@@ -19,9 +22,28 @@ defmodule PhxcrdWeb.UserController do
     end
   end
 
-  def index(conn, _params) do
-    users = Auth.list_users()
-    render(conn, "index.html", users: users)
+  def index(conn, params) do
+    changeset =
+      case params do
+        %{"user" => user_params} -> User.changeset(%User{}, user_params)
+        _ -> User.changeset(%User{}, %{})
+      end
+
+    users =
+      from(u in User,
+        left_join: a in Authority,
+        on: a.id == u.authority_id,
+        left_join: up in UserPermission,
+        on: up.user_id == u.id,
+        left_join: p in Permission,
+        on: up.permission_id == p.id,
+        preload: [authority: a, permissions: p]
+      )
+      |> QueryFilter.filter(%User{}, Map.fetch!(changeset, :changes), username: :ilike)
+      |> Repo.all()
+
+    # users = Repo.all(users)
+    render(conn, "index.html", users: users, changeset: changeset)
   end
 
   def show(conn, %{"id" => id}) do
