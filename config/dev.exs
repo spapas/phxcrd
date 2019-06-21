@@ -46,5 +46,6 @@ config :phxcrd, Phxcrd.Repo,
   hostname: "localhost",
   template: "template0",
   pool_size: 10
+  # , log: false Use this to disable query logging
 
 import_config "dev.secret.exs"
