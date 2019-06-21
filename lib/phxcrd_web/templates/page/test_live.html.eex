@@ -1,0 +1,6 @@
+<section class="phx-hero">
+  <h1>Testing phoenix live views</h1>
+</section>
+
+
+<%= Phoenix.LiveView.live_render(@conn, PhxcrdWeb.ThermostatLiveView, session: %{user_id: @user_id}) %>

@@ -45,7 +45,7 @@ defmodule Phxcrd.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.6"},
+      {:phoenix, "~> 1.4.8"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.1.2"},
@@ -60,7 +60,9 @@ defmodule Phxcrd.MixProject do
       {:exldap, "~> 0.6"},
       {:canada, "~> 2.0.0"},
       {:ex_audit, "~> 0.6"},
-      {:validate_greek_tax_number, github: "spapas/validate_greek_tax_number", app: false},
+
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
+
       # {:scrivener, "~> 2.0"},
       {:scrivener_ecto, "~> 2.0"},
       {:scrivener_html, "~> 1.8"},

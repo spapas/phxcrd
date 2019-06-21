@@ -10,6 +10,11 @@ defmodule PhxcrdWeb.PageController do
     render(conn, "test_presence.html")
   end
 
+  def test_live(conn, _params) do
+    render(conn, "test_live.html")
+    #live_render(conn, PhxcrdWeb.ThermostatLiveView, session: %{id: 32, current_user_id: 33})
+  end
+
   def test_sentry(conn, _params) do
     if conn.assigns[:perms] |> Enum.member?("superuser") do
       try do

@@ -1,3 +1,4 @@
+
 <%= if action_name(@conn) in [:test_presence] do %>
 
 <script>
@@ -17,5 +18,20 @@ $(function() {
     document.getElementById("#presence").innerHTML = response
   }
 });
+</script>
+<% end %>
+
+<%= if action_name(@conn) in [:test_live] do %>
+
+<script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix_live_view.js") %>'></script>
+<script>
+
+$(function() {
+  
+  var ls = liveSocket = new phoenix_live_view.LiveSocket("/live")
+  liveSocket.connect()
+  
+});
+
 </script>
 <% end %>

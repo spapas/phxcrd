@@ -7,6 +7,7 @@ defmodule PhxcrdWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
+    plug Phoenix.LiveView.Flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug Phxcrd.Plugs.SetCurrentUser
@@ -34,6 +35,7 @@ defmodule PhxcrdWeb.Router do
     get "/test-pdf", PageController, :test_pdf
     get "/test-xlsx", PageController, :test_xlsx
     get "/test-presence", PageController, :test_presence
+    get "/test-live", PageController, :test_live
   end
 
   scope "/api", PhxcrdWeb do

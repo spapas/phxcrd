@@ -25,6 +25,7 @@ defmodule PhxcrdWeb do
       import PhxcrdWeb.Gettext
       alias PhxcrdWeb.Router.Helpers, as: Routes
       alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
+      import Phoenix.LiveView.Controller, only: [live_render: 3]
     end
   end
 
@@ -45,6 +46,8 @@ defmodule PhxcrdWeb do
       alias PhxcrdWeb.Router.Helpers, as: Routes
       alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
 
+      import Phoenix.LiveView, only: [live_render: 2, live_render: 3]
+
       # Custom helper
       import PhxcrdWeb.ViewHelpers
     end
@@ -55,6 +58,8 @@ defmodule PhxcrdWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+
+      import Phoenix.LiveView.Router
     end
   end
 
