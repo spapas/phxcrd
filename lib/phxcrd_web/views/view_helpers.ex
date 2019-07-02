@@ -54,9 +54,16 @@ defmodule PhxcrdWeb.ViewHelpers do
   end
 
   def get_select_value(cs, attr) do
+    Ecto.Changeset.get_field(cs, attr)
+  end
+
+  def get_select_value2(cs, attr) do
     case cs.changes[attr] do
       nil -> Map.get(cs.data, attr)
       z -> z
     end
+
+    # Or define it like
+    # cs |> Ecto.Changeset.get_field(attr)
   end
 end
