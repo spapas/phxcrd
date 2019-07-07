@@ -21,7 +21,7 @@ A list of users:
       <th>Kind</th>
 
       <th>Last login</th>
-      <th>Is active</th>
+      <th>Is enabled</th>
 
       <th></th>
     </tr>
@@ -38,12 +38,11 @@ A list of users:
       <td><%= user.kind %></td>
 
       <td><%= to_local_time_str user.last_login %></td>
-      <td><%= user.is_active %></td>
+      <td><%= user.is_enabled %></td>
 
       <td>
-        <%= link "Show", to: AdminRoutes.user_path(@conn, :show, user) %>
-        <%= link "Edit", to: AdminRoutes.user_path(@conn, :edit, user) %>
-
+        <%= link "Show", class: "button button-outline", to: AdminRoutes.user_path(@conn, :show, user) %>
+        <%= link "Edit", class: "button button-outline", to: AdminRoutes.user_path(@conn, :edit, user) %>
       </td>
     </tr>
     <% end %>
