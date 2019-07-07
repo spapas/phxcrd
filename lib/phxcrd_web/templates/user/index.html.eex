@@ -7,6 +7,7 @@
 <%= submit gettext("Filter"), class: "ml-5" %>
 <%= link gettext("Reset"), to: AdminRoutes.user_path(@conn, :index), class: "button button-outline ml-2" %>
 <% end %>
+A list of users:
 
 <table>
   <thead>
@@ -20,6 +21,7 @@
       <th>Kind</th>
 
       <th>Last login</th>
+      <th>Is active</th>
 
       <th></th>
     </tr>
@@ -36,6 +38,7 @@
       <td><%= user.kind %></td>
 
       <td><%= to_local_time_str user.last_login %></td>
+      <td><%= user.is_active %></td>
 
       <td>
         <%= link "Show", to: AdminRoutes.user_path(@conn, :show, user) %>
