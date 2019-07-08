@@ -2,13 +2,13 @@
 
 <%= form_for @changeset, AdminRoutes.version_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
 
-<%= label f, "Entity schema" %>
+<%= label f, :entity_schema, "Entity schema" %>
 <%= select f,
         :entity_schema,
         [{"---", ""}] ++ (schemas() |> Enum.map(&{&1, &1}) )
       %>
 
-<%= label f, "Entity id" %>
+<%= label f, :entity_id, "Entity id" %>
 <%= text_input f, :entity_id  %>
 
 <%= submit gettext("Version list"), class: "ml-5" %>

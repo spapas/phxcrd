@@ -1,7 +1,7 @@
 <h1><%= gettext "User list" %></h1>
 
 <%= form_for @changeset, AdminRoutes.user_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
-<%= label f, gettext "Username" %>
+<%= label f, :username, gettext "Username" %>
 <%= text_input f, :username  %>
 
 <%= submit gettext("Filter"), class: "ml-5" %>

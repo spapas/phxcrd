@@ -1,10 +1,10 @@
 <h1><%= gettext "Authority list" %></h1>
 
 <%= form_for @changeset, AdminRoutes.authority_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
-<%= label f, gettext "Authority name" %>
+<%= label f, :name, gettext "Authority name" %>
 <%= text_input f, :name  %>
 
-<%= label f, gettext "Authority kind" %>
+<%= label f, :authority_kind_id, gettext "Authority kind" %>
 <%= select f,
         :authority_kind_id,
         [{"---", ""}] ++ (Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id}) )
