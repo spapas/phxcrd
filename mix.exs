@@ -52,7 +52,7 @@ defmodule Phxcrd.MixProject do
       {:postgrex, ">=  0.14.3"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:gettext, "~> 0.11"},
+      {:gettext, "~> 0.17"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.1"},
 
@@ -70,7 +70,7 @@ defmodule Phxcrd.MixProject do
       {:pdf_generator, "== 0.5.2"},
       {:elixlsx, "~> 0.4.1"},
       {:argon2_elixir, "~> 2.0"},
-      {:timex, "~> 3.5"},
+      {:timex, "~> 3.6"},
       {:accessible, "~> 0.2.1"},
       {:csv, "~> 2.3"}
     ]
