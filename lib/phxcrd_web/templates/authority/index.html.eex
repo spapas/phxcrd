@@ -1,8 +1,8 @@
 <h1><%= gettext "Authority list" %></h1>
 
-<%= form_for @changeset, AdminRoutes.authority_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
-<%= label f, :name, gettext "Authority name" %>
-<%= text_input f, :name  %>
+<%= form_for @changeset, AdminRoutes.authority_path(@conn, :index), [method: :get, class: "filter-form", as: :filter],  fn f -> %>
+<%= label f, :authority_name, gettext "Authority name" %>
+<%= text_input f, :authority_name  %>
 
 <%= label f, :authority_kind_id, gettext "Authority kind" %>
 <%= select f,

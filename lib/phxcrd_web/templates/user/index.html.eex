@@ -1,6 +1,6 @@
 <h1><%= gettext "User list" %></h1>
 
-<%= form_for @changeset, AdminRoutes.user_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
+<%= form_for @changeset, AdminRoutes.user_path(@conn, :index), [method: :get, class: "filter-form", as: :filter],  fn f -> %>
 <%= label f, :username, gettext "Username" %>
 <%= text_input f, :username  %>
 

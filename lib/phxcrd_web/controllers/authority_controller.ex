@@ -4,7 +4,7 @@ defmodule PhxcrdWeb.AuthorityController do
   alias Phxcrd.Auth
   alias Phxcrd.Auth.{Authority, User, AuthorityKind}
   alias Phxcrd.Plugs
-  alias Phxcrdweb.QueryFilter
+  alias PhxcrdWeb.QueryFilterEx
   alias Phxcrd.Repo
   import Canada, only: [can?: 2]
   import Ecto.Query, only: [from: 2]
@@ -24,24 +24,21 @@ defmodule PhxcrdWeb.AuthorityController do
     end
   end
 
+  @authority_filters [
+    %{name: :authority_name, type: :string, binding: :authority, field_name: :name, method: :ilike},
+    %{name: :authority_kind_id, type: :integer, binding: :authority_kind, field_name: :id, method: :eq}
+  ]
+
   def index(conn, params) do
-    changeset =
-      case params do
-        %{"authority" => authority_params} -> Authority.changeset(%Authority{}, authority_params)
-        _ -> Authority.changeset(%Authority{}, %{})
-      end
+    changeset = QueryFilterEx.get_changeset_from_params(params, @authority_filters)
 
     page =
-      from(a in Authority,
-        join: ak in AuthorityKind,
+      from(a in Authority, as: :authority,
+        join: ak in AuthorityKind, as: :authority_kind,
         on: [id: a.authority_kind_id],
         preload: [authority_kind: ak]
       )
-      |> QueryFilter.filter(%Authority{}, Map.fetch!(changeset, :changes),
-        name: :ilike,
-        authority_kind_id: :exact
-      )
-      # |> Repo.all()
+      |> QueryFilterEx.filter(changeset, @authority_filters)
       |> Repo.paginate(params)
 
     render(conn, "index.html",

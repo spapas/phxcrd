@@ -5,8 +5,8 @@ defmodule PhxcrdWeb.VersionController do
   alias Phxcrd.Audit.Version
   alias Phxcrd.Plugs
   alias Phxcrd.Repo
-  alias Phxcrdweb.QueryFilter
   import Canada, only: [can?: 2]
+  import Ecto.Query, only: [where: 3]
 
   plug Plugs.UserSignedIn
   plug :cancan
@@ -47,12 +47,20 @@ defmodule PhxcrdWeb.VersionController do
           Version.changeset(%Version{}, %{})
       end
 
-    page =
-      Audit.list_versions()
-      |> QueryFilter.filter(%Version{}, Map.fetch!(changeset, :changes),
-        entity_schema: :exact,
-        entity_id: :exact
-      )
+    query = Audit.list_versions()
+    changes = Map.fetch!(changeset, :changes)
+
+    query = case changes[:entity_schema] do
+      nil -> query
+      val -> query |> where([v], v.entity_schema == ^val)
+    end
+
+    query = case changes[:entity_id] do
+      nil -> query
+      val -> query |> where([v], v.entity_id == ^val)
+    end
+
+    page = query
       |> Repo.paginate(params)
 
     render(conn, "index.html",
