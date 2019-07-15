@@ -30,6 +30,7 @@ This doesn't include webpack or any other JS bundlers; just use good ol vanilla 
 * A i18n enabled Phoenix datepicker
 * Properly configure phoenix presence along with a small demonstration
 * Properly configure phoenix live view along with a small demonstration
+* An example of file uploading and usage of sendfile to implement authorization on uploaded files
 
 ## Missing stuff
 

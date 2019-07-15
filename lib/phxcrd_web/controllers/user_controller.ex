@@ -111,10 +111,12 @@ defmodule PhxcrdWeb.UserController do
   end
 
   def get_photo(conn, %{"id" => id}) do
-    user = Auth.get_user!(id)
     # Notice that here i could do any checks I want (authorization) for example display
-    # the image only to admins and the current user. 
+    # the image only to admins and the current user. The most important thing here
+    # is that because `send_file` is used to send the file it will be a fast operation
+    # and will not introduce any problems to the application.
     # Also notice that the cancan plugin will run for all actions in this controller
+    user = Auth.get_user!(id)
     conn 
     |> put_resp_content_type("image/jpg")
     |> send_file(200, user.photo_path)
