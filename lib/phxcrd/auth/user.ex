@@ -22,6 +22,7 @@ defmodule Phxcrd.Auth.User do
     field :password, :string, virtual: true
     field :last_login, :utc_datetime
     field :is_enabled, :boolean, default: true
+    field :photo_path, :string
 
     many_to_many(
       :permissions,

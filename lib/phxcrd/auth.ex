@@ -182,9 +182,19 @@ defmodule Phxcrd.Auth do
     end
   end
 
+  defp add_image_path_to_user(user, user_params) do
+    if upload = user_params["photo"] do
+      extension = Path.extname(upload.filename)
+      path = "./media/#{user.data.username}-profile#{extension}"
+      File.cp!(upload.path, path)
+      user |> Ecto.Changeset.put_change(:photo_path, path)
+    end
+  end
+
   def create_db_user(attrs \\ %{}) do
     case %User{}
          |> User.db_user_changeset(attrs)
+         |> add_image_path_to_user(attrs)
          |> Repo.insert() do
       {:ok, user} -> {:ok, user |> Repo.preload([:permissions])}
       error -> error
@@ -207,6 +217,7 @@ defmodule Phxcrd.Auth do
     user
     |> Repo.preload([:permissions, :authority])
     |> User.changeset(attrs)
+    |> add_image_path_to_user(attrs)
     |> Repo.update()
   end
 
@@ -216,6 +227,7 @@ defmodule Phxcrd.Auth do
     user
     |> Repo.preload(:permissions)
     |> User.db_user_changeset(attrs)
+    |> add_image_path_to_user(attrs)
     |> Ecto.Changeset.put_assoc(:permissions, perms)
     |> Repo.update()
   end

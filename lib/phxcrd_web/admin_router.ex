@@ -8,5 +8,7 @@ defmodule PhxcrdWeb.AdminRouter do
     resources "/users", UserController, except: [:delete]
     get "/users/:id/change-password", UserController, :change_password_get
     put "/users/:id/change-password", UserController, :change_password_post
+
+    get "/users/:id/photo", UserController, :get_photo
   end
 end

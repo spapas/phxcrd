@@ -109,4 +109,12 @@ defmodule PhxcrdWeb.UserController do
         render(conn, "change_password.html", user: user, changeset: changeset)
     end
   end
+
+  def get_photo(conn, %{"id" => id}) do
+    user = Auth.get_user!(id)
+    #conn |> html(user.photo_path)
+    conn 
+    |> put_resp_content_type("image/jpg")
+    |> send_file(200, user.photo_path)
+  end
 end
