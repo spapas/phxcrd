@@ -112,7 +112,9 @@ defmodule PhxcrdWeb.UserController do
 
   def get_photo(conn, %{"id" => id}) do
     user = Auth.get_user!(id)
-    #conn |> html(user.photo_path)
+    # Notice that here i could do any checks I want (authorization) for example display
+    # the image only to admins and the current user. 
+    # Also notice that the cancan plugin will run for all actions in this controller
     conn 
     |> put_resp_content_type("image/jpg")
     |> send_file(200, user.photo_path)
