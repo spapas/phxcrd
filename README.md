@@ -20,7 +20,7 @@ This doesn't include webpack or any other JS bundlers; just use good ol vanilla 
 * Send mails with bamboo (smtp)
 * A milligram styled template
 * A script to easily *rename* this project so it can be used as a template for your own projects
-* A way to define filters (for querying) for a schema (check authority_controller for example)
+* A way to define filters for a query among joins etc (check authority_controller for example)
 * Sentry integration for error reporting
 * Configuration using secrets and a secret template
 * Multiple environments (dev/uat/prod) each with its own secret (copy the template and rename it)
