@@ -23,14 +23,15 @@ defmodule PhxcrdWeb.UserController do
   end
 
   @user_filters [
-    %{name: :username, type: :string, binding: :user, field_name: :username, method: :ilike},
+    %{name: :username, type: :string, binding: :user, field_name: :username, method: :ilike}
   ]
 
   def index(conn, params) do
     changeset = QueryFilterEx.get_changeset_from_params(params, @user_filters)
-      
+
     users =
-      from(u in User, as: :user,
+      from(u in User,
+        as: :user,
         left_join: a in Authority,
         on: a.id == u.authority_id,
         left_join: up in UserPermission,
@@ -117,8 +118,15 @@ defmodule PhxcrdWeb.UserController do
     # and will not introduce any problems to the application.
     # Also notice that the cancan plugin will run for all actions in this controller
     user = Auth.get_user!(id)
-    conn 
-    |> put_resp_content_type("image/jpg")
-    |> send_file(200, user.photo_path)
+
+    case user.photo_path do
+      nil ->
+        conn |> redirect(external: "https://picsum.photos/200")
+
+      v ->
+        conn
+        |> put_resp_content_type("image/jpg")
+        |> send_file(200, v)
+    end
   end
 end
