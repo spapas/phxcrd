@@ -217,7 +217,6 @@ defmodule Phxcrd.Auth do
     user
     |> Repo.preload([:permissions, :authority])
     |> User.changeset(attrs)
-    |> add_image_path_to_user(attrs)
     |> Repo.update()
   end
 
