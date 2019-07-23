@@ -188,6 +188,8 @@ defmodule Phxcrd.Auth do
       path = "#{Application.get_env(:phxcrd, :media_root)}/#{user.data.username}-profile#{extension}"
       File.cp!(upload.path, path)
       user |> Ecto.Changeset.put_change(:photo_path, path)
+    else
+      user
     end
   end
 
