@@ -23,20 +23,25 @@ defmodule PhxcrdWeb.UserController do
   end
 
   @user_filters [
-    %{name: :username, type: :string, binding: :user, field_name: :username, method: :ilike}
+    %{name: :username, type: :string, binding: :user, field_name: :username, method: :ilike},
+    %{name: :authority_name, type: :string, binding: :authority, field_name: :name, method: :ilike},
+    %{name: :permission_name, type: :string, binding: :permission, field_name: :name, method: :ilike},
+    %{name: :last_login_date, type: :date, binding: :user, field_name: :last_login, method: :date}
   ]
 
   def index(conn, params) do
     changeset = QueryFilterEx.get_changeset_from_params(params, @user_filters)
+    changeset |> IO.inspect
 
     users =
       from(u in User,
         as: :user,
-        left_join: a in Authority,
+        left_join: a in Authority, as: :authority,
         on: a.id == u.authority_id,
+
         left_join: up in UserPermission,
         on: up.user_id == u.id,
-        left_join: p in Permission,
+        left_join: p in Permission, as: :permission,
         on: up.permission_id == p.id,
         preload: [authority: a, permissions: p]
       )

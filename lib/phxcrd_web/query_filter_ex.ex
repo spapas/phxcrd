@@ -11,10 +11,10 @@ defmodule PhxcrdWeb.QueryFilterEx do
 
   def make_filter_changeset(filters, params) do
     data = %{}
-    types = filters |> make_filter_types |> IO.inspect()
+    types = filters |> make_filter_types
 
     {data, types}
-    |> Ecto.Changeset.cast(params, filters |> make_filter_keys)
+    |> Ecto.Changeset.cast(params, filters |> make_filter_keys) |> Map.merge(%{action: :insert})
   end
 
   def get_changeset_from_params(params, filters, filter_name \\ "filter") do
@@ -29,12 +29,12 @@ defmodule PhxcrdWeb.QueryFilterEx do
 
   def filter(query, changeset, filters) do
     changes = Map.fetch!(changeset, :changes)
-    filters |> IO.inspect |> Enum.reduce(query, creat_where_clauses_reducer(changes))
+    filters |> Enum.reduce(query, creat_where_clauses_reducer(changes))
   end
 
   defp creat_where_clauses_reducer(changes) do
     fn %{name: name, field_name: field_name, binding: binding, method: method}, acc ->
-      case Map.fetch(changes |> IO.inspect, name|> IO.inspect) do
+      case Map.fetch(changes, name) do
         {:ok, value} ->
           acc |> creat_where_clause(field_name, binding,  method, value)
 
@@ -57,7 +57,12 @@ defmodule PhxcrdWeb.QueryFilterEx do
       :year -> acc  |> where(
         [{^binding, t}],
         fragment("extract (year from ?) = ?", field(t, ^field_name), ^value)
-      )  
+      )
+      :date -> acc  |> where(
+        [{^binding, t}],
+        #fragment("extract (date from ?) = ?", field(t, ^field_name), ^value)
+        fragment("? >= cast(? as date) and ? < cast(? as date) + '1 day'::interval", field(t, ^field_name), ^value, field(t, ^field_name), ^value)
+      ) 
       _ -> acc |> where(
         [{^binding, t}],
         field(t, ^field_name) == ^value

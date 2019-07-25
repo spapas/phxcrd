@@ -27,6 +27,7 @@ defmodule PhxcrdWeb.AuthorityController do
   @authority_filters [
     %{name: :authority_name, type: :string, binding: :authority, field_name: :name, method: :ilike},
     %{name: :authority_kind_id, type: :integer, binding: :authority_kind, field_name: :id, method: :eq}
+    
   ]
 
   def index(conn, params) do

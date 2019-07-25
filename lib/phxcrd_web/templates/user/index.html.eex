@@ -1,8 +1,18 @@
 <h1><%= gettext "User list" %></h1>
-
+<% IO.inspect @changeset %>
 <%= form_for @changeset, AdminRoutes.user_path(@conn, :index), [method: :get, class: "filter-form", as: :filter],  fn f -> %>
 <%= label f, :username, gettext "Username" %>
 <%= text_input f, :username  %>
+
+<%= label f, :authority_name, gettext "Authority name" %>
+<%= text_input f, :authority_name  %>
+
+<%= label f, :permission_name, gettext "Permission name" %>
+<%= text_input f, :permission_name  %>
+
+<%= label f, :last_login_date, gettext "Last login date" %>
+<%= text_input f, :last_login_date  %>
+<%= error_tag f, :last_login_date %>
 
 <%= submit gettext("Filter"), class: "ml-5" %>
 <%= link gettext("Reset"), to: AdminRoutes.user_path(@conn, :index), class: "button button-outline ml-2" %>
