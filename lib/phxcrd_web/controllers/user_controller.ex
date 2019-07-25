@@ -24,14 +24,13 @@ defmodule PhxcrdWeb.UserController do
 
   @user_filters [
     %{name: :username, type: :string, binding: :user, field_name: :username, method: :ilike},
-    %{name: :authority_name, type: :string, binding: :authority, field_name: :name, method: :ilike},
+    %{name: :authority_name, type: :string, binding: :authority, field_name: :name, method: :icontains},
     %{name: :permission_name, type: :string, binding: :permission, field_name: :name, method: :ilike},
     %{name: :last_login_date, type: :date, binding: :user, field_name: :last_login, method: :date}
   ]
 
   def index(conn, params) do
     changeset = QueryFilterEx.get_changeset_from_params(params, @user_filters)
-    changeset |> IO.inspect
 
     users =
       from(u in User,
@@ -48,7 +47,6 @@ defmodule PhxcrdWeb.UserController do
       |> QueryFilterEx.filter(changeset, @user_filters)
       |> Repo.all()
 
-    # users = Repo.all(users)
     render(conn, "index.html", users: users, changeset: changeset)
   end
 

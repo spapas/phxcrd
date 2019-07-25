@@ -45,7 +45,11 @@ defmodule PhxcrdWeb.QueryFilterEx do
   end
 
   defp creat_where_clause(acc, field_name, binding,  method, value) do
-    case method |> IO.inspect do
+    case method do
+      :eq -> acc |> where(
+        [{^binding, t}],
+        field(t, ^field_name) == ^value
+      )
       :ilike -> acc |> where(
         [{^binding, t}],
         ilike(field(t, ^field_name), ^("#{value}%") )
@@ -71,30 +75,4 @@ defmodule PhxcrdWeb.QueryFilterEx do
     end
   end
 
-  defp creat_where_clauses_reducer1(changes) do
-    fn {k, filter_type}, acc ->
-      k |> IO.inspect()
-      filter_type |> IO.inspect()
-
-      case filter_type do
-        :ilike ->
-          case Map.fetch(changes, k) do
-            {:ok, v} ->
-              dynamic([z], ilike(field(z, ^k), ^("%" <> v <> "%")) and ^acc)
-
-            _ ->
-              acc
-          end
-
-        _ ->
-          case Map.fetch(changes, k) do
-            {:ok, v} ->
-              dynamic([z], field(z, ^k) == ^v and ^acc)
-
-            _ ->
-              acc
-          end
-      end
-    end
-  end
 end
