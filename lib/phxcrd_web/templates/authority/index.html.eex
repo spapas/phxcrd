@@ -20,11 +20,15 @@
 <table class='condensed'>
   <thead>
     <tr>
-      <th>Id</th>
-      <th><%= gettext "Kind" %></th>
-      <th><%= gettext "Name" %></th>
-
-      <th></th>
+      <th>
+        <%= link gettext("Id"), to: Phoenix.Controller.current_url(@conn, get_order_params(@conn.params, ["filter"], "authority__id")) %>
+      </th>
+      <th>
+        <%= link gettext("Kind"), to: Phoenix.Controller.current_url(@conn, get_order_params(@conn.params, ["filter"], "authority_kind__name")) %>
+      </th>
+      <th>
+        <%= link gettext("Name"), to: Phoenix.Controller.current_url(@conn, get_order_params(@conn.params, ["filter"], "authority__name")) %>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -47,9 +51,12 @@
   </tbody>
 </table>
 
-<%= pagination_links @page, get_query_params(@conn.params, ["authority"]) %>
+<%= pagination_links @page, get_query_params(@conn.params, ["filter", "order_by"]) %>
 <% else %>
 <p><%= gettext "No authorities found" %></p>
 <% end %>
+
+1<%= AdminRoutes.authority_path(@conn, :new, a: %{b: 33}) %>2
+1<%= Phoenix.Controller.current_url(@conn, %{b:  %{c: 33 } }) %>2
 
 <span><%= link gettext("New Authority"), to: AdminRoutes.authority_path(@conn, :new), class: "button button-primary" %></span>

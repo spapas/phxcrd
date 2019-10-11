@@ -3,6 +3,7 @@ defmodule PhxcrdWeb.ViewHelpers do
   import PhxcrdWeb.Gettext
   alias Phoenix.HTML.Form
   import Phoenix.HTML
+  import IEx
 
   def get_query_params(params, allowed_keys) do
     params |> Map.take(allowed_keys) |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
@@ -51,6 +52,18 @@ defmodule PhxcrdWeb.ViewHelpers do
       )
 
     Form.date_select(form, field, [builder: builder] ++ opts)
+  end
+
+  def get_order_params(params, allowed_keys, order_key) do
+    params
+    |> Map.take(allowed_keys ++ ["order_by"])
+    |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
+    |> Map.new
+    |> Map.update(:order_by, order_key, &(case &1 do
+      "-" <> ^order_key -> order_key
+      ^order_key -> "-" <> order_key
+      _ -> "-" <> order_key
+    end))
   end
 
   def get_select_value(cs, attr) do

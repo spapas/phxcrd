@@ -9,7 +9,7 @@ defmodule PhxcrdWeb.QueryFilterEx do
     filters |> Enum.map(&{&1.name, &1.type}) |> Map.new()
   end
 
-  def make_filter_changeset(filters, params) do
+  defp make_filter_changeset(filters, params) do
     data = %{}
     types = filters |> make_filter_types
 
@@ -64,8 +64,7 @@ defmodule PhxcrdWeb.QueryFilterEx do
       )
       :date -> acc  |> where(
         [{^binding, t}],
-        #fragment("extract (date from ?) = ?", field(t, ^field_name), ^value)
-        fragment("? >= cast(? as date) and ? < cast(? as date) + '1 day'::interval", field(t, ^field_name), ^value, field(t, ^field_name), ^value)
+        fragment("? >= cast(? as date) and ? < (cast(? as date) + '1 day'::interval)", field(t, ^field_name), ^value, field(t, ^field_name), ^value)
       ) 
       _ -> acc |> where(
         [{^binding, t}],

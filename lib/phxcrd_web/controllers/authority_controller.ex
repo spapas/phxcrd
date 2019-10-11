@@ -7,7 +7,7 @@ defmodule PhxcrdWeb.AuthorityController do
   alias PhxcrdWeb.QueryFilterEx
   alias Phxcrd.Repo
   import Canada, only: [can?: 2]
-  import Ecto.Query, only: [from: 2]
+  import Ecto.Query, only: [from: 2, order_by: 3]
 
   plug Plugs.UserSignedIn
   plug Plugs.ExAuditPlug
@@ -25,21 +25,45 @@ defmodule PhxcrdWeb.AuthorityController do
   end
 
   @authority_filters [
-    %{name: :authority_name, type: :string, binding: :authority, field_name: :name, method: :ilike},
-    %{name: :authority_kind_id, type: :integer, binding: :authority_kind, field_name: :id, method: :eq}
-    
+    %{
+      name: :authority_name,
+      type: :string,
+      binding: :authority,
+      field_name: :name,
+      method: :ilike
+    },
+    %{
+      name: :authority_kind_id,
+      type: :integer,
+      binding: :authority_kind,
+      field_name: :id,
+      method: :eq
+    }
   ]
+
+  def sort_by_params_int(qs, val, ord) do
+    [binding, name] = val |> String.split("__") |> Enum.map(&String.to_atom/1)
+    qs |> order_by([{^binding, t}], [{^ord, field(t, ^name)}])
+  end
+
+  def sort_by_params(qs, %{"order_by" => "-" <> val}), do: sort_by_params_int(qs, val, :asc)
+  def sort_by_params(qs, %{"order_by" => val}), do: sort_by_params_int(qs, val, :desc)
+  def sort_by_params(qs, _), do: qs
+
 
   def index(conn, params) do
     changeset = QueryFilterEx.get_changeset_from_params(params, @authority_filters)
 
     page =
-      from(a in Authority, as: :authority,
-        join: ak in AuthorityKind, as: :authority_kind,
+      from(a in Authority,
+        as: :authority,
+        join: ak in AuthorityKind,
+        as: :authority_kind,
         on: [id: a.authority_kind_id],
         preload: [authority_kind: ak]
       )
       |> QueryFilterEx.filter(changeset, @authority_filters)
+      |> sort_by_params(params)
       |> Repo.paginate(params)
 
     render(conn, "index.html",
