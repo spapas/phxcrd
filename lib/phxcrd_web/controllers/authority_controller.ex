@@ -41,15 +41,9 @@ defmodule PhxcrdWeb.AuthorityController do
     }
   ]
 
-  def sort_by_params_int(qs, val, ord) do
-    [binding, name] = val |> String.split("__") |> Enum.map(&String.to_atom/1)
-    qs |> order_by([{^binding, t}], [{^ord, field(t, ^name)}])
-  end
-
-  def sort_by_params(qs, %{"order_by" => "-" <> val}), do: sort_by_params_int(qs, val, :asc)
-  def sort_by_params(qs, %{"order_by" => val}), do: sort_by_params_int(qs, val, :desc)
-  def sort_by_params(qs, _), do: qs
-
+  @authority_sort_fields [
+    "authority__id", "authority_kind__name", "authority__name"
+  ]
 
   def index(conn, params) do
     changeset = QueryFilterEx.get_changeset_from_params(params, @authority_filters)
@@ -63,7 +57,7 @@ defmodule PhxcrdWeb.AuthorityController do
         preload: [authority_kind: ak]
       )
       |> QueryFilterEx.filter(changeset, @authority_filters)
-      |> sort_by_params(params)
+      |> QueryFilterEx.sort_by_params(params, @authority_sort_fields)
       |> Repo.paginate(params)
 
     render(conn, "index.html",

@@ -58,12 +58,20 @@ defmodule PhxcrdWeb.ViewHelpers do
     params
     |> Map.take(allowed_keys ++ ["order_by"])
     |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
-    |> Map.new
-    |> Map.update(:order_by, order_key, &(case &1 do
-      "-" <> ^order_key -> order_key
-      ^order_key -> "-" <> order_key
-      _ -> "-" <> order_key
-    end))
+    |> Map.new()
+    |> Map.update(
+      :order_by,
+      order_key,
+      &case &1 do
+        "-" <> ^order_key -> order_key
+        ^order_key -> "-" <> order_key
+        _ -> "-" <> order_key
+      end
+    )
+  end
+
+  def create_order_url(conn, field_name, ignore \\ ["filter"]) do
+    Phoenix.Controller.current_url(conn, get_order_params(conn.params, ignore, field_name))
   end
 
   def get_select_value(cs, attr) do

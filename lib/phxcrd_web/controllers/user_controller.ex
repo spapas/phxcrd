@@ -29,6 +29,10 @@ defmodule PhxcrdWeb.UserController do
     %{name: :last_login_date, type: :date, binding: :user, field_name: :last_login, method: :date}
   ]
 
+  @user_sort_fields [
+    "user__username", "user__name", "user__last_login"
+  ]
+
   def index(conn, params) do
     changeset = QueryFilterEx.get_changeset_from_params(params, @user_filters)
 
@@ -45,6 +49,7 @@ defmodule PhxcrdWeb.UserController do
         preload: [authority: a, permissions: p]
       )
       |> QueryFilterEx.filter(changeset, @user_filters)
+      |> QueryFilterEx.sort_by_params(params, @user_sort_fields)
       |> Repo.all()
 
     render(conn, "index.html", users: users, changeset: changeset)

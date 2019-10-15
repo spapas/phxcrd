@@ -21,13 +21,13 @@
   <thead>
     <tr>
       <th>
-        <%= link gettext("Id"), to: Phoenix.Controller.current_url(@conn, get_order_params(@conn.params, ["filter"], "authority__id")) %>
+        <%= link gettext("Id"), to: create_order_url(@conn, "authority__id") %>
       </th>
       <th>
-        <%= link gettext("Kind"), to: Phoenix.Controller.current_url(@conn, get_order_params(@conn.params, ["filter"], "authority_kind__name")) %>
+        <%= link gettext("Kind"), to: create_order_url(@conn, "authority_kind__name") %>
       </th>
       <th>
-        <%= link gettext("Name"), to: Phoenix.Controller.current_url(@conn, get_order_params(@conn.params, ["filter"], "authority__name")) %>
+        <%= link gettext("Name"), to: create_order_url(@conn, "authority__name") %>
       </th>
     </tr>
   </thead>
