@@ -3,4 +3,4 @@
 </section>
 
 
-<%= Phoenix.LiveView.live_render(@conn, PhxcrdWeb.ThermostatLiveView, session: %{user_id: @user_id}) %>
+<%= live_render(@conn, PhxcrdWeb.ThermostatLiveView, session: %{"user_id" => @user_id}) %>
