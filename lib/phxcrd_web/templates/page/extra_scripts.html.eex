@@ -1,37 +1,40 @@
-
 <%= if action_name(@conn) in [:test_presence] do %>
 
 <script>
-$(function() {
-  window.presence.onSync(() => renderOnlineUsers(window.presence))
+  $(function () {
+    window.presence.onSync(() => renderOnlineUsers(window.presence))
 
-  function renderOnlineUsers(presence) {
-    let response = ""
+    function renderOnlineUsers(presence) {
+      let response = ""
 
-    window.presence.list((id, {metas: [first, ...rest]}) => {
-      //console.log("ID = " + id +".", first, rest  )
-      let count = rest.length + 1
-      response += `<br>${id} Username: ${first.username} Authority: ${first.authority_name} Count: ${count}</br>`
-    })
+      window.presence.list((id, { metas: [first, ...rest] }) => {
+        //console.log("ID = " + id +".", first, rest  )
+        let count = rest.length + 1
+        response += `<br>${id} Username: ${first.username} Authority: ${first.authority_name} Count: ${count}</br>`
+      })
 
-    console.log(response)
-    document.getElementById("#presence").innerHTML = response
-  }
-});
+      console.log(response)
+      document.getElementById("#presence").innerHTML = response
+    }
+  });
 </script>
 <% end %>
 
 <%= if action_name(@conn) in [:test_live] do %>
 
 <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix_live_view.js") %>'></script>
+<script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/nprogress.js") %>'></script>
 <script>
 
-$(function() {
-  
-  var ls = liveSocket = new phoenix_live_view.LiveSocket("/live")
-  liveSocket.connect()
-  
-});
+  $(function () {
+
+    window.addEventListener("phx:page-loading-start", info => NProgress.start())
+    window.addEventListener("phx:page-loading-stop", info => NProgress.done())
+
+    var ls = liveSocket = new phoenix_live_view.LiveSocket("/live")
+    liveSocket.connect()
+
+  });
 
 </script>
 <% end %>

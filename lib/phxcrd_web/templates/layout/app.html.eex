@@ -13,6 +13,7 @@
   <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/app.css") %>' />
 
   <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/select2.min.css") %>' />
+  <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/nprogress.css") %>' />
 
   <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user salt", %{
     user_id: @user_id,
@@ -113,7 +114,7 @@
   </div>
   <footer class="footer">
     <section class="container">
-      Copyright © 2019 &lt;Serafeim Papastefanos&gt;
+      Copyright © 2019-20 &lt;Serafeim Papastefanos&gt;
       <%= if Application.get_env(:phxcrd, :env) != :prod do %>
       <span style='padding: 8px; font-weight:900; color: red; background-color:#661111'>
         WARNING: TEST VERSION (<%= Application.get_env(:phxcrd, :env) %>)
@@ -125,12 +126,12 @@
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/select2.min.js") %>'></script>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix.js") %>'></script>
-  
+
 
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/main.js") %>'></script>
 
   <%= render_existing @view_module, "extra_scripts.html", assigns %>
-  
+
 </body>
 
 </html>

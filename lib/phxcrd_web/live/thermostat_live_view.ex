@@ -2,7 +2,9 @@ defmodule PhxcrdWeb.ThermostatLiveView do
   use Phoenix.LiveView
 
   def render(assigns) do
-    Phoenix.View.render(PhxcrdWeb.PageView, "thermostat.html", assigns)
+    PhxcrdWeb.PageView.render("thermostat.html", assigns)
+    # or
+    # Phoenix.View.render(PhxcrdWeb.PageView, "thermostat.html", assigns)
   end
 
   def mount(%{user_id: user_id}, socket) do
@@ -29,7 +31,7 @@ defmodule PhxcrdWeb.ThermostatLiveView do
   defp get_user_reading(user_id) do
     case user_id do
       nil -> {:error, "Please login"}
-      v -> {:ok, v+1}
+      v -> {:ok, v + 1}
     end
   end
 end
