@@ -26,15 +26,19 @@
 <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/nprogress.js") %>'></script>
 <script>
 
+
   $(function () {
 
     window.addEventListener("phx:page-loading-start", info => NProgress.start())
     window.addEventListener("phx:page-loading-stop", info => NProgress.done())
 
-    var ls = liveSocket = new phoenix_live_view.LiveSocket("/live")
+    liveSocket = new phoenix_live_view.LiveSocket("/live")
     liveSocket.connect()
+    // liveSocket.enableLatencySim(2000)
+
 
   });
+
 
 </script>
 <% end %>

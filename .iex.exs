@@ -6,4 +6,4 @@ alias Phxcrd.Auth.Permision
 alias Phxcrd.Auth.Version
 alias Phxcrd.Repo
 
-import Ecto.Query, only: [from: 2, from: 1]
+import Ecto.Query, only: [from: 2, from: 1, where: 3]

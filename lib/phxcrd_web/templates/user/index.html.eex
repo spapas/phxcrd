@@ -22,15 +22,21 @@ A list of users:
 <table>
   <thead>
     <tr>
-      <th>Username</th>
-      <th>Name</th>
+      <th>
+        <%= link gettext("Username"), to: create_order_url(@conn, "user__username") %>
+      </th>
+      <th>
+        <%= link gettext("Name"), to: create_order_url(@conn, "user__name") %>
+      </th>
       <th>First name</th>
       <th>Last name</th>
       <th>Email</th>
       <th>Am / Am phxcrd</th>
       <th>Kind</th>
 
-      <th>Last login</th>
+      <th>
+        <%= link gettext("Last login"), to: create_order_url(@conn, "user__last_login") %>
+      </th>
       <th>Is enabled</th>
 
       <th></th>

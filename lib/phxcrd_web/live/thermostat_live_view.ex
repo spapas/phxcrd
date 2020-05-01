@@ -2,12 +2,16 @@ defmodule PhxcrdWeb.ThermostatLiveView do
   use Phoenix.LiveView
 
   def render(assigns) do
+
     PhxcrdWeb.PageView.render("thermostat.html", assigns)
     # or
     # Phoenix.View.render(PhxcrdWeb.PageView, "thermostat.html", assigns)
+
   end
 
-  def mount(%{user_id: user_id}, socket) do
+  def mount(_params, %{"user_id" => user_id}, socket) do
+    #{:ok, assign(socket, :temperature, 33)}
+
     if connected?(socket), do: :timer.send_interval(500, self(), :update)
 
     case get_user_reading(user_id) do
@@ -16,7 +20,7 @@ defmodule PhxcrdWeb.ThermostatLiveView do
 
       {:error, reason} ->
         {:ok, assign(socket, :temperature, reason)}
-    end
+     end
   end
 
   def handle_info(:update, socket) do
