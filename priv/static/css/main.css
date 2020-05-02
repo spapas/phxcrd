@@ -223,7 +223,7 @@
        url('../fonts/fira-sans-v9-greek_latin-900.woff') format('woff'), /* Modern Browsers */
        url('../fonts/fira-sans-v9-greek_latin-900.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../fonts/fira-sans-v9-greek_latin-900.svg#FiraSans') format('svg'); /* Legacy iOS */
-}    
+}
 
 body {
   color:#011f4b;
@@ -232,7 +232,7 @@ body {
   font-weight:300;
   letter-spacing:.01em;
   line-height:1.6
-}    
+}
 
 
 .phx-click-loading {

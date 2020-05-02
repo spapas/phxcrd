@@ -29,6 +29,9 @@
       <th>
         <%= link gettext("Name"), to: create_order_url(@conn, "authority__name") %>
       </th>
+      <th>
+        Actions
+      </th>
     </tr>
   </thead>
   <tbody>

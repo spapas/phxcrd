@@ -1,0 +1,42 @@
+<h1>Show Authority</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, PhxcrdWeb.AuthorityLive.FormComponent,
+    id: @authority.id,
+    title: @page_title,
+    action: @live_action,
+    authority: @authority,
+    return_to: Routes.authority_show_path(@socket, :show, @authority) %>
+<% end %>
+
+<ul>
+  <li>
+    <strong>Id:</strong>
+    <%= @authority.id %>
+  </li>
+  <li>
+    <strong><%= gettext "Kind" %>:</strong>
+    <%= @authority.authority_kind.name %>
+  </li>
+  <li>
+    <strong><%= gettext "Name" %>:</strong>
+    <%= @authority.name %>
+  </li>
+  <li>
+    <strong><%= gettext "Users" %>:</strong>
+    <br />
+    <%= if @authority.users && length(@authority.users)>0 do %>
+    <%= for u <- @authority.users do %>
+    <%= "#{u.name} (#{u.username} - #{u.email})" %>
+    <br />
+    <% end %>
+    <%= # @authority.users |> Enum.map(& "#{&1.name} (#{&1.username} - #{&1.email})") |> Enum.join("<br />") %>
+    <% else %>
+    <%= gettext "N/A" %>
+    <% end %>
+  </li>
+
+</ul>
+
+<span><%= live_patch gettext("Edit"), to: Routes.authority_show_path(@socket, :edit, @authority), class: "button" %></span>
+<span><%= live_redirect gettext("Return"), to: Routes.authority_index_path(@socket, :index), class: "button button-secondary" %></span>

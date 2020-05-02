@@ -10,6 +10,7 @@ defmodule PhxcrdWeb.Router do
     # plug :fetch_flash
     # plug Phoenix.LiveView.Flash
     plug :fetch_live_flash
+    plug :put_root_layout, {PhxcrdWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug Phxcrd.Plugs.SetCurrentUser
@@ -38,6 +39,13 @@ defmodule PhxcrdWeb.Router do
     get "/test-xlsx", PageController, :test_xlsx
     get "/test-presence", PageController, :test_presence
     get "/test-live", PageController, :test_live
+
+    live "/authoritiesl", AuthorityLive.Index, :index
+    live "/authoritiesl/new", AuthorityLive.Index, :new
+    live "/authoritiesl/:id/edit", AuthorityLive.Index, :edit
+
+    live "/authoritiesl/:id", AuthorityLive.Show, :show
+    live "/authoritiesl/:id/show/edit", AuthorityLive.Show, :edit
   end
 
   scope "/api", PhxcrdWeb do

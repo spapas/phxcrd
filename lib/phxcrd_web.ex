@@ -25,7 +25,7 @@ defmodule PhxcrdWeb do
       import PhxcrdWeb.Gettext
       alias PhxcrdWeb.Router.Helpers, as: Routes
       alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
-      import Phoenix.LiveView.Controller, only: [live_render: 3]
+      import Phoenix.LiveView.Controller
     end
   end
 
@@ -38,18 +38,14 @@ defmodule PhxcrdWeb do
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
 
+      unquote(view_helpers())
       # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
 
-      import PhxcrdWeb.ErrorHelpers
-      import PhxcrdWeb.Gettext
-      alias PhxcrdWeb.Router.Helpers, as: Routes
-      alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
 
-      import Phoenix.LiveView.Helpers, only: [live_render: 3]
 
-      # Custom helper
-      import PhxcrdWeb.ViewHelpers
+
+
+
     end
   end
 
@@ -67,6 +63,43 @@ defmodule PhxcrdWeb do
     quote do
       use Phoenix.Channel
       import PhxcrdWeb.Gettext
+    end
+  end
+
+  def live_component do
+    quote do
+      use Phoenix.LiveComponent
+
+      unquote(view_helpers())
+    end
+  end
+
+  def live_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {PhxcrdWeb.LayoutView, "live.html"}
+
+      unquote(view_helpers())
+    end
+  end
+
+  defp view_helpers do
+    quote do
+      # Use all HTML functionality (forms, tags, etc)
+      use Phoenix.HTML
+
+      # Import LiveView helpers (live_render, live_component, live_patch, etc)
+      import Phoenix.LiveView.Helpers
+
+      # Import basic rendering functionality (render, render_layout, etc)
+      import Phoenix.View
+
+      import PhxcrdWeb.ViewHelpers
+      import PhxcrdWeb.LiveHelpers
+      import PhxcrdWeb.ErrorHelpers
+      import PhxcrdWeb.Gettext
+      alias PhxcrdWeb.Router.Helpers, as: Routes
+      alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
     end
   end
 

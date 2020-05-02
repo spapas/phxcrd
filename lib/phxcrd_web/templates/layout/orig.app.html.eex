@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P·H·X·C·R·D</title>
+
+  <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/normalize.css") %>' />
+  <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/milligram.min.css") %>' />
+  <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/main.css") %>' />
+  <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/app.css") %>' />
+
+  <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/select2.min.css") %>' />
+  <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/nprogress.css") %>' />
+
+  <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user salt", %{
+    user_id: @user_id,
+    username: @username,
+    authority_id: @authority_id,
+    authority_name: @authority_name,
+    perms: @perms,
+  }) %>
+
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <nav class="navigation">
+      <section class="container"><a class="navigation-title" href="/">
+          <h1 class="title">P·H·X·C·R·D</h1>
+        </a>
+        <ul class="navigation-list float-right">
+
+          <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
+
+          <li class="navigation-item"><a class="navigation-link" href="#popover-admin"
+              data-popover=""><%= gettext "Administration" %></a>
+            <div class="popover" id="popover-admin">
+              <ul class="popover-list">
+                <li class="popover-item">
+                  <%= link gettext("Authorities"),
+                        to: AdminRoutes.authority_path(@conn, :index),
+                        class: "popover-link",
+                        title: gettext "Authorities"
+                  %>
+                </li>
+
+                <%= if @perms |> Enum.any?(&( &1 == "superuser")) do %>
+
+                <li class="popover-item">
+                  <%= link gettext("Users"),
+                        to: AdminRoutes.user_path(@conn, :index),
+                        class: "popover-link",
+                        title: gettext "Users"
+                  %>
+                </li>
+
+                <li class="popover-item">
+                  <%= link gettext("Permissions"),
+                        to: AdminRoutes.permission_path(@conn, :index),
+                        class: "popover-link",
+                        title: gettext "Permissions"
+                  %>
+                </li>
+
+                <li class="popover-item">
+                  <%= link gettext("Versions"),
+                        to: AdminRoutes.version_path(@conn, :index),
+                        class: "popover-link",
+                        title: gettext "Versions"
+                  %>
+                </li>
+                <% end %>
+
+              </ul>
+            </div>
+          </li>
+          <% end %>
+
+          <li class="navigation-item"><a class="navigation-link" href="/">
+              <%= if @user_signed_in? do %>
+              <%= form_for @conn, Routes.session_path(@conn, :delete), [method: :delete, as: :user], fn _ -> %>
+              <%= submit @username <> " | " <> gettext "Log out", class: "button button-outline" %>
+              <% end %>
+              <% else %>
+              <%= link gettext("Log in"), to: Routes.session_path(@conn, :new), class: "button button-outline" %>
+              <% end %>
+
+            </a></li>
+        </ul>
+      </section>
+    </nav>
+
+    <header>
+      <section class="container">
+        <nav role="navigation">
+          <ul class='navigation-list'>
+
+
+          </ul>
+        </nav>
+        <a href="/" class="phx-logo"> </a>
+      </section>
+    </header>
+    <main role="main" class="container">
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= @inner_content %>
+
+    </main>
+    <div class="push"></div>
+  </div>
+  <footer class="footer">
+    <section class="container">
+      Copyright © 2019-20 &lt;Serafeim Papastefanos&gt;
+      <%= if Application.get_env(:phxcrd, :env) != :prod do %>
+      <span style='padding: 8px; font-weight:900; color: red; background-color:#661111'>
+        WARNING: TEST VERSION (<%= Application.get_env(:phxcrd, :env) %>)
+      </span>
+      <% end %>
+    </section>
+  </footer>
+  <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/jquery-3.4.1.min.js") %>'></script>
+  <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/select2.min.js") %>'></script>
+  <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
+  <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix.js") %>'></script>
+
+
+  <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/main.js") %>'></script>
+
+  <%= render_existing @view_module, "extra_scripts.html", assigns %>
+
+</body>
+
+</html>
