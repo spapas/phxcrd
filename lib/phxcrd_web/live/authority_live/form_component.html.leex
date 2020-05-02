@@ -23,7 +23,7 @@
 <%= multiple_select(f,
                   :users,
                   (Phxcrd.Auth.list_users |> Enum.map(&{ "#{&1.name} (#{&1.username})", &1.id})),
-                  selected: if(assigns[:authority], do: Enum.map(@authority.users, &(&1.id)), else: []),
+                  selected: if(assigns[:authority] && Ecto.assoc_loaded?(@authority.users), do: Enum.map(@authority.users, &(&1.id)), else: []),
                   style: "width: 100%"
 
                   )
