@@ -16,7 +16,8 @@
 
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/select2.min.css") %>' />
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/nprogress.css") %>' />
-    <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+
+    <script defer type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
 
   <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user salt", %{
     user_id: @user_id,
@@ -128,11 +129,22 @@
   </footer>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/jquery-3.4.1.min.js") %>'></script>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/select2.min.js") %>'></script>
-  <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
+
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix.js") %>'></script>
 
 
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/main.js") %>'></script>
+
+
+<script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix_live_view.js") %>'></script>
+<script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/nprogress.js") %>'></script>
+<script>
+
+
+
+
+
+</script>
 
   <%= render_existing @view_module, "extra_scripts.html", assigns %>
 

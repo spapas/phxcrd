@@ -125,6 +125,11 @@ defmodule Phxcrd.Auth do
     Authority.changeset(authority, %{})
   end
 
+  def change_authority(%Authority{} = authority, attrs) do
+    authority
+    |> Authority.changeset(attrs)
+  end
+
   alias Phxcrd.Auth.User
 
   @doc """

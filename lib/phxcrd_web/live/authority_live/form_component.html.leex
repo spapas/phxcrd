@@ -19,13 +19,17 @@
 <%= error_tag f, :authority_kind %>
 
 <%= label f, :users, gettext("Users") %>
+<div phx-hook="FixSelect2" phx-update="ignore">
 <%= multiple_select(f,
                   :users,
                   (Phxcrd.Auth.list_users |> Enum.map(&{ "#{&1.name} (#{&1.username})", &1.id})),
                   selected: if(assigns[:authority], do: Enum.map(@authority.users, &(&1.id)), else: []),
-                  style: "width: 100%")
+                  style: "width: 100%"
+
+                  )
                   %>
 <%= error_tag f, :users %>
+</div>
 
   <%= submit "Save", phx_disable_with: "Saving..." %>
 </form>

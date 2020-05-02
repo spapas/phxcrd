@@ -22,24 +22,4 @@
 
 <%= if action_name(@conn) in [:test_live] do %>
 
-<script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix_live_view.js") %>'></script>
-<script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/nprogress.js") %>'></script>
-<script>
-
-
-  $(function () {
-
-    window.addEventListener("phx:page-loading-start", info => NProgress.start())
-    window.addEventListener("phx:page-loading-stop", info => NProgress.done())
-
-
-    liveSocket = new phoenix_live_view.LiveSocket("/live", Phoenix.Socket)
-    liveSocket.connect()
-    // liveSocket.enableLatencySim(2000)
-
-
-  });
-
-
-</script>
 <% end %>
