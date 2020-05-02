@@ -1,12 +1,14 @@
 defmodule PhxcrdWeb.RoomChannelTest do
   use PhxcrdWeb.ChannelCase
 
+
   setup do
     {:ok, _, socket} =
-      socket(PhxcrdWeb.UserSocket, "user_id", %{some: :assign})
+      PhxcrdWeb.UserSocket
+      |> socket("user_id", %{some: :assign})
       |> subscribe_and_join(PhxcrdWeb.RoomChannel, "room:lobby")
 
-    {:ok, socket: socket}
+    %{socket: socket}
   end
 
   test "ping replies with status ok", %{socket: socket} do

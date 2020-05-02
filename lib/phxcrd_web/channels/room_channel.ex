@@ -1,5 +1,6 @@
 defmodule PhxcrdWeb.RoomChannel do
-  use PhxcrdWeb, :channel
+  #use PhxcrdWeb, :channel
+  use Phoenix.Channel
   alias PhxcrdWeb.Presence
 
   intercept ["presence_diff"]
