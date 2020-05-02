@@ -1,8 +1,11 @@
 # Phxcrd
 
+**Updated with Phoenix 1.5.1**
+
 A project-template for starting CRUD apps with Phoenix framework. This is based mainly on my own requirements.
 
-This doesn't include webpack or any other JS bundlers; just use good ol vanilla JS where you need it!
+This doesn't include webpack or any other JS bundlers; just use good ol' vanilla JS! Everything client-side phoenix (presense, live views etc) is  working!
+
 
 ## Things that *are* included:
 
@@ -31,6 +34,7 @@ This doesn't include webpack or any other JS bundlers; just use good ol vanilla 
 * Properly configure phoenix presence along with a small demonstration
 * Properly configure phoenix live view along with a small demonstration
 * An example of file uploading and usage of sendfile to implement authorization on uploaded files
+* Phoenix Live Dashboard
 
 ## Missing stuff
 
@@ -46,15 +50,15 @@ TL;DR: You'll need to install the MS VS Build tools and then run vcvarsall.bat a
 
 ## Requirements
 
-I've tested it on both Windows 10 with 
+I've tested it on both Windows 10 with
 
 ```
 Erlang/OTP 21 [erts-10.1] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1]
 
-Elixir 1.8.1 (compiled with Erlang/OTP 20)
+Elixir 1.9.0 (compiled with Erlang/OTP 20)
 ```
 
-and Centos 6.5 with 
+and Centos 6.5 with
 
 ```
 Erlang/OTP 21 [erts-10.3.5] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:1] [hipe]
@@ -64,7 +68,7 @@ Elixir 1.8.2 (compiled with Erlang/OTP 21)
 
 Please notice that to install Erlang I've used the repository from https://packages.erlang-solutions.com/erlang/.
 To install elixir I've just compiled from source, it worked flawlessly. I then moved elixir to /opt/elixir-1.8.2/
-and added 
+and added
 
 ```
 PATH=$PATH:/opt/elixir-1.8.2/bin/
@@ -88,10 +92,10 @@ git clone https://github.com/spapas/phxcrd
 
 and then go to the phxcrd directory and copy the `config/secret.exs.template` to `env_name.secret.exs` where `env_name` is either `dev`, `uat` or `prod`.
 
-Then you should properly edit the secrets file for your environment. 
+Then you should properly edit the secrets file for your environment.
 
 After that you should set your mix environment ie run something like `export MIX_ENV=uat` on unix/bash or `set MIX_ENV=uat` on windows and finally you'll
-be able to run `mix`. The following steps will be run anyway each time you deploy something from fabric but I recommend running them once to see the 
+be able to run `mix`. The following steps will be run anyway each time you deploy something from fabric but I recommend running them once to see the
 output. So try running:
 
 ```
@@ -116,7 +120,7 @@ set CURRENT_OTP="phxcrd"
 
 set NEW_NAME="NewName"
 set NEW_OTP="new_name"
-``` 
+```
 
 ## Deploying changes
 

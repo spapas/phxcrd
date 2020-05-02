@@ -18,6 +18,7 @@ defmodule PhxcrdWeb.PageController do
   def test_sentry(conn, _params) do
     if conn.assigns[:perms] |> Enum.member?("superuser") do
       try do
+
         ThisWillError.reall()
       rescue
         my_exception ->
