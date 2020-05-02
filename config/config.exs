@@ -15,8 +15,8 @@ config :phxcrd, PhxcrdWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "45DslMwn2lvg4O3WxPNJk1iJxa93sJQ2ARgQa2C/8YfN6ZnMnjg38MaITvRzdAT6",
   render_errors: [view: PhxcrdWeb.ErrorView, accepts: ~w(html json)],
-  # pubsub: [name: Phxcrd.PubSub, adapter: Phoenix.PubSub.PG2]
-  pubsub_server: Phxcrd.PubSub
+  pubsub_server: Phxcrd.PubSub,
+  live_view: [signing_salt: "xLfrf2IO"]
 
 # Configures Elixir's Logger
 config :logger, :console,

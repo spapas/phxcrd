@@ -1,11 +1,20 @@
 defmodule PhxcrdWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :phxcrd
 
+  # The session will be stored in the cookie and signed,
+  # this means its contents can be read but not tampered with.
+  # Set :encryption_salt if you would also like to encrypt it.
+  @session_options [
+    store: :cookie,
+    key: "_hello_key",
+    signing_salt: "UScy63uF"
+  ]
+
   socket "/socket", PhxcrdWeb.UserSocket,
     websocket: true,
     longpoll: false
 
-  socket "/live", Phoenix.LiveView.Socket
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
 
   # Serve at "/" the static files from "priv/static" directory.
@@ -24,7 +33,12 @@ defmodule PhxcrdWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :phxcrd
   end
+
+  plug Phoenix.LiveDashboard.RequestLogger,
+    param_key: "request_logger",
+    cookie_key: "request_logger"
 
   plug Plug.RequestId
   plug Plug.Logger
@@ -36,14 +50,6 @@ defmodule PhxcrdWeb.Endpoint do
 
   plug Plug.MethodOverride
   plug Plug.Head
-
-  # The session will be stored in the cookie and signed,
-  # this means its contents can be read but not tampered with.
-  # Set :encryption_salt if you would also like to encrypt it.
-  plug Plug.Session,
-    store: :cookie,
-    key: "_phxcrd_key",
-    signing_salt: "3q8WMRzY"
-
+  plug Plug.Session, @session_options
   plug PhxcrdWeb.Router
 end

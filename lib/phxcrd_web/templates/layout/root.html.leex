@@ -109,12 +109,9 @@
         <a href="/" class="phx-logo"> </a>
       </section>
     </header>
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= @inner_content %>
 
-    </main>
+    <%= @inner_content %>
+
     <div class="push"></div>
   </div>
   <footer class="footer">
@@ -140,13 +137,9 @@
 <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/nprogress.js") %>'></script>
 <script>
 
-
-
-
-
 </script>
 
-  <%= render_existing @view_module, "extra_scripts.html", assigns %>
+<%= render_existing @view_module, "extra_scripts.html", assigns %>
 
 </body>
 

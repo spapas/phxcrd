@@ -72,7 +72,6 @@
         }
     }, false);
 
-
     csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
     window.addEventListener("phx:page-loading-start", info => NProgress.start())

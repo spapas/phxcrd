@@ -1,7 +1,9 @@
 <%= if action_name(@conn) in [:edit, :new] do %>
 <script>
+    console.log("ZZ")
     // Render me on :new and :edit
     $(function () {
+        console.log("Z")
         $('#authority_users').select2();
     })
 </script>
