@@ -129,17 +129,15 @@
 
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix.js") %>'></script>
 
-
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/main.js") %>'></script>
 
+  <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix_live_view.js") %>'></script>
+  <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/nprogress.js") %>'></script>
+  <script>
 
-<script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix_live_view.js") %>'></script>
-<script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/nprogress.js") %>'></script>
-<script>
+  </script>
 
-</script>
-
-<%= render_existing @view_module, "extra_scripts.html", assigns %>
+  <%= render_existing @view_module, "extra_scripts.html", assigns %>
 
 </body>
 

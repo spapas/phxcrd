@@ -32,30 +32,30 @@
 		}, 1);
 	}
 
-///// Presense
+	///// Presense
 
-function getMeta(metaName) {
-	const metas = document.getElementsByTagName('meta');
-  
-	for (let i = 0; i < metas.length; i++) {
-	  if (metas[i].getAttribute('name') === metaName) {
-		return metas[i].getAttribute('content');
-	  }
+	function getMeta(metaName) {
+		const metas = document.getElementsByTagName('meta');
+
+		for (let i = 0; i < metas.length; i++) {
+			if (metas[i].getAttribute('name') === metaName) {
+				return metas[i].getAttribute('content');
+			}
+		}
+
+		return '';
 	}
-  
-	return '';
-  }
-  
-  
 
-window.socket = new Phoenix.Socket("/socket", {
-	params: {channel_token: getMeta('channel_token')}
-})
 
-window.channel = socket.channel("room:lobby", {})
-window.presence = new Phoenix.Presence(window.channel)
 
-window.socket.connect()
-window.channel.join()
+	window.socket = new Phoenix.Socket("/socket", {
+		params: { channel_token: getMeta('channel_token') }
+	})
+
+	window.channel = socket.channel("room:lobby", {})
+	window.presence = new Phoenix.Presence(window.channel)
+
+	window.socket.connect()
+	window.channel.join()
 
 })()

@@ -106,10 +106,12 @@
   min-width: 13.4rem;
   position: absolute;
   top: 94%;
-  transform: translateX(-50%); }
-  .popover.popover-open {
-    display: block; }
-  .popover:after, .popover:before {
+  transform: translateX(-50%);
+}
+.popover.popover-open {
+    display: block;
+}
+.popover:after, .popover:before {
     border: solid transparent;
     border-color: transparent;
     border-width: 1.0rem;
@@ -120,13 +122,16 @@
     position: absolute;
     right: 1.7rem;
     top: 0;
-    width: 0; }
+    width: 0;
+}
   .popover:after {
     border-bottom-color: #fff;
-    transform: translate(-50%, -100%); }
+    transform: translate(-50%, -100%);
+  }
   .popover:before {
     border-bottom-color: #d1d1d1;
-    transform: translate(-50%, -102%); }
+    transform: translate(-50%, -102%);
+  }
   .popover .popover-list {
     list-style: none;
     margin: 0;
@@ -183,8 +188,6 @@
   .only-mobile {
     display: none; } }
 
-
-
 /* fira-sans-regular - greek_latin */
 @font-face {
   font-family: 'Fira Sans';
@@ -232,9 +235,4 @@ body {
   font-weight:300;
   letter-spacing:.01em;
   line-height:1.6
-}
-
-
-.phx-click-loading {
-  font-size:3.6em;
 }
