@@ -32,7 +32,8 @@
     window.addEventListener("phx:page-loading-start", info => NProgress.start())
     window.addEventListener("phx:page-loading-stop", info => NProgress.done())
 
-    liveSocket = new phoenix_live_view.LiveSocket("/live")
+
+    liveSocket = new phoenix_live_view.LiveSocket("/live", Phoenix.Socket)
     liveSocket.connect()
     // liveSocket.enableLatencySim(2000)
 

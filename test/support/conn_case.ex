@@ -18,7 +18,9 @@ defmodule PhxcrdWeb.ConnCase do
   using do
     quote do
       # Import conveniences for testing with connections
-      use Phoenix.ConnTest
+      # use Phoenix.ConnTest
+      import Plug.Conn
+      import Phoenix.ConnTest
       alias PhxcrdWeb.Router.Helpers, as: Routes
       alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
 

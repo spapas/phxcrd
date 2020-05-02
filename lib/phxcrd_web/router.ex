@@ -2,12 +2,13 @@ defmodule PhxcrdWeb.Router do
   use PhxcrdWeb, :router
   use Plug.ErrorHandler
   use Sentry.Plug
+  import Phoenix.LiveDashboard.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    #plug :fetch_flash
-    #plug Phoenix.LiveView.Flash
+    # plug :fetch_flash
+    # plug Phoenix.LiveView.Flash
     plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
@@ -43,5 +44,12 @@ defmodule PhxcrdWeb.Router do
     pipe_through :api
 
     get "/search_authorities", ApiController, :search_authorities
+  end
+
+  if Mix.env() == :dev do
+    scope "/" do
+      pipe_through :browser
+      live_dashboard "/dashboard"
+    end
   end
 end

@@ -21,17 +21,17 @@ defmodule Phxcrd.MixProject do
     [
       mod: {Phxcrd.Application, []},
       extra_applications: [
-        :sentry,
+        # :sentry,
         :logger,
-        :bamboo,
-        :bamboo_smtp,
-        :runtime_tools,
-        :exldap,
-        :pdf_generator,
+        # :bamboo,
+        # :bamboo_smtp,
+        :runtime_tools
+        # :exldap,
+        # :pdf_generator,
         # :scrivener,
-        :scrivener_ecto,
-        :scrivener_html,
-        :timex
+        # :scrivener_ecto,
+        # :scrivener_html,
+        # :timex
       ]
     ]
   end
@@ -45,8 +45,8 @@ defmodule Phxcrd.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.16"},
-      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix, "~> 1.5.1"},
+      {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.1.2"},
       {:postgrex, ">=  0.14.3"},
@@ -55,22 +55,25 @@ defmodule Phxcrd.MixProject do
       {:gettext, "~> 0.16"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.1"},
+      {:phoenix_live_dashboard, "~> 0.1"},
 
       # Extra deps
       {:exldap, "~> 0.6"},
       {:canada, "~> 2.0.0"},
       {:ex_audit, "~> 0.6"},
-      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
+      {:phoenix_live_view, "~> 0.12.1"},
 
       # {:scrivener, "~> 2.0"},
       {:scrivener_ecto, "~> 2.0"},
-      {:scrivener_html, "~> 1.8"},
+      # {:scrivener_html, "~> 1.8"},
+      {:scrivener_html, github: "spapas/scrivener_html"},
       {:sentry, "~> 7.1.0"},
       {:bamboo_smtp, "~> 1.6.0"},
       {:pdf_generator, "== 0.5.2"},
       {:elixlsx, "~> 0.4.1"},
-      {:argon2_elixir, "~> 2.0"},
-      {:timex, "~> 3.6"},
+      {:pbkdf2_elixir, "~> 1.2.1"},
+      # {:argon2_elixir, "~> 2.0"},
+      {:timex, "~> 3.6.1"},
       {:accessible, "~> 0.2.1"},
       {:csv, "~> 2.3"}
     ]

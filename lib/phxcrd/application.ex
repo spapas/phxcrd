@@ -10,6 +10,8 @@ defmodule Phxcrd.Application do
     children = [
       # Start the Ecto repository
       Phxcrd.Repo,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Phxcrd.PubSub},
       # Start the endpoint when the application starts
       PhxcrdWeb.Endpoint,
       PhxcrdWeb.Presence

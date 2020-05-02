@@ -15,7 +15,8 @@ config :phxcrd, PhxcrdWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "45DslMwn2lvg4O3WxPNJk1iJxa93sJQ2ARgQa2C/8YfN6ZnMnjg38MaITvRzdAT6",
   render_errors: [view: PhxcrdWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Phxcrd.PubSub, adapter: Phoenix.PubSub.PG2]
+  # pubsub: [name: Phxcrd.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub_server: Phxcrd.PubSub
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -52,7 +53,7 @@ config :sentry,
   # :dev is here only for testing, remove it after you confirm it works
   included_environments: [:prod, :uat]
 
-# Bamboo smtp settings 
+# Bamboo smtp settings
 config :phxcrd, Phxcrd.Mailer,
   # configure server, hostname, username and password through a secret
   adapter: Bamboo.SMTPAdapter,
