@@ -40,12 +40,7 @@ defmodule PhxcrdWeb.Router do
     get "/test-presence", PageController, :test_presence
     get "/test-live", PageController, :test_live
 
-    live "/authoritiesl", AuthorityLive.Index, :index
-    live "/authoritiesl/new", AuthorityLive.Index, :new
-    live "/authoritiesl/:id/edit", AuthorityLive.Index, :edit
 
-    live "/authoritiesl/:id", AuthorityLive.Show, :show
-    live "/authoritiesl/:id/show/edit", AuthorityLive.Show, :edit
   end
 
   scope "/api", PhxcrdWeb do

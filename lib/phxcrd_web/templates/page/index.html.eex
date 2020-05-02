@@ -38,6 +38,9 @@
       <li>
         <%= link gettext("Authorities"), to: AdminRoutes.authority_path(@conn, :index)%>
       </li>
+      <li>
+        <%= link gettext("Live Authorities"), to: AdminRoutes.authority_index_path(@conn, :index)%>
+      </li>
 
     </ul>
   </article>

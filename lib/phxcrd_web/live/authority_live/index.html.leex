@@ -6,7 +6,7 @@
     title: @page_title,
     action: @live_action,
     authority: @authority,
-    return_to: Routes.authority_index_path(@socket, :index) %>
+    return_to: AdminRoutes.authority_index_path(@socket, :index) %>
 <% end %>
 
 <table>
@@ -30,14 +30,14 @@
     <%= for authority <- @authorities do %>
       <tr id="authority-<%= authority.id %>">
       <td>
-        <%= link  authority.id, to: Routes.authority_show_path(@socket, :show, authority), class: "mb-0 px-3 button button-outline" %>
+        <%= link  authority.id, to: AdminRoutes.authority_show_path(@socket, :show, authority), class: "mb-0 px-3 button button-outline" %>
       </td>
       <td><%= authority.authority_kind.name %></td>
       <td><%= authority.name %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.authority_show_path(@socket, :show, authority) %></span>
-          <span><%= live_patch "Edit", to: Routes.authority_index_path(@socket, :edit, authority) %></span>
+          <span><%= live_redirect "Show", to: AdminRoutes.authority_show_path(@socket, :show, authority) %></span>
+          <span><%= live_patch "Edit", to: AdminRoutes.authority_index_path(@socket, :edit, authority) %></span>
           <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: authority.id, data: [confirm: "Are you sure?"] %></span>
         </td>
       </tr>
@@ -45,4 +45,4 @@
   </tbody>
 </table>
 
-<span><%= live_patch "New Authority", to: Routes.authority_index_path(@socket, :new) %></span>
+<span><%= live_patch "New Authority", to: AdminRoutes.authority_index_path(@socket, :new) %></span>
