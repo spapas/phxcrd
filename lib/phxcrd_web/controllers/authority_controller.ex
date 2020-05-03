@@ -42,7 +42,9 @@ defmodule PhxcrdWeb.AuthorityController do
   ]
 
   @authority_sort_fields [
-    "authority__id", "authority_kind__name", "authority__name"
+    "authority__id",
+    "authority_kind__name",
+    "authority__name"
   ]
 
   def index(conn, params) do

@@ -32,7 +32,7 @@ defmodule PhxcrdWeb.AuthorityLiveTest do
       {:ok, index_live, _html} = live(conn, AdminRoutes.authority_index_path(conn, :index))
 
       assert index_live |> element("a", "New Authority") |> render_click() =~
-        "New Authority"
+               "New Authority"
 
       assert_patch(index_live, AdminRoutes.authority_index_path(conn, :new))
 
@@ -53,7 +53,7 @@ defmodule PhxcrdWeb.AuthorityLiveTest do
       {:ok, index_live, _html} = live(conn, AdminRoutes.authority_index_path(conn, :index))
 
       assert index_live |> element("#authority-#{authority.id} a", "Edit") |> render_click() =~
-        "Edit Authority"
+               "Edit Authority"
 
       assert_patch(index_live, AdminRoutes.authority_index_path(conn, :edit, authority))
 
@@ -82,16 +82,18 @@ defmodule PhxcrdWeb.AuthorityLiveTest do
     setup [:create_authority]
 
     test "displays authority", %{conn: conn, authority: authority} do
-      {:ok, _show_live, html} = live(conn, AdminRoutes.authority_show_path(conn, :show, authority))
+      {:ok, _show_live, html} =
+        live(conn, AdminRoutes.authority_show_path(conn, :show, authority))
 
       assert html =~ "Show Authority"
     end
 
     test "updates authority within modal", %{conn: conn, authority: authority} do
-      {:ok, show_live, _html} = live(conn, AdminRoutes.authority_show_path(conn, :show, authority))
+      {:ok, show_live, _html} =
+        live(conn, AdminRoutes.authority_show_path(conn, :show, authority))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Authority"
+               "Edit Authority"
 
       assert_patch(show_live, AdminRoutes.authority_show_path(conn, :edit, authority))
 

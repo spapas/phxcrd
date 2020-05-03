@@ -24,13 +24,27 @@ defmodule PhxcrdWeb.UserController do
 
   @user_filters [
     %{name: :username, type: :string, binding: :user, field_name: :username, method: :ilike},
-    %{name: :authority_name, type: :string, binding: :authority, field_name: :name, method: :icontains},
-    %{name: :permission_name, type: :string, binding: :permission, field_name: :name, method: :ilike},
+    %{
+      name: :authority_name,
+      type: :string,
+      binding: :authority,
+      field_name: :name,
+      method: :icontains
+    },
+    %{
+      name: :permission_name,
+      type: :string,
+      binding: :permission,
+      field_name: :name,
+      method: :ilike
+    },
     %{name: :last_login_date, type: :date, binding: :user, field_name: :last_login, method: :date}
   ]
 
   @user_sort_fields [
-    "user__username", "user__name", "user__last_login"
+    "user__username",
+    "user__name",
+    "user__last_login"
   ]
 
   def index(conn, params) do
@@ -39,12 +53,13 @@ defmodule PhxcrdWeb.UserController do
     users =
       from(u in User,
         as: :user,
-        left_join: a in Authority, as: :authority,
+        left_join: a in Authority,
+        as: :authority,
         on: a.id == u.authority_id,
-
         left_join: up in UserPermission,
         on: up.user_id == u.id,
-        left_join: p in Permission, as: :permission,
+        left_join: p in Permission,
+        as: :permission,
         on: up.permission_id == p.id,
         preload: [authority: a, permissions: p]
       )

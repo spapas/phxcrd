@@ -1,7 +1,6 @@
 defmodule PhxcrdWeb.RoomChannelTest do
   use PhxcrdWeb.ChannelCase
 
-
   setup do
     {:ok, _, socket} =
       PhxcrdWeb.UserSocket

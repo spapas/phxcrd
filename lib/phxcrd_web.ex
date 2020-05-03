@@ -40,12 +40,6 @@ defmodule PhxcrdWeb do
 
       unquote(view_helpers())
       # Use all HTML functionality (forms, tags, etc)
-
-
-
-
-
-
     end
   end
 

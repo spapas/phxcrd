@@ -50,17 +50,20 @@ defmodule PhxcrdWeb.VersionController do
     query = Audit.list_versions()
     changes = Map.fetch!(changeset, :changes)
 
-    query = case changes[:entity_schema] do
-      nil -> query
-      val -> query |> where([v], v.entity_schema == ^val)
-    end
+    query =
+      case changes[:entity_schema] do
+        nil -> query
+        val -> query |> where([v], v.entity_schema == ^val)
+      end
 
-    query = case changes[:entity_id] do
-      nil -> query
-      val -> query |> where([v], v.entity_id == ^val)
-    end
+    query =
+      case changes[:entity_id] do
+        nil -> query
+        val -> query |> where([v], v.entity_id == ^val)
+      end
 
-    page = query
+    page =
+      query
       |> Repo.paginate(params)
 
     render(conn, "index.html",

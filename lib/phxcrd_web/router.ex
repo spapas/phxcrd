@@ -39,8 +39,6 @@ defmodule PhxcrdWeb.Router do
     get "/test-xlsx", PageController, :test_xlsx
     get "/test-presence", PageController, :test_presence
     get "/test-live", PageController, :test_live
-
-
   end
 
   scope "/api", PhxcrdWeb do
