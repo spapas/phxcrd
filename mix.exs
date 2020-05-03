@@ -69,7 +69,7 @@ defmodule Phxcrd.MixProject do
       {:scrivener_html, github: "spapas/scrivener_html"},
       {:sentry, "~> 7.1.0"},
       {:bamboo_smtp, "~> 1.6.0"},
-      {:pdf_generator, "== 0.5.2"},
+      {:pdf_generator, "== 0.6.2"},
       {:elixlsx, "~> 0.4.1"},
       {:pbkdf2_elixir, "~> 1.2.1"},
       # {:argon2_elixir, "~> 2.0"},

@@ -71,8 +71,8 @@ defmodule PhxcrdWeb.PageController do
 
   def test_pdf(conn, _params) do
     conn
-    |> put_resp_content_type("text/xlsx")
     |> put_resp_content_type("application/pdf")
-    |> render("report.pdf", %{rows: ["a", "b", "c"]})
+    |> put_resp_header("content-disposition", "attachment; filename=\"report.pdf\"")
+    |> render("root.pdf", %{posts: ["a", "b", "c"]})
   end
 end
