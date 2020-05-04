@@ -30,6 +30,16 @@ defmodule Phxcrd.Auth do
     )
   end
 
+  def filter_authorities(name) do
+    Repo.all(
+      from a in Authority,
+        join: ak in AuthorityKind,
+        on: [id: a.authority_kind_id],
+        preload: [authority_kind: ak],
+        where: ilike(a.name,  ^("%"<>name<>"%"))
+    )
+  end
+
   def list_authority_kinds do
     Repo.all(AuthorityKind)
   end

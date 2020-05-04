@@ -9,6 +9,11 @@
     return_to: AdminRoutes.authority_index_path(@socket, :index) %>
 <% end %>
 
+<form phx-change="filter" >
+<%= label :filter, :name, "Filter name" %>
+<%= text_input :filter, :name, phx_debounce: 200 %>
+</form>
+
 <table>
   <thead>
     <tr>

@@ -21,17 +21,8 @@ defmodule Phxcrd.MixProject do
     [
       mod: {Phxcrd.Application, []},
       extra_applications: [
-        # :sentry,
         :logger,
-        # :bamboo,
-        # :bamboo_smtp,
         :runtime_tools
-        # :exldap,
-        # :pdf_generator,
-        # :scrivener,
-        # :scrivener_ecto,
-        # :scrivener_html,
-        # :timex
       ]
     ]
   end

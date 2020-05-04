@@ -5,6 +5,7 @@ defmodule PhxcrdWeb.AuthorityLive.Index do
   alias Phxcrd.Auth.Authority
   import Canada, only: [can?: 2]
 
+
   defp cancan(socket, _options \\ []) do
     if %User{permissions: socket.assigns[:perms]} |> can?(index(Authority)) do
       socket
@@ -16,7 +17,7 @@ defmodule PhxcrdWeb.AuthorityLive.Index do
   end
 
   @impl true
-  def mount(params, session, socket) do
+  def mount(_params, session, socket) do
     {:ok,
      socket
      |> assign(:authorities, fetch_authorities())
@@ -65,7 +66,18 @@ defmodule PhxcrdWeb.AuthorityLive.Index do
     end
   end
 
+  @impl true
+  def handle_event("filter", %{"filter" => %{"name"=> name}}, socket) do
+    name |> IO.inspect
+    {:noreply, socket|> assign(:authorities, filter_authorities(name))
+  }
+  end
+
   defp fetch_authorities do
     Auth.list_authorities()
+  end
+
+  defp filter_authorities(name)  do
+    Auth.filter_authorities(name)
   end
 end
