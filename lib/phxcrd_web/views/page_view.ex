@@ -36,7 +36,7 @@ defmodule PhxcrdWeb.PageView do
     |> elem(1)
   end
 
-  def render("root.pdf", %{posts: _posts}) do
+  def render("report.pdf", %{posts: _posts}) do
 
     invoice_html = """
     <!doctype html>

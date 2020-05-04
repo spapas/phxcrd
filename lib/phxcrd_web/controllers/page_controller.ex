@@ -64,6 +64,7 @@ defmodule PhxcrdWeb.PageController do
 
   def test_xlsx(conn, _params) do
     conn
+    |> put_root_layout(false)
     |> put_resp_content_type("text/xlsx")
     |> put_resp_header("content-disposition", "attachment; filename=\"report.xlsx\"")
     |> render("report.xlsx", %{posts: ["a", "b", "c"]})
@@ -71,8 +72,9 @@ defmodule PhxcrdWeb.PageController do
 
   def test_pdf(conn, _params) do
     conn
+    |> put_root_layout(false)
     |> put_resp_content_type("application/pdf")
     |> put_resp_header("content-disposition", "attachment; filename=\"report.pdf\"")
-    |> render("root.pdf", %{posts: ["a", "b", "c"]})
+    |> render("report.pdf", %{posts: ["a", "b", "c"]})
   end
 end
