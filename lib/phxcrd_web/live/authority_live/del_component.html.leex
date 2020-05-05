@@ -8,6 +8,10 @@
   <p>
   Are you sure that you want to delete "<%= @authority.authority_kind.name <> " " <> @authority.name %>"?
   </p>
+  <div>
+  &nbsp;<span style="display: inline" class="help-block"><%= @errors %></span>
 
+  </div>
+<br />
   <%= submit "Delete", phx_disable_with: "Deleting..." %>
 </form>

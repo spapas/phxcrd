@@ -7,6 +7,7 @@ defmodule PhxcrdWeb.AuthorityLive.DelComponent do
   def update(assigns, socket) do
     {:ok,
      socket
+     |> assign(:errors, "")
      |> assign(assigns)}
   end
 
@@ -16,16 +17,18 @@ defmodule PhxcrdWeb.AuthorityLive.DelComponent do
   end
 
   defp delete_authority(socket) do
-    "~~~~~~~~~~" |> IO.inspect
+
     case Auth.delete_authority(socket.assigns.authority) do
       {:ok, _authority} ->
         {:noreply,
          socket
          |> put_flash(:info, "Authority deleted successfully")
          |> push_redirect(to: socket.assigns.return_to)}
+      {:error, %Ecto.Changeset{errors: [users: {reason, _}]}} ->
+         {:noreply, assign(socket, :errors, "Error while deleting (" <> reason <> ")!")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, :changeset, changeset)}
+        {:noreply, assign(socket, :errors, "Error, cannot delete!")}
     end
   end
 end
