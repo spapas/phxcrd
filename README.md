@@ -44,9 +44,11 @@ This doesn't include webpack or any other JS bundlers; just use good ol' vanilla
 
 ## Compiling comeonin-argon
 
-Read this first: https://github.com/riverrun/comeonin/wiki/Requirements
+~~Read this first: https://github.com/riverrun/comeonin/wiki/Requirements~~
 
-TL;DR: You'll need to install the MS VS Build tools and then run vcvarsall.bat amd64. Notice that the location of vcvaralls.bat is different for different versions so just search it. Then run `mix compile` to properly compile argon.
+~~TL;DR: You'll need to install the MS VS Build tools and then run vcvarsall.bat amd64. Notice that the location of vcvaralls.bat is different for different versions so just search it. Then run `mix compile` to properly compile argon.~~
+
+Depracted! I changed it with `pbkdf2_elixir` to avoid the compilation step on Windows!
 
 ## Requirements
 
