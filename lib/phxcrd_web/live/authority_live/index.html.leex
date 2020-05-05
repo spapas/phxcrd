@@ -9,6 +9,15 @@
     return_to: AdminRoutes.authority_index_path(@socket, :index) %>
 <% end %>
 
+<%= if @live_action in [:delete] do %>
+  <%= live_modal @socket, PhxcrdWeb.AuthorityLive.DelComponent,
+    id: @authority.id,
+    title: @page_title,
+    action: @live_action,
+    authority: @authority,
+    return_to: AdminRoutes.authority_index_path(@socket, :index) %>
+<% end %>
+
 <form phx-change="filter" >
 <%= label :filter, :name, "Filter name" %>
 <%= text_input :filter, :name, phx_debounce: 200 %>
@@ -43,7 +52,10 @@
         <td>
           <span><%= live_redirect "Show", to: AdminRoutes.authority_show_path(@socket, :show, authority) %></span>
           <span><%= live_patch "Edit", to: AdminRoutes.authority_index_path(@socket, :edit, authority) %></span>
+          <span><%= live_patch "Delete", to: AdminRoutes.authority_index_path(@socket, :delete, authority) %></span>
+          <!--
           <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: authority.id, data: [confirm: "Are you sure?"] %></span>
+          -->
         </td>
       </tr>
     <% end %>

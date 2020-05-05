@@ -44,6 +44,13 @@ defmodule PhxcrdWeb.AuthorityLive.Index do
     |> cancan()
   end
 
+  defp apply_action(socket, :delete, %{"id" => id}) do
+    socket
+    |> assign(:page_title, "Delete Authority")
+    |> assign(:authority, Auth.get_authority!(id))
+    |> cancan()
+  end
+
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "New Authority")
@@ -52,19 +59,7 @@ defmodule PhxcrdWeb.AuthorityLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    authority = Auth.get_authority!(id)
-    # TODO: Fix me; this ain't good
-    if false and %User{permissions: socket.assigns[:perms]} |> can?(index(Authority)) do
-      {:ok, _} = Auth.delete_authority(authority)
-      {:noreply, assign(socket, :authorities, fetch_authorities())}
-    else
-      {:noreply,
-       socket
-       |> put_flash(:error, "Access Denied!")
-       |> redirect(to: Routes.page_path(socket, :index))}
-    end
-  end
+
 
   @impl true
   def handle_event("filter", %{"filter" => %{"name"=> name}}, socket) do

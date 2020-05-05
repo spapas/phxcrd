@@ -1,0 +1,13 @@
+<h2><%= @title %></h2>
+
+<%= form_for :delete, "#",
+  id: "authority-form",
+  phx_target: @myself,
+  phx_submit: "delete" %>
+
+  <p>
+  Are you sure that you want to delete "<%= @authority.authority_kind.name <> " " <> @authority.name %>"?
+  </p>
+
+  <%= submit "Delete", phx_disable_with: "Deleting..." %>
+</form>

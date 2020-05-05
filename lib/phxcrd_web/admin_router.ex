@@ -12,6 +12,7 @@ defmodule PhxcrdWeb.AdminRouter do
     live "/authorities_live", AuthorityLive.Index, :index
     live "/authorities_live/new", AuthorityLive.Index, :new
     live "/authorities_live/:id/edit", AuthorityLive.Index, :edit
+    live "/authorities_live/:id/delete", AuthorityLive.Index, :delete
     live "/authorities_live/:id", AuthorityLive.Show, :show
     live "/authorities_live/:id/show/edit", AuthorityLive.Show, :edit
 
