@@ -120,9 +120,7 @@ defmodule Phxcrd.Auth do
   """
   def delete_authority(%Authority{} = authority) do
     # Repo.delete(authority)
-    "ZZZZZZZ" |> IO.inspect
     authority |> Ecto.Changeset.change() |> Ecto.Changeset.foreign_key_constraint(:users, name: :users_authority_id_fkey) |> Repo.delete()
-
   end
 
   @doc """
