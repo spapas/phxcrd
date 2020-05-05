@@ -27,6 +27,7 @@ defmodule Phxcrd.Ldap do
     case Exldap.search_field(con, "uid", uid) do
       {:ok, [entry | _]} -> {:ok, entry |> entry_to_map}
       {:ok, []} -> {:error, nil}
+      {:error, _} -> {:error, nil}
     end
   end
 
