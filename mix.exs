@@ -5,7 +5,7 @@ defmodule Phxcrd.MixProject do
     [
       app: :phxcrd,
       version: "0.1.0",
-      elixir: "~> 1.5",
+      elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -22,7 +22,8 @@ defmodule Phxcrd.MixProject do
       mod: {Phxcrd.Application, []},
       extra_applications: [
         :logger,
-        :runtime_tools
+        :runtime_tools,
+        :os_mon
       ]
     ]
   end
@@ -47,6 +48,8 @@ defmodule Phxcrd.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.1"},
       {:phoenix_live_dashboard, "~> 0.1"},
+      {:telemetry_poller, "~> 0.4"},
+      {:telemetry_metrics, "~> 0.4"},
 
       # Extra deps
       {:exldap, "~> 0.6"},
@@ -78,6 +81,7 @@ defmodule Phxcrd.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
+      setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"]

@@ -25,7 +25,6 @@ defmodule PhxcrdWeb do
       import PhxcrdWeb.Gettext
       alias PhxcrdWeb.Router.Helpers, as: Routes
       alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
-      import Phoenix.LiveView.Controller
     end
   end
 
