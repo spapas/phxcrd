@@ -48,4 +48,13 @@ config :phxcrd, Phxcrd.Repo,
 
 # , log: false Use this to disable query logging
 
+config :os_mon,
+  disk_space_check_interval: 1,
+  memory_check_interval: 5,
+  disk_almost_full_threshold: 0.50
+
+
+
 import_config "dev.secret.exs"
+
+
