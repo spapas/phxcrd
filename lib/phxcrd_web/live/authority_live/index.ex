@@ -32,14 +32,24 @@ defmodule PhxcrdWeb.AuthorityLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :index, _params) do
+  defp parse_int(s) do
+    with {number, ""} <- Integer.parse(s) do
+      number
+    else
+      _ -> 1
+    end
+  end
+
+  defp apply_action(socket, :index, params) do
+
     socket
     |> assign(:page_title, "Listing Authorities")
     |> assign(:authority, nil)
     |> assign(:params, %{
-      "page" => 1,
-      "filter" => %{"name"=> ""}
+      "page" => Map.get(params, "page", "1") |> parse_int,
+      "filter" => Map.get(params, "filter", %{"name"=> ""})
     })
+
     |> cancan()
   end
 
@@ -74,24 +84,27 @@ defmodule PhxcrdWeb.AuthorityLive.Index do
       socket
       |> assign(:authorities, filter_authorities(params))
       |> assign(:params, params)
+      |> push_patch(to: AdminRoutes.authority_index_path(socket, :index, params) )
     }
   end
 
   def handle_event("next_page", _args, socket) do
-    params = Map.update!(socket.assigns.params, "page", &(&1 + 1) )
+    params = Map.update!(socket.assigns.params, "page", &(&1 + 1) ) |> IO.inspect
     { :noreply,
       socket
       |> assign(:authorities, filter_authorities(params))
       |> assign(:params, params)
+      |> push_patch(to: AdminRoutes.authority_index_path(socket, :index, params) )
     }
   end
 
   def handle_event("prev_page", _args, socket) do
-    params = Map.update!(socket.assigns.params, "page", &(&1 - 1) )
+    params = Map.update!(socket.assigns.params, "page", &(&1 - 1) ) |> IO.inspect
     { :noreply,
       socket
       |> assign(:authorities, filter_authorities(params))
       |> assign(:params, params)
+      |> push_patch(to: AdminRoutes.authority_index_path(socket, :index, params) )
     }
   end
 
