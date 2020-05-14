@@ -22,7 +22,9 @@
 <%= label :filter, :name, "Filter name" %>
 <%= text_input :filter, :name, phx_debounce: 200 %>
 </form>
-
+<button phx-click="prev_page" <%= if @authorities.page_number == 1, do: "disabled" %>><</button>
+  Page: <%= @authorities.page_number %>
+<button phx-click="next_page" <%= if @authorities.page_number == @authorities.total_pages, do: "disabled" %>>></button>
 <table>
   <thead>
     <tr>
