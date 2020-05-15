@@ -24,7 +24,7 @@ defmodule Phxcrd.AlarmHandler do
     Logger.debug  "Handling alarm " <>  Atom.to_string(alarm_id)
 
     new_email(
-      to: "spapas@gmail.com",
+      to: "foo@foofoo.com",
       from: "bar@bar.gr",
       subject: "New alarm!",
       html_body: "<strong>Alert:"  <>  Atom.to_string(alarm_id) <> " " <> alarm_description <>  "</strong>",
