@@ -23,7 +23,9 @@ This doesn't include webpack or any other JS bundlers; just use good ol' vanilla
 * Send mails with bamboo (smtp)
 * A milligram styled template
 * A script to easily *rename* this project so it can be used as a template for your own projects
-* A way to define filters for a query among joins etc (check authority_controller for example)
+* A way to define filters for a query among joins etc (check authority_controller for example - https://spapas.github.io/2019/07/25/declarative-ecto-query-filters/)
+* Allow sorting pages with click (https://spapas.github.io/2019/10/17/declarative-ecto-query-sorting/)
+* Integration of select2 with ajax (https://spapas.github.io/2019/06/04/phoenix-form-select2-ajax/)
 * Sentry integration for error reporting
 * Configuration using secrets and a secret template
 * Multiple environments (dev/uat/prod) each with its own secret (copy the template and rename it)
@@ -33,8 +35,10 @@ This doesn't include webpack or any other JS bundlers; just use good ol' vanilla
 * A i18n enabled Phoenix datepicker
 * Properly configure phoenix presence along with a small demonstration
 * Properly configure phoenix live view along with a small demonstration
+* Proper CRUD handling with Phoenix Live View (add/edit/show/delete)
 * An example of file uploading and usage of sendfile to implement authorization on uploaded files
 * Phoenix Live Dashboard
+* Custom handlers for alerts (https://spapas.github.io/2020/05/15/elixir-osmon-alerts/)
 
 ## Missing stuff
 

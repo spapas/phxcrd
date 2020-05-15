@@ -51,9 +51,8 @@ config :phxcrd, Phxcrd.Repo,
 config :os_mon,
   disk_space_check_interval: 1,
   memory_check_interval: 5,
-  disk_almost_full_threshold: 0.50
-
-
+  disk_almost_full_threshold: 0.90,
+  start_memsup: false
 
 import_config "dev.secret.exs"
 

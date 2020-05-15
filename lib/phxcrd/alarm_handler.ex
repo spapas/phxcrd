@@ -1,48 +1,38 @@
 defmodule Phxcrd.AlarmHandler do
-  @behaviour :gen_event
   import Bamboo.Email
+  require Logger
 
-  @impl true
-  def init({_args, {:alarm_handler, []}}) do
-    "ALARMT INIT EMPTY" |> IO.inspect
-    {:ok, []}
-  end
-
-  @impl true
   def init({_args, {:alarm_handler, alarms}}) do
-    "ALARMT INIT NON EMPTY" |> IO.inspect
-    for alarm <- alarms, do: handle_alarm(alarm)
+    Logger.debug  "Custom alarm handler init!"
+    for {alarm_id, alarm_description} <- alarms, do: handle_alarm(alarm_id, alarm_description)
     {:ok, []}
   end
 
-  @impl true
-  def handle_call(request, state) do
-    "ALARMT HANDLE CALL " |> IO.inspect
-    request |> IO.inspect
-    state |> IO.inspect
-    {:ok, :ok, state}
+  def handle_event({:set_alarm, {alarm_id, alarm_description}}, state) do
+    Logger.warn  "Got an alarm " <> Atom.to_string(alarm_id) <> " " <> alarm_description
+    handle_alarm(alarm_id, alarm_description)
+    {:ok, state}
   end
 
-  @impl true
-  def handle_event(request, state) do
-    "ALARMT HANDLE EVENT " |> IO.inspect
-    request |> IO.inspect
+  def handle_event({:clear_alarm, alarm_id}, state) do
+    Logger.debug  "Clearing the alarm  " <>  Atom.to_string(alarm_id)
     state |> IO.inspect
     {:ok, state}
   end
 
-  def handle_alarm(alarm) do
-    "CUSTOM ALARM HANDLER START" |> IO.inspect
+  def handle_alarm(alarm_id, alarm_description) do
+    Logger.debug  "Handling alarm " <>  Atom.to_string(alarm_id)
 
     new_email(
       to: "spapas@gmail.com",
       from: "bar@bar.gr",
       subject: "New alarm!",
-      html_body: "<strong>Alert:" <> inspect(alarm) <>  "</strong>",
-      text_body: "Alert:" <> inspect(alarm)
+      html_body: "<strong>Alert:"  <>  Atom.to_string(alarm_id) <> " " <> alarm_description <>  "</strong>",
+      text_body: "Alert:" <>  Atom.to_string(alarm_id) <> " " <> alarm_description
     )
     |> Phxcrd.Mailer.deliver_later()
-    "CUSTOM ALARM HANDLER END" |> IO.inspect
+
+    Logger.debug  "End handling alarm " <> Atom.to_string(alarm_id)
   end
 
 end

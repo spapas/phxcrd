@@ -6,7 +6,8 @@ defmodule Phxcrd.Application do
   use Application
 
   def start(_type, _args) do
-    :gen_event.swap_handler(:alarm_handler, {:alarm_handler, :swap}, {Phxcrd.AlarmHandler, :ok}) |> IO.inspect
+
+    :gen_event.swap_handler(:alarm_handler, {:alarm_handler, :swap}, {Phxcrd.AlarmHandler, :ok})
     #:gen_event.add_handler(:alarm_handler, Phxcrd.AlarmHandler, []) |> IO.inspect
 
     # List all child processes to be supervised
