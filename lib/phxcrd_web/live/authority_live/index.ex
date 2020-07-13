@@ -7,7 +7,6 @@ defmodule PhxcrdWeb.AuthorityLive.Index do
   import Ecto.Query, only: [from: 2, order_by: 3]
   import Canada, only: [can?: 2]
 
-
   defp cancan(socket, _options \\ []) do
     if %User{permissions: socket.assigns[:perms]} |> can?(index(Authority)) do
       socket
@@ -41,15 +40,13 @@ defmodule PhxcrdWeb.AuthorityLive.Index do
   end
 
   defp apply_action(socket, :index, params) do
-
     socket
     |> assign(:page_title, "Listing Authorities")
     |> assign(:authority, nil)
     |> assign(:params, %{
       "page" => Map.get(params, "page", "1") |> parse_int,
-      "filter" => Map.get(params, "filter", %{"name"=> ""})
+      "filter" => Map.get(params, "filter", %{"name" => ""})
     })
-
     |> cancan()
   end
 
@@ -75,61 +72,59 @@ defmodule PhxcrdWeb.AuthorityLive.Index do
   end
 
   @impl true
-  def handle_event("filter", %{"filter" => %{"name"=> name}}, socket) do
-    socket |> IO.inspect
-    params = Map.update!(socket.assigns.params, "filter", fn(_v) -> %{"name" => name} end )
+  def handle_event("filter", %{"filter" => %{"name" => name}}, socket) do
+    socket |> IO.inspect()
+    params = Map.update!(socket.assigns.params, "filter", fn _v -> %{"name" => name} end)
     params = params |> Map.put("page", 1)
 
     {:noreply,
-      socket
-      |> assign(:authorities, filter_authorities(params))
-      |> assign(:params, params)
-      |> push_patch(to: AdminRoutes.authority_index_path(socket, :index, params) )
-    }
+     socket
+     |> assign(:authorities, filter_authorities(params))
+     |> assign(:params, params)
+     |> push_patch(to: AdminRoutes.authority_index_path(socket, :index, params))}
   end
 
   def handle_event("next_page", _args, socket) do
-    params = Map.update!(socket.assigns.params, "page", &(&1 + 1) ) |> IO.inspect
-    { :noreply,
-      socket
-      |> assign(:authorities, filter_authorities(params))
-      |> assign(:params, params)
-      |> push_patch(to: AdminRoutes.authority_index_path(socket, :index, params) )
-    }
+    params = Map.update!(socket.assigns.params, "page", &(&1 + 1)) |> IO.inspect()
+
+    {:noreply,
+     socket
+     |> assign(:authorities, filter_authorities(params))
+     |> assign(:params, params)
+     |> push_patch(to: AdminRoutes.authority_index_path(socket, :index, params))}
   end
 
   def handle_event("prev_page", _args, socket) do
-    params = Map.update!(socket.assigns.params, "page", &(&1 - 1) ) |> IO.inspect
-    { :noreply,
-      socket
-      |> assign(:authorities, filter_authorities(params))
-      |> assign(:params, params)
-      |> push_patch(to: AdminRoutes.authority_index_path(socket, :index, params) )
-    }
+    params = Map.update!(socket.assigns.params, "page", &(&1 - 1)) |> IO.inspect()
+
+    {:noreply,
+     socket
+     |> assign(:authorities, filter_authorities(params))
+     |> assign(:params, params)
+     |> push_patch(to: AdminRoutes.authority_index_path(socket, :index, params))}
   end
 
   defp fetch_authorities do
     # Auth.list_authorities()  |> Repo.paginate
 
     from(a in Authority,
-        as: :authority,
-        join: ak in AuthorityKind,
-        as: :authority_kind,
-        on: [id: a.authority_kind_id],
-        preload: [authority_kind: ak]
-      )
-      |> Repo.paginate()
-
+      as: :authority,
+      join: ak in AuthorityKind,
+      as: :authority_kind,
+      on: [id: a.authority_kind_id],
+      preload: [authority_kind: ak]
+    )
+    |> Repo.paginate()
   end
 
-  defp filter_authorities(params)  do
+  defp filter_authorities(params) do
     from(a in Authority,
       as: :authority,
       join: ak in AuthorityKind,
       as: :authority_kind,
       on: [id: a.authority_kind_id],
       preload: [authority_kind: ak],
-      where: ilike(a.name,  ^("%"<>Map.get(params["filter"], "name", "")<>"%"))
+      where: ilike(a.name, ^("%" <> Map.get(params["filter"], "name", "") <> "%"))
     )
     |> Repo.paginate(params)
   end

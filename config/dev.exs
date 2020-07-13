@@ -55,5 +55,3 @@ config :os_mon,
   start_memsup: false
 
 import_config "dev.secret.exs"
-
-

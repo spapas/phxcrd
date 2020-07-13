@@ -69,7 +69,8 @@ defmodule Phxcrd.MixProject do
       # {:argon2_elixir, "~> 2.0"},
       {:timex, "~> 3.6.1"},
       {:accessible, "~> 0.2.1"},
-      {:csv, "~> 2.3"}
+      {:csv, "~> 2.3"},
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
   end
 

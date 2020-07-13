@@ -17,15 +17,15 @@ defmodule PhxcrdWeb.AuthorityLive.DelComponent do
   end
 
   defp delete_authority(socket) do
-
     case Auth.delete_authority(socket.assigns.authority) do
       {:ok, _authority} ->
         {:noreply,
          socket
          |> put_flash(:info, "Authority deleted successfully")
          |> push_redirect(to: socket.assigns.return_to)}
+
       {:error, %Ecto.Changeset{errors: [users: {reason, _}]}} ->
-         {:noreply, assign(socket, :errors, "Error while deleting (" <> reason <> ")!")}
+        {:noreply, assign(socket, :errors, "Error while deleting (" <> reason <> ")!")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :errors, "Error, cannot delete!")}
