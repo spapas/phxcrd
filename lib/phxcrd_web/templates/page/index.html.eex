@@ -1,74 +1,93 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}", name: "P·H·X·C·R·D" %></h1>
-</section>
+<section class="pf-c-page__main-section">
 
-<%= if length(@perms) > 0 do %>
-<p><strong><%= gettext "Permissions" %>:
-    <%= @perms |> Enum.join %>
-  </strong></p>
-<% end %>
-<%= if @authority_id do %>
-<p><strong><%= gettext "Authority" %>:
-    <%= "#{@authority_name} (#{@authority_id})" %>
-  </strong></p>
-<% end %>
 
-<section class="row">
-  <%= if @perms |> Enum.member?("superuser") do %>
-  <article class="column">
-    <h2><%= gettext "Administration" %></h2>
-    <ul>
-      <li>
-        <%= link gettext("Users"), to: AdminRoutes.user_path(@conn, :index)%>
-      </li>
-      <li>
-        <%= link gettext("Permissions"), to: AdminRoutes.permission_path(@conn, :index)%>
-      </li>
-      <li>
-        <%= link gettext("Versions"), to: AdminRoutes.version_path(@conn, :index) %>
-      </li>
-    </ul>
-  </article>
-  <% end %>
+  <div class="pf-l-stack">
+    <div class="pf-l-stack__item  pf-u-pb-xl">
+      <div class="pf-l-bullseye">
+        <div class="pf-l-bullseye__item">
+          <h1 class="pf-c-title pf-m-4xl"><%= gettext "Welcome to %{name}", name: "P·H·X·C·R·D" %></h1>
+        </div>
+      </div>
+    </div>
+    <div class="pf-l-stack__item   pf-u-pb-xl">
+      <div class="pf-l-bullseye">
+        <div class="pf-l-bullseye__item">
+          <%= if length(@perms) > 0 do %>
+          <h2 class='pf-c-title pf-m-lg'><%= gettext "Permissions" %>:
+              <%= @perms |> Enum.join %>
+            </h2>
+          <% end %>
+          <%= if @authority_id do %>
+            <h2 class='pf-c-title pf-m-lg'><%= gettext "Authority" %>:
+              <%= "#{@authority_name} (#{@authority_id})" %>
+            </h2>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="pf-l-stack__item ">
+      <div class="pf-u-display-flex pf-u-justify-content-center">
+        <div class="pf-l-grid pf-u-w-50">
+          <%= if @perms |> Enum.member?("superuser") do %>
+          <div class="pf-l-grid__item pf-m-4-col">
+            <h2 class='pf-c-title pf-m-lg'><%= gettext "Administration" %></h2>
+            <ul>
+              <li>
+                <%= link gettext("Users"), to: AdminRoutes.user_path(@conn, :index)%>
+              </li>
+              <li>
+                <%= link gettext("Permissions"), to: AdminRoutes.permission_path(@conn, :index)%>
+              </li>
+              <li>
+                <%= link gettext("Versions"), to: AdminRoutes.version_path(@conn, :index) %>
+              </li>
+            </ul>
+          </div>
+          <% end %>
 
-  <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
-  <article class="column">
-    <h2><%= gettext "Management" %></h2>
-    <ul>
-      <li>
-        <%= link gettext("Authorities"), to: AdminRoutes.authority_path(@conn, :index)%>
-      </li>
-      <li>
-        <%= link gettext("Live Authorities"), to: AdminRoutes.authority_index_path(@conn, :index)%>
-      </li>
+          <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
+          <div class="pf-l-grid__item pf-m-4-col p">
+            <h2 class='pf-c-title pf-m-lg'><%= gettext "Management" %></h2>
+            <ul>
+              <li>
+                <%= link gettext("Authorities"), to: AdminRoutes.authority_path(@conn, :index)%>
+              </li>
+              <li>
+                <%= link gettext("Live Authorities"), to: AdminRoutes.authority_index_path(@conn, :index)%>
+              </li>
+            </ul>
+          </div>
+          <% end %>
 
-    </ul>
-  </article>
-  <% end %>
-  <article class="column">
-    <h2><%= gettext "Test features" %></h2>
-    <ul>
-      <li>
-        <%= link gettext("Test sentry"), to: Routes.page_path(@conn, :test_sentry)%>
-      </li>
-      <li>
-        <%= link gettext("Test mail"), to: Routes.page_path(@conn, :test_mail)%>
-      </li>
-      <li>
-        <%= link gettext("Test PDF"), to: Routes.page_path(@conn, :test_pdf)%>
-      </li>
-      <li>
-        <%= link gettext("Test XLSX"), to: Routes.page_path(@conn, :test_xlsx)%>
-      </li>
-      <li>
-        <%= link gettext("Test Presence"), to: Routes.page_path(@conn, :test_presence)%>
-      </li>
-      <li>
-        <%= link gettext("Test Live"), to: Routes.page_path(@conn, :test_live)%>
-      </li>
-      <li>
-        <%= link gettext("Live Dashboard"), to: Routes.live_dashboard_path(@conn, :home) %>
-      </li>
-      <ul>
-  </article>
-</section>
+          <div class="pf-l-grid__item pf-m-4-col">
+          <h2 class='pf-c-title pf-m-lg'><%= gettext "Test features" %></h2>
+            <ul>
+              <li>
+                <%= link gettext("Test sentry"), to: Routes.page_path(@conn, :test_sentry)%>
+              </li>
+              <li>
+                <%= link gettext("Test mail"), to: Routes.page_path(@conn, :test_mail)%>
+              </li>
+              <li>
+                <%= link gettext("Test PDF"), to: Routes.page_path(@conn, :test_pdf)%>
+              </li>
+              <li>
+                <%= link gettext("Test XLSX"), to: Routes.page_path(@conn, :test_xlsx)%>
+              </li>
+              <li>
+                <%= link gettext("Test Presence"), to: Routes.page_path(@conn, :test_presence)%>
+              </li>
+              <li>
+                <%= link gettext("Test Live"), to: Routes.page_path(@conn, :test_live)%>
+              </li>
+              <li>
+                <%= link gettext("Live Dashboard"), to: Routes.live_dashboard_path(@conn, :home) %>
+              </li>
+              <ul>
+          </div> <!-- grid-item -->
+        </div> <!-- grid -->
+      </div> <!-- flex -->
+    </div> <!-- stack-item-->
+  </div> <!-- stack -->
+
+</div> <!-- main -->

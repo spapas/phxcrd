@@ -42,3 +42,5 @@ tags*
 fabfile.pyc
 media/*
 !media/store_media_files_here.txt
+
+node_modules/*

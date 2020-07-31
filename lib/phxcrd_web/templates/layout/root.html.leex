@@ -8,16 +8,27 @@
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "Hello", suffix: " · Phoenix Framework" %>
 
+
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/normalize.css") %>' />
+    <!--
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/milligram.min.css") %>' />
-    <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/app.css") %>' />
-    <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/main.css") %>' />
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/phoenix.css") %>' />
+    -->
 
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/select2.min.css") %>' />
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/nprogress.css") %>' />
 
+    <link rel="stylesheet" type="text/css" href='<%= Routes.static_path(@conn, "/css/patternfly.min.css") %>'>
+    <link rel="stylesheet" type="text/css" href='<%= Routes.static_path(@conn, "/css/patternfly-addons.css") %>'>
+
+    <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/main.css") %>' />
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js' />
+
+
     <script defer type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
+    <style>
+
+    </style>
 
   <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user salt", %{
     user_id: @user_id,
@@ -30,6 +41,120 @@
   </head>
 
 <body>
+
+<div class="pf-c-page">
+  <header class="pf-c-page__header">
+    <div class="pf-c-page__header-brand">
+      <div class="pf-c-page__header-brand-toggle">
+        <button class="pf-c-button pf-m-plain" type="button" id="burger-button" aria-label="Global navigation" aria-expanded="true" aria-controls="page-default-nav-example-primary-nav">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href='/' class="pf-c-page__header-brand-link"><h3>P·H·X·C·R·D</h3></a>
+    </div>
+    <div class="pf-c-page__header-nav">
+      <nav class="pf-c-nav pf-m-horizontal pf-m-scrollable" aria-label="Global">
+        <button class="pf-c-nav__scroll-button" id='scroll-left' aria-label="Scroll left">
+          <i class="fas fa-angle-left" aria-hidden="true"></i>
+        </button>
+        <ul class="pf-c-nav__list">
+          <li class="pf-c-nav__item">
+            <a href="#" class="pf-c-nav__link">Horizontal nav item 1</a>
+          </li>
+          <li class="pf-c-nav__item">
+            <a href="#" class="pf-c-nav__link">Horizontal nav item 4</a>
+          </li>
+          <li class="pf-c-nav__item">
+            <a href="#" class="pf-c-nav__link pf-m-current" aria-current="page">Horizontal nav item 5</a>
+          </li>
+        </ul>
+        <button class="pf-c-nav__scroll-button" id='scroll-right' aria-label="Scroll right">
+          <i class="fas fa-angle-right" aria-hidden="true"></i>
+        </button>
+      </nav>
+    </div>
+    <div class="pf-c-page__header-tools" id='kebab-container'>
+      <div class="pf-c-dropdown pf-m-expanded">
+        <button id='kebab-button' class="pf-c-dropdown__toggle pf-m-plain" type="button" id="dropdown-kebab-align-right-button" aria-expanded="true" aria-label="Actions">
+          <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+        </button>
+        <ul class="pf-c-dropdown__menu pf-m-align-right" aria-labelledby="dropdown-kebab-align-right-button" id='kebab-menu' hidden>
+          <li>
+            <a class="pf-c-dropdown__menu-item" href="/">Αρχή</a>
+          </li>
+          <li>
+            <button class="pf-c-dropdown__menu-item" type="button">Action</button>
+          </li>
+          <li>
+            <a class="pf-c-dropdown__menu-item pf-m-disabled" href="#" aria-disabled="true" tabindex="-1">Disabled link</a>
+          </li>
+          <li>
+            <button class="pf-c-dropdown__menu-item" type="button" disabled>Disabled action</button>
+          </li>
+          <li class="pf-c-divider" role="separator"></li>
+          <li>
+              <%= if @user_signed_in? do %>
+              <%= link (@username <> " | " <> gettext "Log out"), to: "#", id: "logout-button", class: "pf-c-dropdown__menu-item" %>
+              <%= form_for @conn, Routes.session_path(@conn, :delete), [style: "display: none;", method: :delete, as: :user, id: "logout-form"], fn _ -> %>
+                <%= submit @username <> " | " <> gettext "Log out", class: "pf-c-dropdown__menu-item" %>
+              <% end %>
+              <% else %>
+              <%= link gettext("Log in"), to: Routes.session_path(@conn, :new), class: "pf-c-dropdown__menu-item" %>
+              <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="pf-c-page__sidebar" id='burger-menu' hidden>
+    <div class="pf-c-page__sidebar-body">
+      <nav class="pf-c-nav" id="page-default-nav-example-primary-nav" aria-label="Global">
+        <ul class="pf-c-nav__list">
+          <li class="pf-c-nav__item">
+            <a href="#" class="pf-c-nav__link">System panel</a>
+          </li>
+          <li class="pf-c-nav__item">
+            <a href="#" class="pf-c-nav__link pf-m-current" aria-current="page">Policy</a>
+          </li>
+          <li class="pf-c-nav__item">
+            <a href="#" class="pf-c-nav__link">Authentication</a>
+          </li>
+          <li class="pf-c-nav__item">
+            <a href="#" class="pf-c-nav__link">Network services</a>
+          </li>
+          <li class="pf-c-nav__item">
+            <a href="#" class="pf-c-nav__link">Server</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <main class="pf-c-page__main" tabindex="-1" id="main-content-page-layout-horizontal-nav">
+    <%= get_breadcrumbs %>
+    <%= @inner_content %>
+      <footer class="footer">
+    <section class="container">
+      Copyright © 2019-20 &lt;Serafeim Papastefanos&gt;
+      <%= if Application.get_env(:phxcrd, :env) != :prod do %>
+      <span style='padding: 8px; font-weight:900; color: red; background-color:#661111'>
+        WARNING: TEST VERSION (<%= Application.get_env(:phxcrd, :env) %>)
+      </span>
+      <% end %>
+    </section>
+  </footer>
+<hr />
+<hr />
+<hr />
+<hr />
+
+  </main>
+
+
+</div> <!-- page -->
+
+
   <div class="wrapper">
 
     <nav class="navigation">
@@ -84,47 +209,23 @@
           </li>
           <% end %>
 
-          <li class="navigation-item"><a class="navigation-link" href="/">
-              <%= if @user_signed_in? do %>
-              <%= form_for @conn, Routes.session_path(@conn, :delete), [method: :delete, as: :user], fn _ -> %>
-              <%= submit @username <> " | " <> gettext "Log out", class: "button button-outline" %>
-              <% end %>
-              <% else %>
-              <%= link gettext("Log in"), to: Routes.session_path(@conn, :new), class: "button button-outline" %>
-              <% end %>
-
-            </a></li>
         </ul>
       </section>
     </nav>
 
-    <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul class='navigation-list'>
 
 
-          </ul>
-        </nav>
-        <a href="/" class="phx-logo"> </a>
-      </section>
-    </header>
-
-    <%= @inner_content %>
-
-    <div class="push"></div>
   </div>
-  <footer class="footer">
-    <section class="container">
-      Copyright © 2019-20 &lt;Serafeim Papastefanos&gt;
-      <%= if Application.get_env(:phxcrd, :env) != :prod do %>
-      <span style='padding: 8px; font-weight:900; color: red; background-color:#661111'>
-        WARNING: TEST VERSION (<%= Application.get_env(:phxcrd, :env) %>)
-      </span>
-      <% end %>
-    </section>
-  </footer>
+
+
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/jquery-3.4.1.min.js") %>'></script>
+
+  <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/js/patternfly.min.js"></script>
+
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/select2.min.js") %>'></script>
 
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix.js") %>'></script>
@@ -136,6 +237,46 @@
 
   <%= render_existing view_module(@conn), "extra_scripts.html", assigns %>
 
+  <script>
+    $(function() {
+
+      $('body').click(function(e) {
+          if (!document.getElementById('kebab-container').contains(e.target)) {
+            $('#kebab-menu').hide()
+          }
+
+          if (!document.getElementById('burger-button').contains(e.target) && !document.getElementById('burger-menu').contains(e.target)  ) {
+            $('#burger-menu').hide()
+          }
+      });
+
+      $('#kebab-button').click(function() {
+        $('#kebab-menu').show()
+      })
+
+      $('#burger-button').click(function() {
+        console.log("B")
+        $('#burger-menu').show();
+      })
+
+      $("#scroll-left").click(function () {
+        var leftPos = $('.pf-c-nav__list').scrollLeft();
+        console.log("L")
+        $(".pf-c-nav__list").animate({scrollLeft: leftPos - 200}, 300);
+      });
+
+      $("#scroll-right").click(function () {
+        var leftPos = $('.pf-c-nav__list').scrollLeft();
+        console.log("R")
+        $(".pf-c-nav__list").animate({scrollLeft: leftPos + 200}, 300);
+      });
+
+      $('#logout-button').click(function() {
+        console.log("Z")
+        $('#logout-form').submit()
+      })
+    });
+  </script>
 
 </body>
 

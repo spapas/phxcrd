@@ -87,4 +87,25 @@ defmodule PhxcrdWeb.ViewHelpers do
     # Or define it like
     # cs |> Ecto.Changeset.get_field(attr)
   end
+
+  def get_breadcrumbs() do
+    ~E"""
+      <section class="pf-c-page__main-breadcrumb">
+      <nav class="pf-c-breadcrumb" aria-label="breadcrumb">
+        <ol class="pf-c-breadcrumb__list">
+          <li class="pf-c-breadcrumb__item">
+            <a href="#" class="pf-c-breadcrumb__link">Section home</a>
+          </li>
+
+          <li class="pf-c-breadcrumb__item">
+            <span class="pf-c-breadcrumb__item-divider">
+              <i class="fas fa-angle-right" aria-hidden="true"></i>
+            </span>
+            <a href="#" class="pf-c-breadcrumb__link pf-m-current" aria-current="page">Section landing</a>
+          </li>
+        </ol>
+      </nav>
+    </section>
+    """
+  end
 end
