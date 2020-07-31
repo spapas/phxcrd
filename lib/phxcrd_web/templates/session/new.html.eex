@@ -1,4 +1,4 @@
-<%= form_for @conn, Routes.session_path(@conn, :create), [method: :post, as: :user], fn f -> %>
+<%= form_for @conn, Routes.session_path(@conn, :create), [method: :post, as: :user, class: "pf-c-form", novalidate: true], fn f -> %>
 <div class="pf-c-login">
   <div class="pf-c-login__container">
 

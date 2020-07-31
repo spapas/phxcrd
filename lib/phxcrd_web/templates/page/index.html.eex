@@ -1,6 +1,4 @@
 <section class="pf-c-page__main-section">
-
-
   <div class="pf-l-stack">
     <div class="pf-l-stack__item  pf-u-pb-xl">
       <div class="pf-l-bullseye">
@@ -12,15 +10,19 @@
     <div class="pf-l-stack__item   pf-u-pb-xl">
       <div class="pf-l-bullseye">
         <div class="pf-l-bullseye__item">
-          <%= if length(@perms) > 0 do %>
-          <h2 class='pf-c-title pf-m-lg'><%= gettext "Permissions" %>:
-              <%= @perms |> Enum.join %>
-            </h2>
-          <% end %>
-          <%= if @authority_id do %>
-            <h2 class='pf-c-title pf-m-lg'><%= gettext "Authority" %>:
-              <%= "#{@authority_name} (#{@authority_id})" %>
-            </h2>
+          <%= if @user_signed_in? do %>
+            <%= if length(@perms) > 0 do %>
+            <h2 class='pf-c-title pf-m-lg'><%= gettext "Permissions" %>:
+                <%= @perms |> Enum.join %>
+              </h2>
+            <% end %>
+            <%= if @authority_id do %>
+              <h2 class='pf-c-title pf-m-lg'><%= gettext "Authority" %>:
+                <%= "#{@authority_name} (#{@authority_id})" %>
+              </h2>
+            <% end %>
+          <% else %>
+            <%= link gettext("Please log in"), to: Routes.session_path(@conn, :new), class: "pf-c-button pf-m-primary" %>
           <% end %>
         </div>
       </div>

@@ -3,7 +3,14 @@ defmodule PhxcrdWeb.ViewHelpers do
   import PhxcrdWeb.Gettext
   alias Phoenix.HTML.Form
   import Phoenix.HTML
-  import IEx
+  use Phoenix.HTML
+
+  # Import basic rendering functionality (render, render_layout, etc)
+  import Phoenix.View
+
+  import PhxcrdWeb.Gettext
+  alias PhxcrdWeb.Router.Helpers, as: Routes
+
 
   def get_query_params(params, allowed_keys) do
     params |> Map.take(allowed_keys) |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
@@ -106,6 +113,57 @@ defmodule PhxcrdWeb.ViewHelpers do
         </ol>
       </nav>
     </section>
+    """
+  end
+
+  def get_header_horizontal_nav() do
+    ~E"""
+    <div class="pf-c-page__header-nav">
+      <nav class="pf-c-nav pf-m-horizontal pf-m-scrollable" aria-label="Global">
+        <button class="pf-c-nav__scroll-button" id='scroll-left' aria-label="Scroll left">
+          <i class="fas fa-angle-left" aria-hidden="true"></i>
+        </button>
+        <ul class="pf-c-nav__list">
+          <li class="pf-c-nav__item">
+            <a href="#" class="pf-c-nav__link">Horizontal nav item 1</a>
+          </li>
+          <li class="pf-c-nav__item">
+            <a href="#" class="pf-c-nav__link pf-m-current" aria-current="page">Horizontal nav item 5</a>
+          </li>
+        </ul>
+        <button class="pf-c-nav__scroll-button" id='scroll-right' aria-label="Scroll right">
+          <i class="fas fa-angle-right" aria-hidden="true"></i>
+        </button>
+      </nav>
+    </div>
+    """
+  end
+
+  def get_header_tools(assigns) do
+    ~E"""
+    <div class="pf-c-page__header-tools" id='kebab-container'>
+      <div class="pf-c-dropdown pf-m-expanded">
+        <button id='kebab-button' class="pf-c-dropdown__toggle pf-m-plain" type="button" id="dropdown-kebab-align-right-button" aria-expanded="true" aria-label="Actions">
+          <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+        </button>
+        <ul class="pf-c-dropdown__menu pf-m-align-right" aria-labelledby="dropdown-kebab-align-right-button" id='kebab-menu' hidden>
+          <li>
+            <a class="pf-c-dropdown__menu-item" href="/"><%= gettext("Home") %></a>
+          </li>
+          <li class="pf-c-divider" role="separator"></li>
+          <li>
+              <%= if @user_signed_in? do %>
+              <%= link (@username <> " | " <> gettext "Log out"), to: "#", id: "logout-button", class: "pf-c-dropdown__menu-item" %>
+              <%= form_for @conn, Routes.session_path(@conn, :delete), [style: "display: none;", method: :delete, as: :user, id: "logout-form"], fn _ -> %>
+                <%= submit @username <> " | " <> gettext "Log out", class: "pf-c-dropdown__menu-item" %>
+              <% end %>
+              <% else %>
+              <%= link gettext("Log in"), to: Routes.session_path(@conn, :new), class: "pf-c-dropdown__menu-item" %>
+              <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
     """
   end
 end
