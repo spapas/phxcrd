@@ -2,18 +2,17 @@
 
 <script>
   $(function () {
-    window.presence.onSync(() => renderOnlineUsers(window.presence))
 
+    window.presence.onSync(() => renderOnlineUsers(window.presence))
     function renderOnlineUsers(presence) {
       let response = ""
 
       window.presence.list((id, { metas: [first, ...rest] }) => {
         //console.log("ID = " + id +".", first, rest  )
         let count = rest.length + 1
-        response += `<br>${id} Username: ${first.username} Authority: ${first.authority_name} Count: ${count}</br>`
+        response += `<li>${id} Username: ${first.username} Authority: ${first.authority_name} Count: ${count}</li>`
       })
 
-      console.log(response)
       document.getElementById("#presence").innerHTML = response
     }
   });

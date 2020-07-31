@@ -17,9 +17,9 @@ defmodule Phxcrd.Application do
       PhxcrdWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Phxcrd.PubSub},
+      PhxcrdWeb.Presence,
       # Start the endpoint when the application starts
-      PhxcrdWeb.Endpoint,
-      PhxcrdWeb.Presence
+      PhxcrdWeb.Endpoint
       # Starts a worker by calling: Phxcrd.Worker.start_link(arg)
       # {Phxcrd.Worker, arg},
     ]

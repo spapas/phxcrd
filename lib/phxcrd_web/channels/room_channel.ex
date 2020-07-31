@@ -1,12 +1,17 @@
 defmodule PhxcrdWeb.RoomChannel do
-  # use PhxcrdWeb, :channel
-  use Phoenix.Channel
+  use PhxcrdWeb, :channel
+  # use Phoenix.Channel
   alias PhxcrdWeb.Presence
 
   intercept ["presence_diff"]
 
+  # Add authorization logic here as required.
+  defp authorized?(_payload) do
+    true
+  end
+
   def join("room:lobby", payload, socket) do
-    if authorized?(payload) do
+    if authorized?(payload) == true do
       send(self(), :after_join)
       {:ok, socket}
     else
@@ -15,16 +20,16 @@ defmodule PhxcrdWeb.RoomChannel do
   end
 
   def handle_info(:after_join, socket) do
-    if socket.assigns[:perms] |> Enum.member?("superuser") do
-      push(socket, "presence_state", Presence.list(socket))
-    end
-
     {:ok, _} =
       Presence.track(socket, socket.assigns.user_id, %{
         online_at: inspect(System.system_time(:second)),
         username: socket.assigns[:username],
         authority_name: socket.assigns[:authority_name]
       })
+
+    if socket.assigns[:perms] |> Enum.member?("superuser") do
+      push(socket, "presence_state", Presence.list(socket))
+    end
 
     {:noreply, socket}
   end
@@ -45,10 +50,5 @@ defmodule PhxcrdWeb.RoomChannel do
   def handle_in("shout", payload, socket) do
     broadcast(socket, "shout", payload)
     {:noreply, socket}
-  end
-
-  # Add authorization logic here as required.
-  defp authorized?(_payload) do
-    true
   end
 end
