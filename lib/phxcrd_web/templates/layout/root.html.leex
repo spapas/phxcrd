@@ -62,9 +62,6 @@
             <a href="#" class="pf-c-nav__link">Horizontal nav item 1</a>
           </li>
           <li class="pf-c-nav__item">
-            <a href="#" class="pf-c-nav__link">Horizontal nav item 4</a>
-          </li>
-          <li class="pf-c-nav__item">
             <a href="#" class="pf-c-nav__link pf-m-current" aria-current="page">Horizontal nav item 5</a>
           </li>
         </ul>
@@ -107,35 +104,56 @@
     </div>
   </header>
 
+
   <div class="pf-c-page__sidebar" id='burger-menu' hidden>
     <div class="pf-c-page__sidebar-body">
-      <nav class="pf-c-nav" id="page-default-nav-example-primary-nav" aria-label="Global">
-        <ul class="pf-c-nav__list">
-          <li class="pf-c-nav__item">
-            <a href="#" class="pf-c-nav__link">System panel</a>
-          </li>
-          <li class="pf-c-nav__item">
-            <a href="#" class="pf-c-nav__link pf-m-current" aria-current="page">Policy</a>
-          </li>
-          <li class="pf-c-nav__item">
-            <a href="#" class="pf-c-nav__link">Authentication</a>
-          </li>
-          <li class="pf-c-nav__item">
-            <a href="#" class="pf-c-nav__link">Network services</a>
-          </li>
-          <li class="pf-c-nav__item">
-            <a href="#" class="pf-c-nav__link">Server</a>
-          </li>
-        </ul>
+      <nav class="pf-c-nav" aria-label="Global">
+        <section class="pf-c-nav__section" aria-labelledby="grouped-title1">
+          <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
+            <h2 class="pf-c-nav__section-title" id="grouped-title1"><%= gettext "Administration" %></h2>
+            <ul class="pf-c-nav__list">
+              <li class="pf-c-nav__item">
+                <%= link gettext("Authorities"),
+                        to: AdminRoutes.authority_path(@conn, :index),
+                        class: "pf-c-nav__link",
+                        title: gettext "Authorities"
+                  %>
+              </li>
+              <%= if @perms |> Enum.any?(&( &1 == "superuser")) do %>
+                <li class="pf-c-nav__item">
+                  <%= link gettext("Users"),
+                                to: AdminRoutes.user_path(@conn, :index),
+                                class: "pf-c-nav__link",
+                                title: gettext "Users"
+                          %>
+                </li>
+                <li class="pf-c-nav__item">
+                  <%= link gettext("Permissions"),
+                                to: AdminRoutes.permission_path(@conn, :index),
+                                class: "pf-c-nav__link",
+                                title: gettext "Permissions"
+                          %>
+                </li>
+                <li class="pf-c-nav__item">
+                  <%= link gettext("Versions"),
+                                to: AdminRoutes.version_path(@conn, :index),
+                                class: "pf-c-nav__link",
+                                title: gettext "Versions"
+                          %>
+                </li>
+              <% end %>
+            </ul>
+          </section>
+        <% end %>
       </nav>
     </div>
   </div>
 
   <main class="pf-c-page__main" tabindex="-1" id="main-content-page-layout-horizontal-nav">
-    <%= get_breadcrumbs %>
-      <section class="pf-c-page__main-section">
-        <%= @inner_content %>
-      </section>
+
+    <section class="pf-c-page__main-section">
+      <%= @inner_content %>
+    </section>
     <footer class="footer">
       <section class="container">
         Copyright © 2019-20 &lt;Serafeim Papastefanos&gt;
@@ -151,74 +169,8 @@
 
 </div> <!-- page -->
 
-
-  <div class="wrapper">
-
-    <nav class="navigation">
-      <section class="container"><a class="navigation-title" href="/">
-          <h1 class="title">P·H·X·C·R·D</h1>
-        </a>
-        <ul class="navigation-list float-right">
-
-          <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
-
-          <li class="navigation-item"><a class="navigation-link" href="#popover-admin"
-              data-popover=""><%= gettext "Administration" %></a>
-            <div class="popover" id="popover-admin">
-              <ul class="popover-list">
-                <li class="popover-item">
-                  <%= link gettext("Authorities"),
-                        to: AdminRoutes.authority_path(@conn, :index),
-                        class: "popover-link",
-                        title: gettext "Authorities"
-                  %>
-                </li>
-
-                <%= if @perms |> Enum.any?(&( &1 == "superuser")) do %>
-
-                <li class="popover-item">
-                  <%= link gettext("Users"),
-                        to: AdminRoutes.user_path(@conn, :index),
-                        class: "popover-link",
-                        title: gettext "Users"
-                  %>
-                </li>
-
-                <li class="popover-item">
-                  <%= link gettext("Permissions"),
-                        to: AdminRoutes.permission_path(@conn, :index),
-                        class: "popover-link",
-                        title: gettext "Permissions"
-                  %>
-                </li>
-
-                <li class="popover-item">
-                  <%= link gettext("Versions"),
-                        to: AdminRoutes.version_path(@conn, :index),
-                        class: "popover-link",
-                        title: gettext "Versions"
-                  %>
-                </li>
-                <% end %>
-
-              </ul>
-            </div>
-          </li>
-          <% end %>
-
-        </ul>
-      </section>
-    </nav>
-
-
-
-  </div>
-
-
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/jquery-3.4.1.min.js") %>'></script>
-
   <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/js/patternfly.min.js"></script>

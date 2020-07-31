@@ -1,47 +1,42 @@
 <h1 class="pf-c-title pf-m-4xl"><%= gettext "User list" %></h1>
 
 <%= form_for @changeset, AdminRoutes.user_path(@conn, :index), [method: :get, class: "pf-c-form ", as: :filter],  fn f -> %>
-<div class="pf-u-display-flex pf-u-flex-direction-row pf-u-justify-content-space-between">
-<div class="pf-c-form__group">
+<div class="pf-u-display-flex pf-u-flex-direction-row ">
+<div class="pf-c-form__group pf-u-mr-xl">
   <%= label f, :username, gettext("Username"), class: "pf-c-form__label" %>
   <div class="pf-c-form__group-control">
     <%= text_input f, :username, class: "pf-c-form-control"   %>
   </div>
 </div>
-<div class="pf-c-form__group">
+<div class="pf-c-form__group pf-u-mr-xl">
   <%= label f, :authority_name, gettext("Authority name"), class: "pf-c-form__label" %>
   <div class="pf-c-form__group-control">
     <%= text_input f, :authority_name, class: "pf-c-form-control"  %>
   </div>
 </div>
-<div class="pf-c-form__group">
+<div class="pf-c-form__group pf-u-mr-xl">
   <%= label f, :permission_name, gettext("Permission name"), class: "pf-c-form__label" %>
   <div class="pf-c-form__group-control">
     <%= text_input f, :permission_name, class: "pf-c-form-control"   %>
   </div>
 </div>
-<div class="pf-c-form__group">
+<div class="pf-c-form__group pf-u-mr-xl">
   <%= label f, :last_login_date, gettext("Last login date"), class: "pf-c-form__label" %>
   <div class="pf-c-form__group-control">
-    <%= text_input f, :last_login_date, class: "pf-c-form-control", aria_invalid: "true"  %>
+    <%= text_input f, :last_login_date, class: "pf-c-form-control"  %>
     <%= error_tag f, :last_login_date %>
   </div>
 </div>
-
-
 
   <div class="pf-c-form__group pf-m-action">
     <div class="pf-c-form__actions">
       <%= submit gettext("Filter"), class: "pf-c-button pf-m-primary" %>
       <%= link gettext("Reset"), to: AdminRoutes.user_path(@conn, :index), class: "pf-c-button pf-m-secondary" %>
-
     </div>
   </div>
 </div> <!-- flex -->
 
-
 <% end %>
-
 
 <table class='pf-c-table'>
   <thead>
@@ -81,12 +76,12 @@
       <td><%= user.is_enabled %></td>
 
       <td>
-        <%= link "Show", class: "button button-outline", to: AdminRoutes.user_path(@conn, :show, user) %>
-        <%= link "Edit", class: "button button-outline", to: AdminRoutes.user_path(@conn, :edit, user) %>
+        <%= link "Show", class: "pf-c-button pf-m-secondary", to: AdminRoutes.user_path(@conn, :show, user) %>
+        <%= link "Edit", class: "pf-c-button pf-m-secondary", to: AdminRoutes.user_path(@conn, :edit, user) %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= link gettext("New User"), to: AdminRoutes.user_path(@conn, :new), class: "button button-primary" %></span>
+<span><%= link gettext("New User"), to: AdminRoutes.user_path(@conn, :new), class: "pf-c-button pf-m-primary" %></span>
