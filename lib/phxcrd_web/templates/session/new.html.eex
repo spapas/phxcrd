@@ -1,15 +1,42 @@
-<h1><%= gettext "Login" %></h1>
-
 <%= form_for @conn, Routes.session_path(@conn, :create), [method: :post, as: :user], fn f -> %>
-<div class="form-group">
-    <%= text_input f, :username, placeholder: gettext("Username"), autofocus: true, autocomplete: "username" %>
-</div>
+<div class="pf-c-login">
+  <div class="pf-c-login__container">
 
-<div class="form-group">
-    <%= password_input f, :password, placeholder: gettext("Password"), autocomplete: "current-password" %>
-</div>
+    <main class="pf-c-login__main">
+      <header class="pf-c-login__main-header">
+        <h1 class="pf-c-title pf-m-3xl"><%= gettext "Login" %></h1>
+        <p class="pf-c-login__main-header-desc"></p>
 
-<div class="form-group">
-    <%= submit gettext "Submit" %>
+      </header>
+      <div class="pf-c-login__main-body">
+        <form novalidate class="pf-c-form">
+          <p class="pf-c-form__helper-text pf-m-error pf-m-hidden">
+            <span class="pf-c-form__helper-text-icon">
+              <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+            </span>Invalid login credentials.</p>
+          <div class="pf-c-form__group">
+            <label class="pf-c-form__label" for="login-demo-form-username">
+              <span class="pf-c-form__label-text">Username</span>
+
+              <span class="pf-c-form__label-required" aria-hidden="true">&#42;</span>
+            </label>
+            <%= text_input f, :username, placeholder: gettext("Username"), autofocus: true, autocomplete: "username", class: "pf-c-form-control" %>
+          </div>
+          <div class="pf-c-form__group">
+            <label class="pf-c-form__label" for="login-demo-form-password">
+              <span class="pf-c-form__label-text">Password</span>
+              <span class="pf-c-form__label-required" aria-hidden="true">&#42;</span>
+            </label>
+            <%= password_input f, :password, placeholder: gettext("Password"), autocomplete: "current-password", class: "pf-c-form-control" %>
+          </div>
+          <div class="pf-c-form__group pf-m-action">
+            <%= submit gettext("Log in"), class: "pf-c-button pf-m-primary pf-m-block" %>
+          </div>
+        </form>
+      </div>
+
+    </main>
+
+  </div>
 </div>
-<% end %>
+<% end  %>
