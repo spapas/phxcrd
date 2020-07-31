@@ -1,5 +1,5 @@
-<h1>New User</h1>
+<%= title gettext "New User" %>
 
 <%= render "form.html", Map.put(assigns, :action, AdminRoutes.user_path(@conn, :create)) %>
 
-<span><%= link "Back", to: AdminRoutes.user_path(@conn, :index) %></span>
+<span><%= link "Back", to: AdminRoutes.user_path(@conn, :index), class: "pf-c-button pf-m-secondary" %></span>

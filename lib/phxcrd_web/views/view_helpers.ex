@@ -9,7 +9,9 @@ defmodule PhxcrdWeb.ViewHelpers do
   import Phoenix.View
 
   import PhxcrdWeb.Gettext
+  import PhxcrdWeb.ErrorHelpers
   alias PhxcrdWeb.Router.Helpers, as: Routes
+  alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
 
 
   def get_query_params(params, allowed_keys) do
@@ -166,4 +168,90 @@ defmodule PhxcrdWeb.ViewHelpers do
     </div>
     """
   end
+
+  def get_sidebar(assigns) do
+    ~E"""
+    <div class="pf-c-page__sidebar" id='burger-menu' hidden>
+      <div class="pf-c-page__sidebar-body">
+        <nav class="pf-c-nav" aria-label="Global">
+          <section class="pf-c-nav__section" aria-labelledby="grouped-title1">
+            <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
+              <h2 class="pf-c-nav__section-title" id="grouped-title1"><%= gettext "Administration" %></h2>
+              <ul class="pf-c-nav__list">
+                <li class="pf-c-nav__item">
+                  <%= link gettext("Authorities"),
+                          to: AdminRoutes.authority_path(@conn, :index),
+                          class: "pf-c-nav__link",
+                          title: gettext "Authorities"
+                    %>
+                </li>
+                <%= if @perms |> Enum.any?(&( &1 == "superuser")) do %>
+                  <li class="pf-c-nav__item">
+                    <%= link gettext("Users"),
+                                  to: AdminRoutes.user_path(@conn, :index),
+                                  class: "pf-c-nav__link",
+                                  title: gettext "Users"
+                            %>
+                  </li>
+                  <li class="pf-c-nav__item">
+                    <%= link gettext("Permissions"),
+                                  to: AdminRoutes.permission_path(@conn, :index),
+                                  class: "pf-c-nav__link",
+                                  title: gettext "Permissions"
+                            %>
+                  </li>
+                  <li class="pf-c-nav__item">
+                    <%= link gettext("Versions"),
+                                  to: AdminRoutes.version_path(@conn, :index),
+                                  class: "pf-c-nav__link",
+                                  title: gettext "Versions"
+                            %>
+                  </li>
+                <% end %>
+              </ul>
+            </section>
+          <% end %>
+        </nav>
+      </div>
+    </div>
+    """
+  end
+
+  def title(title) do
+    ~E"<h1 class='pf-c-title pf-m-3xl'><%= title %></h1>"
+  end
+
+  def get_form_field(fo, fi, input) do
+    ~E"""
+    <div class="pf-c-form__group">
+      <div class="pf-c-form__group-label">
+        <label class="pf-c-form__label" for="help-text-form-address">
+          <%= label(fo, fi, class: "pf-c-form__label-text") %>
+          <span class="pf-c-form__label-required" aria-hidden="true">&#42;</span>
+        </label>
+      </div>
+      <div class="pf-c-form__group-control">
+        <%= input %>
+        <%= error_tag(fo, fi) %>
+      </div>
+    </div>
+    """
+  end
+
+  def get_form_text_field(fo, fi) do
+    get_form_field(fo, fi, text_input(fo, fi, class: "pf-c-form-control"))
+  end
+
+  def get_form_check_field(fo, fi) do
+    get_form_field(fo, fi, checkbox(fo, fi, class: "pf-c-check__input"))
+  end
+
+  def get_form_select_field(fo, fi, val) do
+    get_form_field(fo, fi, select(fo, fi, val, class: "pf-c-form-control", style: "width: 100%"))
+  end
+
+  def get_form_multi_select_field(fo, fi, vals, sel ) do
+    get_form_field(fo, fi, multiple_select(fo, fi, vals, selected: sel, class: "pf-c-form-control",  style: "width: 100%"))
+  end
+
 end

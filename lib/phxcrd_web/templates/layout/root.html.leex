@@ -56,66 +56,28 @@
   </header>
 
 
-  <div class="pf-c-page__sidebar" id='burger-menu' hidden>
-    <div class="pf-c-page__sidebar-body">
-      <nav class="pf-c-nav" aria-label="Global">
-        <section class="pf-c-nav__section" aria-labelledby="grouped-title1">
-          <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
-            <h2 class="pf-c-nav__section-title" id="grouped-title1"><%= gettext "Administration" %></h2>
-            <ul class="pf-c-nav__list">
-              <li class="pf-c-nav__item">
-                <%= link gettext("Authorities"),
-                        to: AdminRoutes.authority_path(@conn, :index),
-                        class: "pf-c-nav__link",
-                        title: gettext "Authorities"
-                  %>
-              </li>
-              <%= if @perms |> Enum.any?(&( &1 == "superuser")) do %>
-                <li class="pf-c-nav__item">
-                  <%= link gettext("Users"),
-                                to: AdminRoutes.user_path(@conn, :index),
-                                class: "pf-c-nav__link",
-                                title: gettext "Users"
-                          %>
-                </li>
-                <li class="pf-c-nav__item">
-                  <%= link gettext("Permissions"),
-                                to: AdminRoutes.permission_path(@conn, :index),
-                                class: "pf-c-nav__link",
-                                title: gettext "Permissions"
-                          %>
-                </li>
-                <li class="pf-c-nav__item">
-                  <%= link gettext("Versions"),
-                                to: AdminRoutes.version_path(@conn, :index),
-                                class: "pf-c-nav__link",
-                                title: gettext "Versions"
-                          %>
-                </li>
-              <% end %>
-            </ul>
-          </section>
-        <% end %>
-      </nav>
-    </div>
-  </div>
+  <%= get_sidebar(assigns) %>
 
   <main class="pf-c-page__main" tabindex="-1" id="main-content-page-layout-horizontal-nav">
+    <div class="pf-l-stack pf-m-gutter">
+      <div class="pf-l-stack__item pf-m-fill">
+        <section class="pf-c-page__main-section">
+          <%= @inner_content %>
+        </section>
+      </div> <!-- stack item-->
+      <div class="pf-l-stack__item pf-global--BackgroundColor--200">
+        <footer class="footer pf-u-px-xl pf-u-display-flex pf-u-justify-content-center">
 
-    <section class="pf-c-page__main-section">
-      <%= @inner_content %>
-    </section>
-    <footer class="footer">
-      <section class="container">
-        Copyright © 2019-20 &lt;Serafeim Papastefanos&gt;
-        <%= if Application.get_env(:phxcrd, :env) != :prod do %>
-        <span style='padding: 8px; font-weight:900; color: red; background-color:#661111'>
-          WARNING: TEST VERSION (<%= Application.get_env(:phxcrd, :env) %>)
-        </span>
-        <% end %>
-      </section>
-    </footer>
-  </main>
+            <span>Copyright © 2019-20 &lt;Serafeim Papastefanos&gt;</span>
+            <%= if Application.get_env(:phxcrd, :env) != :prod do %>
+            <span style='padding: 8px; font-weight:900; color: red; background-color:#661111'>
+              WARNING: TEST VERSION (<%= Application.get_env(:phxcrd, :env) %>)
+            </span>
+            <% end %>
+        </footer>
+      </div> <!-- stack item -->
+    </div> <!-- stack -->
+  </main> <!-- main -->
 
 
 </div> <!-- page -->

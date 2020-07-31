@@ -17,7 +17,7 @@
 <% end %>
 </form>
 <%= if  @page.total_entries > 0 do %>
-<table class='condensed'>
+<table class='pf-c-table pf-m-compact'>
   <thead>
     <tr>
       <th>
