@@ -10,7 +10,7 @@ defmodule PhxcrdWeb.ErrorHelpers do
   """
   def error_tag(form, field) do
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
-      content_tag(:span, translate_error(error), class: "help-block")
+      content_tag(:p, translate_error(error), class: "pf-c-form__helper-text pf-m-error", aria_live: "polite")
     end)
   end
 

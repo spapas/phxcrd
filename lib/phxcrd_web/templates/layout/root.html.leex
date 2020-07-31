@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href='<%= Routes.static_path(@conn, "/css/patternfly-addons.css") %>'>
 
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/main.css") %>' />
-    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js' />
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css' />
 
 
     <script defer type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
@@ -133,22 +133,19 @@
 
   <main class="pf-c-page__main" tabindex="-1" id="main-content-page-layout-horizontal-nav">
     <%= get_breadcrumbs %>
-    <%= @inner_content %>
-      <footer class="footer">
-    <section class="container">
-      Copyright © 2019-20 &lt;Serafeim Papastefanos&gt;
-      <%= if Application.get_env(:phxcrd, :env) != :prod do %>
-      <span style='padding: 8px; font-weight:900; color: red; background-color:#661111'>
-        WARNING: TEST VERSION (<%= Application.get_env(:phxcrd, :env) %>)
-      </span>
-      <% end %>
-    </section>
-  </footer>
-<hr />
-<hr />
-<hr />
-<hr />
-
+      <section class="pf-c-page__main-section">
+        <%= @inner_content %>
+      </section>
+    <footer class="footer">
+      <section class="container">
+        Copyright © 2019-20 &lt;Serafeim Papastefanos&gt;
+        <%= if Application.get_env(:phxcrd, :env) != :prod do %>
+        <span style='padding: 8px; font-weight:900; color: red; background-color:#661111'>
+          WARNING: TEST VERSION (<%= Application.get_env(:phxcrd, :env) %>)
+        </span>
+        <% end %>
+      </section>
+    </footer>
   </main>
 
 
@@ -256,7 +253,7 @@
 
       $('#burger-button').click(function() {
         console.log("B")
-        $('#burger-menu').show();
+        $('#burger-menu').show()
       })
 
       $("#scroll-left").click(function () {
