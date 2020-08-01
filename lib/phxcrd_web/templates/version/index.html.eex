@@ -1,21 +1,18 @@
-<h1><%= gettext "Version list" %></h1>
+<%= title gettext "Version list" %>
 
-<%= form_for @changeset, AdminRoutes.version_path(@conn, :index), [method: :get, class: "filter-form"],  fn f -> %>
-
-<%= label f, :entity_schema, "Entity schema" %>
-<%= select f,
-        :entity_schema,
-        [{"---", ""}] ++ (schemas() |> Enum.map(&{&1, &1}) )
-      %>
-
-<%= label f, :entity_id, "Entity id" %>
-<%= text_input f, :entity_id  %>
-
-<%= submit gettext("Version list"), class: "ml-5" %>
-<%= link gettext("Reset"), to: AdminRoutes.version_path(@conn, :index), class: "button button-outline ml-2" %>
-
+<%= form_for @changeset, AdminRoutes.version_path(@conn, :index), [method: :get, class: "pf-c-form"],  fn f -> %>
+  <div class="pf-u-display-flex pf-u-flex-direction-row ">
+    <%= get_form_select_field(f, :entity_schema, [{"---", ""}] ++ [{"---", ""}] ++ (schemas() |> Enum.map(&{&1, &1}) )) %>
+    <%= get_form_text_field(f, :entity_id) %>
+    <div class="pf-c-form__group pf-m-action">
+      <div class="pf-c-form__actions">
+        <%= submit gettext("Version list"), class: "pf-c-button pf-m-secondary" %>
+        <%= link gettext("Reset"), to: AdminRoutes.version_path(@conn, :index), class: "pf-c-button pf-m-secondary" %>
+      </div>
+    </div>
+  </div>
 <% end %>
-<table class='condensed'>
+<table class='pf-c-table pf-m-compact'>
   <thead>
     <tr>
       <th>Id</th>

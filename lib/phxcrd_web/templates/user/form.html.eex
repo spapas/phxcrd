@@ -13,14 +13,13 @@
 <%= get_form_text_field(f, :last_name) %>
 
 <%= get_form_select_field(f, :authority_id, [
-                        (with sv when not is_nil(sv) <- get_select_value(@changeset, :authority_id),
-                                                   a <- Phxcrd.Auth.get_authority!(sv), do: {a.name, a.id})
-                      ]) %>
+      (with sv when not is_nil(sv) <- get_select_value(@changeset, :authority_id),
+                                  a <- Phxcrd.Auth.get_authority!(sv), do: {a.name, a.id})
+    ]) %>
 
 <%= get_form_multi_select_field(f, :permissions, (
   Phxcrd.Auth.list_permissions |> Enum.map(&{&1.name, &1.id})
   ), if(assigns[:user], do: Enum.map(@user.permissions, &(&1.id)), else: [])) %>
-
 
 Current: <%= @changeset.data.photo_path %>
 
@@ -34,9 +33,6 @@ Current: <%= @changeset.data.photo_path %>
 <div>
   <%= submit gettext("Save"), class: "pf-c-button pf-m-primary" %>
 </div>
-
-
-
 
 
 <% end %>

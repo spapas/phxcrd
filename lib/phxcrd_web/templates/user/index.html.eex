@@ -2,6 +2,7 @@
 
 <%= form_for @changeset, AdminRoutes.user_path(@conn, :index), [method: :get, class: "pf-c-form ", as: :filter],  fn f -> %>
 <div class="pf-u-display-flex pf-u-flex-direction-row ">
+
   <div class="pf-c-form__group pf-u-mr-xl">
     <%= label f, :username, gettext("Username"), class: "pf-c-form__label" %>
     <div class="pf-c-form__group-control">

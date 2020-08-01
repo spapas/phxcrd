@@ -1,23 +1,12 @@
-<div class="row">
-  <div class="column">
-    <h1>User data</h1>
-    </div>
-    <div class="column">
-    <img src='<%= AdminRoutes.user_path(@conn, :get_photo, @user) %>' />
-  </div> 
-</div>
+<%= title("User data") %>
+<img src='<%= AdminRoutes.user_path(@conn, :get_photo, @user) %>' />
 
-<div class="row">
-  <div class="column">
     <%= if @user.is_enabled do %>
     <h3>User is enabled</h3>
     <% else %>
     <h3>User is disabled</h3>
     <% end %>
-  </div>
-</div>
-<div class="row">
-  <div class="column">
+
     <ul>
       <li>
         <strong>Username:</strong>
@@ -55,9 +44,7 @@
       </li>
 
     </ul>
-  </div>
-  <div class="column">
-    <ul>
+      <ul>
 
       <li>
         <strong>AM:</strong>
@@ -89,10 +76,9 @@
         <%= @user.obj_cls %>
       </li>
     </ul>
-  </div>
-</div>
 
 
-<span><%= link "Edit", to: AdminRoutes.user_path(@conn, :edit, @user), class: "button button-primary" %></span>
-<span><%= link "Change password", to: AdminRoutes.user_path(@conn, :change_password_get, @user), class: "button button-primary" %></span>
-<span><%= link "Back", to: AdminRoutes.user_path(@conn, :index), class: "button button-secondary" %></span>
+
+<span><%= link "Edit", to: AdminRoutes.user_path(@conn, :edit, @user), class: "pf-c-button pf-m-primary" %></span>
+<span><%= link "Change password", to: AdminRoutes.user_path(@conn, :change_password_get, @user), class: "pf-c-button pf-m-danger" %></span>
+<span><%= link "Back", to: AdminRoutes.user_path(@conn, :index), class: "pf-c-button pf-m-secondary" %></span>
