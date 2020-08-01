@@ -41,4 +41,17 @@
   </tbody>
 </table>
 
-<%= pagination_links @page, get_query_params(@conn.params, ["version"]) %>
+
+<div class="pf-c-pagination pf-m-compact">
+  <nav class="pf-c-pagination__nav" aria-label="Pagination">
+    <%= for p <- raw_pagination_links @page, get_query_params(@conn.params, ["version"]) do %>
+    <div class="pf-c-pagination__nav-control ">
+        <%= if elem(p, 0) == :ellipsis do %>
+          <%= elem(p, 1) %>
+        <% else %>
+          <%= link(elem(p, 0), to: "#{@conn.request_path}?page=#{elem(p,1)}", class: "pf-c-button "  ) %>
+        <% end %>
+      </div>
+    <% end %>
+  </nav>
+</div>
