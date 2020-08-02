@@ -8,18 +8,10 @@
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "Hello", suffix: " · Phoenix Framework" %>
 
-
-    <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/normalize.css") %>' />
-    <!--
-    <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/milligram.min.css") %>' />
-    <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/phoenix.css") %>' />
-    -->
-
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/select2.min.css") %>' />
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/nprogress.css") %>' />
 
-    <link rel="stylesheet" type="text/css" href='<%= Routes.static_path(@conn, "/css/patternfly.min.css") %>'>
-    <link rel="stylesheet" type="text/css" href='<%= Routes.static_path(@conn, "/css/patternfly-addons.css") %>'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
 
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/main.css") %>' />
     <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css' />
@@ -85,15 +77,12 @@
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/jquery-3.4.1.min.js") %>'></script>
   <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/js/patternfly.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/select2.min.js") %>'></script>
-
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix.js") %>'></script>
-
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/main.js") %>'></script>
-
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix_live_view.js") %>'></script>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/nprogress.js") %>'></script>
 
