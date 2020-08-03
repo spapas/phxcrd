@@ -1,6 +1,4 @@
-<h1><%= gettext("Version info") %></h1>
-
-<div class="pf-c-content">
+<%= title gettext("Version info") %>
 
     <ul>
       <li>
@@ -43,8 +41,4 @@
       <%= "#{inspect @version.patch}" %>
     </p>
 
-
-</div>
-
-
-<span><%= link "Back", to: AdminRoutes.version_path(@conn, :index), class: "pf-c-button pf-m-secondary" %></span>
+<%= link "Back", to: AdminRoutes.version_path(@conn, :index), class: "btn btn-secondary" %>

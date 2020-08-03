@@ -215,19 +215,19 @@ defmodule PhxcrdWeb.ViewHelpers do
   end
 
   def get_form_pass_field(fo, fi, label_text) do
-    get_form_field(fo, fi, label_text, password_input(fo, fi, class: "pf-c-form-control"))
+    get_form_field(fo, fi, label_text, password_input(fo, fi, class: "form-control"))
   end
 
   def get_form_check_field(fo, fi, label_text) do
-    get_form_field(fo, fi, label_text, checkbox(fo, fi, class: "pf-c-check__input"))
+    get_form_field(fo, fi, label_text, checkbox(fo, fi, class: "form-control"))
   end
 
   def get_form_select_field(fo, fi, label_text, val) do
-    get_form_field(fo, fi, label_text, select(fo, fi, val, class: "pf-c-form-control", style: "width: 100%"))
+    get_form_field(fo, fi, label_text, select(fo, fi, val, class: "form-control", style: "width: 100%"))
   end
 
   def get_form_multi_select_field(fo, fi, label_text, vals, sel ) do
-    get_form_field(fo, fi, label_text, multiple_select(fo, fi, vals, selected: sel, class: "pf-c-form-control",  style: "width: 100%"))
+    get_form_field(fo, fi, label_text, multiple_select(fo, fi, vals, selected: sel, class: "form-control",  style: "width: 100%"))
   end
 
 

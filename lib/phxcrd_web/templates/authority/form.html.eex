@@ -1,30 +1,21 @@
-<%= form_for @changeset, @action, fn f -> %>
+<%= form_for @changeset, @action, [class: "pf-c-form pf-m-horizontal"], fn f -> %>
 <%= if @changeset.action do %>
 <div class="alert alert-danger">
   <p><%= gettext "There was an error!" %></p>
 </div>
 <% end %>
 
-<%= label f, :name, gettext("Name") %>
-<%= text_input f, :name %>
-<%= error_tag f, :name %>
+<%= get_form_text_field(f, :name, gettext("Name")) %>
+<%= get_form_select_field(f, :authority_kind_id, gettext("Authority kind"), Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id})) %>
+<%= get_form_multi_select_field(
+  f,
+  :users,
+  gettext("Authority users"),
+  (Phxcrd.Auth.list_users |> Enum.map(&{ "#{&1.name} (#{&1.username})", &1.id})),
+  if(assigns[:authority], do: Enum.map(@authority.users, &(&1.id)), else: [])
+  ) %>
 
-<%= label f, :authority_kind_id, gettext("Kind") %>
-<%= select f,
-    :authority_kind_id,
-    Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id})
-  %>
-<%= error_tag f, :authority_kind %>
 
-<%= label f, :users, gettext("Users") %>
-<%= multiple_select(f,
-                  :users,
-                  (Phxcrd.Auth.list_users |> Enum.map(&{ "#{&1.name} (#{&1.username})", &1.id})),
-                  selected: if(assigns[:authority], do: Enum.map(@authority.users, &(&1.id)), else: []),
-                  style: "width: 100%")
-                  %>
-<%= error_tag f, :users %>
-
-<%= submit gettext("Save") %>
+<%= submit gettext("Save"), class: "btn btn-primary" %>
 
 <% end %>

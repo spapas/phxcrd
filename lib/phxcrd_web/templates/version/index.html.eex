@@ -1,18 +1,14 @@
 <%= title gettext "Version list" %>
 
-<%= form_for @changeset, AdminRoutes.version_path(@conn, :index), [method: :get, class: "pf-c-form"],  fn f -> %>
-  <div class="pf-u-display-flex pf-u-flex-direction-row ">
-    <%= get_form_select_field(f, :entity_schema, "Schema", [{"---", ""}] ++ [{"---", ""}] ++ (schemas() |> Enum.map(&{&1, &1}) )) %>
-    <%= get_form_text_field(f, :entity_id, "Schema") %>
-    <div class="pf-c-form__group pf-m-action">
-      <div class="pf-c-form__actions">
-        <%= submit gettext("Version list"), class: "pf-c-button pf-m-secondary" %>
-        <%= link gettext("Reset"), to: AdminRoutes.version_path(@conn, :index), class: "pf-c-button pf-m-secondary" %>
-      </div>
-    </div>
+<%= form_for @changeset, AdminRoutes.version_path(@conn, :index), [method: :get, class: "row row-cols-md-auto g-3 align-items-center"],  fn f -> %>
+  <%= get_form_select_field(f, :entity_schema, "Schema", [{"---", ""}] ++ (schemas() |> Enum.map(&{&1, &1}) )) %>
+  <%= get_form_text_field(f, :entity_id, "Schema") %>
+  <div class="col-12 d-flex align-self-end">
+    <%= submit gettext("Version list"), class: "btn btn-primary" %>
+    <%= link gettext("Reset"), to: AdminRoutes.version_path(@conn, :index), class: "btn btn-secondary" %>
   </div>
 <% end %>
-<table class='pf-c-table pf-m-compact'>
+<table class='table table-sm'>
   <thead>
     <tr>
       <th>Id</th>
@@ -41,17 +37,4 @@
   </tbody>
 </table>
 
-
-<div class="pf-c-pagination pf-m-compact">
-  <nav class="pf-c-pagination__nav" aria-label="Pagination">
-    <%= for p <- raw_pagination_links @page, get_query_params(@conn.params, ["version"]) do %>
-    <div class="pf-c-pagination__nav-control ">
-        <%= if elem(p, 0) == :ellipsis do %>
-          <%= elem(p, 1) %>
-        <% else %>
-          <%= link(elem(p, 0), to: "#{@conn.request_path}?page=#{elem(p,1)}", class: "pf-c-button "  ) %>
-        <% end %>
-      </div>
-    <% end %>
-  </nav>
-</div>
+<%= pagination_links @page, get_query_params(@conn.params, ["filter", "order_by"]) %>

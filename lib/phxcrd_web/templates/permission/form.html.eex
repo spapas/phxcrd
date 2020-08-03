@@ -5,15 +5,10 @@
     </div>
   <% end %>
 
-  <%= label f, :name %>
-  <%= text_input f, :name %>
-  <%= error_tag f, :name %>
-
-  <%= label f, :verbose_name %>
-  <%= text_input f, :verbose_name %>
-  <%= error_tag f, :verbose_name %>
+  <%= get_form_text_field f, :name, gettext("Name") %>
+  <%= get_form_text_field f, :verbose_name, gettext("Verbose name") %>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>

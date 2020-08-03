@@ -1,20 +1,17 @@
 <%= title gettext "Authority list" %>
 
-<%= form_for @changeset, AdminRoutes.authority_path(@conn, :index), [method: :get,  class: "pf-c-form ", as: :filter],  fn f -> %>
-  <div class="pf-u-display-flex pf-u-flex-direction-row ">
-    <%= get_form_text_field(f, :authority_name, gettext("Authority name")) %>
-    <%= get_form_select_field(f, :authority_kind_id, gettext("Authority kind"), [{"---", ""}] ++ (Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id}) )) %>
-    <div class="pf-c-form__group pf-m-action">
-      <div class="pf-c-form__actions">
-        <%= submit gettext("Filter"), class: "pf-c-button pf-m-secondary" %>
-        <%= link gettext("Reset"), to: AdminRoutes.authority_path(@conn, :index), class: "pf-c-button pf-m-primary" %>
-      </div>
-    </div>
+<%= form_for @changeset, AdminRoutes.authority_path(@conn, :index), [method: :get,  class: "row row-cols-md-auto g-3 align-items-center", as: :filter],  fn f -> %>
+
+  <%= get_form_text_field(f, :authority_name, gettext("Authority name")) %>
+  <%= get_form_select_field(f, :authority_kind_id, gettext("Authority kind"), [{"---", ""}] ++ (Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id}) )) %>
+  <div class="col-12 d-flex align-self-end">
+    <%= submit gettext("Filter"), class: "btn btn-primary" %>
+    <%= link gettext("Reset"), to: AdminRoutes.authority_path(@conn, :index), class: "btn btn-secondary" %>
   </div>
 <% end %>
 
 <%= if  @page.total_entries > 0 do %>
-<table class='pf-c-table pf-m-compact'>
+<table class='table table-sm'>
   <thead>
     <tr>
       <th>
@@ -35,13 +32,13 @@
   <%= for authority <- @page do %>
     <tr>
       <td>
-        <%= link  authority.id, to: AdminRoutes.authority_path(@conn, :show, authority), class: "pf-c-button pf-m-small pf-m-primary" %>
+        <%= link  authority.id, to: AdminRoutes.authority_path(@conn, :show, authority), class: "btn btn-sm btn-primary" %>
       </td>
       <td><%= authority.authority_kind.name %></td>
       <td><%= authority.name %></td>
 
       <td>
-        <%= link gettext("Edit"), to: AdminRoutes.authority_path(@conn, :edit, authority), class: "pf-c-button pf-m-small pf-m-secondary" %>
+        <%= link gettext("Edit"), to: AdminRoutes.authority_path(@conn, :edit, authority), class: "btn btn-sm btn-secondary" %>
         <%= # link "Delete", to: AdminRoutes.authority_path(@conn, :delete, authority), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
     </tr>
@@ -55,4 +52,4 @@
   <p><%= gettext "No authorities found" %></p>
 <% end %>
 
-<span><%= link gettext("New Authority"), to: AdminRoutes.authority_path(@conn, :new), class: "pf-c-button pf-m-primary" %></span>
+<span><%= link gettext("New Authority"), to: AdminRoutes.authority_path(@conn, :new), class: "btn btn-primary" %></span>

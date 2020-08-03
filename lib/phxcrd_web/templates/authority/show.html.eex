@@ -29,5 +29,5 @@
 
 </ul>
 
-<span><%= link gettext("Edit"), to: AdminRoutes.authority_path(@conn, :edit, @authority), class: "button button-primary" %></span>
-<span><%= link gettext("Return"), to: AdminRoutes.authority_path(@conn, :index), class: "button button-secondary" %></span>
+<%= link gettext("Edit"), to: AdminRoutes.authority_path(@conn, :edit, @authority), class: "btn btn-primary" %>
+<%= link gettext("Return"), to: AdminRoutes.authority_path(@conn, :index), class: "btn  btn-secondary" %>
