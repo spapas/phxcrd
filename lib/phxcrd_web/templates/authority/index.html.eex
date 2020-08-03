@@ -4,7 +4,7 @@
 
   <%= get_form_text_field(f, :authority_name, gettext("Authority name")) %>
   <%= get_form_select_field(f, :authority_kind_id, gettext("Authority kind"), [{"---", ""}] ++ (Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id}) )) %>
-  <div class="col-12 d-flex align-self-end">
+  <div class="col-12">
     <%= submit gettext("Filter"), class: "btn btn-primary" %>
     <%= link gettext("Reset"), to: AdminRoutes.authority_path(@conn, :index), class: "btn btn-secondary" %>
   </div>

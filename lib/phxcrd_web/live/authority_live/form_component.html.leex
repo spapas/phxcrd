@@ -1,35 +1,24 @@
-<h2><%= @title %></h2>
+<%= title @title %>
 
 <%= f = form_for @changeset, "#",
   id: "authority-form",
+  class: "pf-c-form pf-m-horizontal",
   phx_target: @myself,
   phx_change: "validate",
   phx_submit: "save" %>
 
+<%= get_form_text_field(f, :name, gettext("Name")) %>
+<%= get_form_select_field(f, :authority_kind_id, gettext("Authority kind"), Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id})) %>
 
-<%= label f, :name, gettext("Name") %>
-<%= text_input f, :name %>
-<%= error_tag f, :name %>
 
-<%= label f, :authority_kind_id, gettext("Kind") %>
-<%= select f,
-    :authority_kind_id,
-    Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id})
-  %>
-<%= error_tag f, :authority_kind %>
-
-<%= label f, :users, gettext("Users") %>
 <div phx-hook="FixSelect2" phx-update="ignore">
-<%= multiple_select(f,
-                  :users,
-                  (Phxcrd.Auth.list_users |> Enum.map(&{ "#{&1.name} (#{&1.username})", &1.id})),
-                  selected: if(assigns[:authority] && Ecto.assoc_loaded?(@authority.users), do: Enum.map(@authority.users, &(&1.id)), else: []),
-                  style: "width: 100%"
+<%= get_form_multi_select_field(
+  f,
+  :users,
+  gettext("Authority users"),
+  (Phxcrd.Auth.list_users |> Enum.map(&{ "#{&1.name} (#{&1.username})", &1.id})),
+  if(assigns[:authority] && Ecto.assoc_loaded?(@authority.users), do: Enum.map(@authority.users, &(&1.id)), else: [])
+  ) %>
 
-                  )
-                  %>
-<%= error_tag f, :users %>
-</div>
-
-  <%= submit "Save", phx_disable_with: "Saving..." %>
+  <%= submit "Save", phx_disable_with: "Saving...", class: "btn btn-primary" %>
 </form>

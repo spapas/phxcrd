@@ -1,4 +1,4 @@
-<h1>Listing Authorities</h1>
+<%= title gettext "Listing Authorities" %>
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, PhxcrdWeb.AuthorityLive.FormComponent,
@@ -18,14 +18,14 @@
     return_to: AdminRoutes.authority_index_path(@socket, :index) %>
 <% end %>
 
-<form phx-change="filter" >
-<%= label :filter, :name, "Filter name" %>
-<%= text_input :filter, :name, phx_debounce: 200 %>
+<form phx-change="filter", class: "row row-cols-md-auto g-3 align-items-center" >
+  <div class="col-3">
+    <%= label :filter, :name, "Filter name", class: "form-label" %>
+    <%= text_input :filter, :name, phx_debounce: 200, class: "form-control" %>
+  </div>
 </form>
-<button phx-click="prev_page" <%= if @authorities.page_number == 1, do: "disabled" %>><</button>
-  Page: <%= @authorities.page_number %>
-<button phx-click="next_page" <%= if @authorities.page_number == @authorities.total_pages, do: "disabled" %>>></button>
-<table>
+
+<table class="table table-sm">
   <thead>
     <tr>
       <th>
@@ -52,9 +52,9 @@
       <td><%= authority.name %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: AdminRoutes.authority_show_path(@socket, :show, authority) %></span>
-          <span><%= live_patch "Edit", to: AdminRoutes.authority_index_path(@socket, :edit, authority) %></span>
-          <span><%= live_patch "Delete", to: AdminRoutes.authority_index_path(@socket, :delete, authority) %></span>
+          <span><%= live_redirect "Show", to: AdminRoutes.authority_show_path(@socket, :show, authority), class: "btn btn-sm btn-info" %></span>
+          <span><%= live_patch "Edit", to: AdminRoutes.authority_index_path(@socket, :edit, authority), class: "btn btn-sm btn-info"  %></span>
+          <span><%= live_patch "Delete", to: AdminRoutes.authority_index_path(@socket, :delete, authority), class: "btn btn-sm btn-info"  %></span>
           <!--
           <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: authority.id, data: [confirm: "Are you sure?"] %></span>
           -->
@@ -64,4 +64,20 @@
   </tbody>
 </table>
 
-<span><%= live_patch "New Authority", to: AdminRoutes.authority_index_path(@socket, :new) %></span>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <button class='page-link'  phx-click="prev_page" <%= if @authorities.page_number == 1, do: "disabled" %>><</button>
+    </li>
+    <li class="page-item" disabled>
+      <span class='page-link' disabled>
+        Page: <%= @authorities.page_number %>
+      </span>
+    </li>
+    <li class="page-item">
+      <button class='page-link' phx-click="next_page" <%= if @authorities.page_number == @authorities.total_pages, do: "disabled" %>>></button>
+    </li>
+  </ul>
+</nav>
+
+<span><%= live_patch "New Authority", to: AdminRoutes.authority_index_path(@socket, :new), class: "btn btn-primary" %></span>

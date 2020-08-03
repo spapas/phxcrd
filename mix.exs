@@ -55,7 +55,7 @@ defmodule Phxcrd.MixProject do
       {:exldap, "~> 0.6"},
       {:canada, "~> 2.0.0"},
       {:ex_audit, "~> 0.6"},
-      {:phoenix_live_view, "~> 0.12.1"},
+      {:phoenix_live_view, "~> 0.13.0"},
       {:cowboy, "< 2.8.0", override: true},
       {:cowlib, "~> 2.8.0", override: true},
       # {:scrivener, "~> 2.0"},

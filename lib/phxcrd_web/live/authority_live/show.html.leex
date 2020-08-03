@@ -1,4 +1,4 @@
-<h1>Show Authority</h1>
+<%= title gettext "Show Authority" %>
 
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, PhxcrdWeb.AuthorityLive.FormComponent,
@@ -38,5 +38,5 @@
 
 </ul>
 
-<span><%= live_patch gettext("Edit"), to: AdminRoutes.authority_show_path(@socket, :edit, @authority), class: "button" %></span>
-<span><%= live_redirect gettext("Return"), to: AdminRoutes.authority_index_path(@socket, :index), class: "button button-secondary" %></span>
+<%= live_patch gettext("Edit"), to: AdminRoutes.authority_show_path(@socket, :edit, @authority), class: "btn btn-primary" %>
+<%= live_redirect gettext("Return"), to: AdminRoutes.authority_index_path(@socket, :index), class: "btn btn--secondary" %>
