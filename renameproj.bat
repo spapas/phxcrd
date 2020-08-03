@@ -1,9 +1,9 @@
 IF [%CURRENT_OTP%] == [] exit /b 1
 IF [%CURRENT_NAME%] == [] exit /b 1
 
-ag --nocolor -0 -l %CURRENT_OTP% | xargs -0 sed -i '' -e "s/%CURRENT_OTP%/%NEW_OTP%/g"
+ag -s --nocolor -0 -l %CURRENT_OTP% | xargs -0 sed -i '' -e "s/%CURRENT_OTP%/%NEW_OTP%/g"
 
-ag --nocolor -0 -l %CURRENT_NAME% | xargs -0 sed -i '' -e "s/%CURRENT_NAME%/%NEW_NAME%/g"
+ag -s --nocolor -0 -l %CURRENT_NAME% | xargs -0 sed -i '' -e "s/%CURRENT_NAME%/%NEW_NAME%/g"
 
 move lib\%CURRENT_OTP% lib\%NEW_OTP%
 move lib\%CURRENT_OTP%.ex lib\%NEW_OTP%.ex
