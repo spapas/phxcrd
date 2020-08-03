@@ -101,7 +101,7 @@ defmodule PhxcrdWeb.ViewHelpers do
     ~E"""
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">P·H·X·C·R·D</a>
+        <a class="navbar-brand" href="/">P·H·X·C·R·D</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -213,7 +213,7 @@ defmodule PhxcrdWeb.ViewHelpers do
   end
 
   def title(title) do
-    ~E"<h1 class='pf-c-title pf-m-3xl'><%= title %></h1>"
+    ~E"<h2 class=''><%= title %></h2>"
   end
 
   def get_form_field(fo, fi, input) do

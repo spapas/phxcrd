@@ -10,8 +10,12 @@ defmodule PhxcrdWeb.ErrorHelpers do
   """
   def error_tag(form, field) do
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
-      content_tag(:p, translate_error(error), class: "pf-c-form__helper-text pf-m-error", aria_live: "polite")
+      content_tag(:div, translate_error(error), class: "invalid-feedback")
     end)
+  end
+
+  def has_error(form, field) do
+    Enum.count(Keyword.get_values(form.errors, field)) > 0
   end
 
   @doc """
