@@ -16,69 +16,37 @@
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/main.css") %>' />
     <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css' />
 
-
     <script defer type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
+    <%= render_existing view_module(@conn), "extra_style.html", assigns %>
+
     <style>
 
     </style>
 
-  <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user salt", %{
-    user_id: @user_id,
-    username: @username,
-    authority_id: @authority_id,
-    authority_name: @authority_name,
-    perms: @perms,
-  }) %>
+    <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user salt", %{
+      user_id: @user_id,
+      username: @username,
+      authority_id: @authority_id,
+      authority_name: @authority_name,
+      perms: @perms,
+    }) %>
 
   </head>
 
 <body>
 
-<div class="pf-c-page">
-  <header class="pf-c-page__header">
-    <div class="pf-c-page__header-brand">
-      <div class="pf-c-page__header-brand-toggle">
-        <button class="pf-c-button pf-m-plain" type="button" id="burger-button" aria-label="Global navigation" aria-expanded="true" aria-controls="page-default-nav-example-primary-nav">
-          <i class="fas fa-bars" aria-hidden="true"></i>
-        </button>
-      </div>
-      <a href='/' class="pf-c-page__header-brand-link"><h3>P·H·X·C·R·D</h3></a>
-    </div>
-    <%= get_header_tools(assigns) %>
-  </header>
+<%= get_nav(assigns) %>
 
+<main class="container">
+  <%= @inner_content %>
+</main><!-- /.container -->
 
-  <%= get_sidebar(assigns) %>
-
-  <main class="pf-c-page__main" tabindex="-1" id="main-content-page-layout-horizontal-nav">
-    <div class="pf-l-stack pf-m-gutter">
-      <div class="pf-l-stack__item pf-m-fill">
-        <section class="pf-c-page__main-section">
-          <%= @inner_content %>
-        </section>
-      </div> <!-- stack item-->
-      <div class="pf-l-stack__item pf-global--BackgroundColor--200">
-        <footer class="footer pf-u-px-xl pf-u-display-flex pf-u-justify-content-center">
-
-            <span>Copyright © 2019-20 &lt;Serafeim Papastefanos&gt;</span>
-            <%= if Application.get_env(:phxcrd, :env) != :prod do %>
-            <span style='padding: 8px; font-weight:900; color: red; background-color:#661111'>
-              WARNING: TEST VERSION (<%= Application.get_env(:phxcrd, :env) %>)
-            </span>
-            <% end %>
-        </footer>
-      </div> <!-- stack item -->
-    </div> <!-- stack -->
-  </main> <!-- main -->
-
-
-</div> <!-- page -->
 
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/jquery-3.4.1.min.js") %>'></script>
   <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
 
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/select2.min.js") %>'></script>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix.js") %>'></script>

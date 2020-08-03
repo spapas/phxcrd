@@ -3,8 +3,9 @@ defmodule PhxcrdWeb.PageController do
   import Bamboo.Email
 
   def index(conn, _params) do
-    conn = put_root_layout(conn, false)
-    render(conn, "index.html", layout: {PhxcrdWeb.LayoutView, "home.html"})
+    #conn = put_root_layout(conn, false)
+    #render(conn, "index.html", layout: {PhxcrdWeb.LayoutView, "home.html"})
+    render(conn, "index.html")
   end
 
   def test_presence(conn, _params) do

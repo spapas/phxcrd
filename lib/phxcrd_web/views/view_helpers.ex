@@ -97,6 +97,51 @@ defmodule PhxcrdWeb.ViewHelpers do
     # cs |> Ecto.Changeset.get_field(attr)
   end
 
+  def get_nav(assigns) do
+    ~E"""
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">P·H·X·C·R·D</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="navbar-nav mr-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Dropdown</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <%= if @user_signed_in? do %>
+              <%= form_for @conn, Routes.session_path(@conn, :delete), [ method: :delete, as: :user, id: "logout-form"], fn _ -> %>
+                <%= submit( (@username <> " | " <> gettext("Log out")), class: "btn btn-outline-info btn-sm") %>
+              <% end %>
+            <% else %>
+              <%= link gettext("Log in"), to: Routes.session_path(@conn, :new), class: "btn btn-outline-info btn-sm" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    """
+  end
+
   def get_breadcrumbs() do
     ~E"""
       <section class="pf-c-page__main-breadcrumb">
@@ -118,56 +163,6 @@ defmodule PhxcrdWeb.ViewHelpers do
     """
   end
 
-  def get_header_horizontal_nav() do
-    ~E"""
-    <div class="pf-c-page__header-nav">
-      <nav class="pf-c-nav pf-m-horizontal pf-m-scrollable" aria-label="Global">
-        <button class="pf-c-nav__scroll-button" id='scroll-left' aria-label="Scroll left">
-          <i class="fas fa-angle-left" aria-hidden="true"></i>
-        </button>
-        <ul class="pf-c-nav__list">
-          <li class="pf-c-nav__item">
-            <a href="#" class="pf-c-nav__link">Horizontal nav item 1</a>
-          </li>
-          <li class="pf-c-nav__item">
-            <a href="#" class="pf-c-nav__link pf-m-current" aria-current="page">Horizontal nav item 5</a>
-          </li>
-        </ul>
-        <button class="pf-c-nav__scroll-button" id='scroll-right' aria-label="Scroll right">
-          <i class="fas fa-angle-right" aria-hidden="true"></i>
-        </button>
-      </nav>
-    </div>
-    """
-  end
-
-  def get_header_tools(assigns) do
-    ~E"""
-    <div class="pf-c-page__header-tools" id='kebab-container'>
-      <div class="pf-c-dropdown pf-m-expanded">
-        <button id='kebab-button' class="pf-c-dropdown__toggle pf-m-plain" type="button" id="dropdown-kebab-align-right-button" aria-expanded="true" aria-label="Actions">
-          <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-        </button>
-        <ul class="pf-c-dropdown__menu pf-m-align-right" aria-labelledby="dropdown-kebab-align-right-button" id='kebab-menu' hidden>
-          <li>
-            <a class="pf-c-dropdown__menu-item" href="/"><%= gettext("Home") %></a>
-          </li>
-          <li class="pf-c-divider" role="separator"></li>
-          <li>
-              <%= if @user_signed_in? do %>
-              <%= link (@username <> " | " <> gettext "Log out"), to: "#", id: "logout-button", class: "pf-c-dropdown__menu-item" %>
-              <%= form_for @conn, Routes.session_path(@conn, :delete), [style: "display: none;", method: :delete, as: :user, id: "logout-form"], fn _ -> %>
-                <%= submit @username <> " | " <> gettext "Log out", class: "pf-c-dropdown__menu-item" %>
-              <% end %>
-              <% else %>
-              <%= link gettext("Log in"), to: Routes.session_path(@conn, :new), class: "pf-c-dropdown__menu-item" %>
-              <% end %>
-          </li>
-        </ul>
-      </div>
-    </div>
-    """
-  end
 
   def get_sidebar(assigns) do
     ~E"""

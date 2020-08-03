@@ -42,11 +42,9 @@
 body {
   color:#011f4b;
   font-family:'Fira Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-  
 }
 
-
-/* Make clicks pass-through */
+/* nprogress */
 #nprogress {
   pointer-events: none;
 }
@@ -172,30 +170,6 @@ body {
   text-decoration: none;
   cursor: pointer; }
 
-/* Alerts and form errors */
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px; }
-
-.alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1; }
-
-.alert-warning {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc; }
-
-.alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1; }
-
-.alert p {
-  margin-bottom: 0; }
-
-.alert:empty {
-  display: none; }
+.container {
+  padding-top: 5rem;
+}
