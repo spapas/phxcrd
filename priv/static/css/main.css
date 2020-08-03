@@ -169,3 +169,7 @@ body {
 .container {
   padding-top: 5rem;
 }
+
+a.phx-modal-close {
+  text-decoration: none;
+}
