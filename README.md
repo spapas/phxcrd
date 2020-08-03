@@ -115,7 +115,7 @@ To auto-start the server I use supervisord; just copy `/etc/phxcrd-supervisor.co
 
 ## Templating
 
-You can use the `renameproj.bat` file to create a project with different name than dod. The script is for windows cmd but you can take a look
+You can use the `renameproj.bat` file to create a project with different name than phxcrd. The script is for windows cmd but you can take a look
 at it and convert it to unix/bash or take a look at this gist: https://gist.github.com/krystofbe/92aed7cd03c9a631eb3c7af490525c4e
 
 Before starting the script you must set the following variables like so:
