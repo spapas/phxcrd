@@ -1,4 +1,4 @@
-<h1>Show Permission</h1>
+<%= title gettext  "Show Permission" %>
 
 <ul>
 
@@ -14,5 +14,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: AdminRoutes.permission_path(@conn, :edit, @permission), class: "button button-primary" %></span>
-<span><%= link "Back", to: AdminRoutes.permission_path(@conn, :index), class: "button button-secondary" %></span>
+<span><%= link "Edit", to: AdminRoutes.permission_path(@conn, :edit, @permission), class: "btn btn-primary" %></span>
+<span><%= link "Back", to: AdminRoutes.permission_path(@conn, :index), class: "btn btn-secondary" %></span>

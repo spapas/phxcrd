@@ -1,6 +1,6 @@
-<h1>Listing Permissions</h1>
+<%= title gettext "Listing Permissions" %>
 
-<table>
+<table class='table table-sm'>
   <thead>
     <tr>
       <th>Name</th>
@@ -16,13 +16,13 @@
       <td><%= permission.verbose_name %></td>
 
       <td>
-        <%= link "Show", to: AdminRoutes.permission_path(@conn, :show, permission) %>
-        <%= link "Edit", to: AdminRoutes.permission_path(@conn, :edit, permission) %>
-        <%= link "Delete", to: AdminRoutes.permission_path(@conn, :delete, permission), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= link "Show", to: AdminRoutes.permission_path(@conn, :show, permission), class: "btn btn-sm btn-secondary" %>
+        <%= link "Edit", to: AdminRoutes.permission_path(@conn, :edit, permission), class: "btn btn-sm btn-secondary" %>
+        <%= link "Delete", to: AdminRoutes.permission_path(@conn, :delete, permission), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-sm btn-secondary" %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Permission", to: AdminRoutes.permission_path(@conn, :new) %></span>
+<span><%= link "New Permission", to: AdminRoutes.permission_path(@conn, :new), class: "btn btn-lg btn-primary" %></span>

@@ -2,8 +2,8 @@
 
 <%= form_for @changeset, AdminRoutes.version_path(@conn, :index), [method: :get, class: "pf-c-form"],  fn f -> %>
   <div class="pf-u-display-flex pf-u-flex-direction-row ">
-    <%= get_form_select_field(f, :entity_schema, [{"---", ""}] ++ [{"---", ""}] ++ (schemas() |> Enum.map(&{&1, &1}) )) %>
-    <%= get_form_text_field(f, :entity_id) %>
+    <%= get_form_select_field(f, :entity_schema, "Schema", [{"---", ""}] ++ [{"---", ""}] ++ (schemas() |> Enum.map(&{&1, &1}) )) %>
+    <%= get_form_text_field(f, :entity_id, "Schema") %>
     <div class="pf-c-form__group pf-m-action">
       <div class="pf-c-form__actions">
         <%= submit gettext("Version list"), class: "pf-c-button pf-m-secondary" %>

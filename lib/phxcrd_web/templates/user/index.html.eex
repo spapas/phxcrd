@@ -1,30 +1,16 @@
 <%= title(gettext("User list")) %>
 
 <%= form_for @changeset, AdminRoutes.user_path(@conn, :index), [method: :get, class: "row row-cols-md-auto g-3 align-items-center", as: :filter],  fn f -> %>
-  <div class="col-12">
-    <%= label f, :username, gettext("Username"), class: "form-label" %>
-    <%= text_input f, :username, class: "form-control" %>
-  </div>
-  <div class="col-12">
-    <%= label f, :authority_name, gettext("Authority name"), class: "form-label" %>
-    <%= text_input f, :authority_name, class: "form-control"  %>
-  </div>
-  <div class="col-12">
-    <%= label f, :permission_name, gettext("Permission name"), class: "form-label" %>
-    <%= text_input f, :permission_name, class: "form-control"   %>
+  <%= get_form_text_field(f, :username, gettext("Username")) %>
+  <%= get_form_text_field(f, :authority_name, gettext("Authority name")) %>
+  <%= get_form_text_field(f, :permission_name, gettext("Permission name")) %>
+  <%= get_form_text_field(f, :last_login_date, gettext("Last login date")) %>
 
-  </div>
-  <div class="col-12">
-    <%= label f, :last_login_date, gettext("Last login date"), class: "form-label" %>
-    <%= text_input(f, :last_login_date, class: ("form-control " <> (if has_error(f, :last_login_date), do: "is-invalid", else: ""))) %>
-    <%= error_tag f, :last_login_date %>
-
-  </div>
   <div class="col-12 d-flex align-self-end">
     <%= submit gettext("Filter"), class: "btn btn-primary" %>
     <%= link gettext("Reset"), to: AdminRoutes.user_path(@conn, :index), class: "btn btn-secondary" %>
   </div>
-</div> <!-- flex -->
+</div>
 
 <% end %>
 

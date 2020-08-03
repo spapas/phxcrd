@@ -2,8 +2,8 @@
 
 <%= form_for @changeset, AdminRoutes.authority_path(@conn, :index), [method: :get,  class: "pf-c-form ", as: :filter],  fn f -> %>
   <div class="pf-u-display-flex pf-u-flex-direction-row ">
-    <%= get_form_text_field(f, :authority_name) %>
-    <%= get_form_select_field(f, :authority_kind_id, [{"---", ""}] ++ (Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id}) )) %>
+    <%= get_form_text_field(f, :authority_name, gettext("Authority name")) %>
+    <%= get_form_select_field(f, :authority_kind_id, gettext("Authority kind"), [{"---", ""}] ++ (Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id}) )) %>
     <div class="pf-c-form__group pf-m-action">
       <div class="pf-c-form__actions">
         <%= submit gettext("Filter"), class: "pf-c-button pf-m-secondary" %>

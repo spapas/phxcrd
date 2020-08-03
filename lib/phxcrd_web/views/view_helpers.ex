@@ -144,22 +144,6 @@ defmodule PhxcrdWeb.ViewHelpers do
 
   def get_breadcrumbs() do
     ~E"""
-      <section class="pf-c-page__main-breadcrumb">
-      <nav class="pf-c-breadcrumb" aria-label="breadcrumb">
-        <ol class="pf-c-breadcrumb__list">
-          <li class="pf-c-breadcrumb__item">
-            <a href="#" class="pf-c-breadcrumb__link">Section home</a>
-          </li>
-
-          <li class="pf-c-breadcrumb__item">
-            <span class="pf-c-breadcrumb__item-divider">
-              <i class="fas fa-angle-right" aria-hidden="true"></i>
-            </span>
-            <a href="#" class="pf-c-breadcrumb__link pf-m-current" aria-current="page">Section landing</a>
-          </li>
-        </ol>
-      </nav>
-    </section>
     """
   end
 
@@ -216,41 +200,34 @@ defmodule PhxcrdWeb.ViewHelpers do
     ~E"<h2 class=''><%= title %></h2>"
   end
 
-  def get_form_field(fo, fi, input) do
+  def get_form_field(fo, fi, label_text, input) do
     ~E"""
-    <div class="pf-c-form__group">
-      <div class="pf-c-form__group-label">
-        <label class="pf-c-form__label" for="help-text-form-address">
-          <%= label(fo, fi, class: "pf-c-form__label-text") %>
-          <span class="pf-c-form__label-required" aria-hidden="true">&#42;</span>
-        </label>
-      </div>
-      <div class="pf-c-form__group-control">
-        <%= input %>
-        <%= error_tag(fo, fi) %>
-      </div>
+    <div class="col-12">
+      <%= label fo, fi, label_text, class: "form-label" %>
+      <%= input %>
+      <%= error_tag fo, fi %>
     </div>
     """
   end
 
-  def get_form_text_field(fo, fi) do
-    get_form_field(fo, fi, text_input(fo, fi, class: "pf-c-form-control"))
+  def get_form_text_field(fo, fi, label_text) do
+    get_form_field(fo, fi, label_text, text_input(fo, fi, class: ("form-control " <> (if has_error(fo, fi), do: "is-invalid", else: ""))))
   end
 
-  def get_form_pass_field(fo, fi) do
-    get_form_field(fo, fi, password_input(fo, fi, class: "pf-c-form-control"))
+  def get_form_pass_field(fo, fi, label_text) do
+    get_form_field(fo, fi, label_text, password_input(fo, fi, class: "pf-c-form-control"))
   end
 
-  def get_form_check_field(fo, fi) do
-    get_form_field(fo, fi, checkbox(fo, fi, class: "pf-c-check__input"))
+  def get_form_check_field(fo, fi, label_text) do
+    get_form_field(fo, fi, label_text, checkbox(fo, fi, class: "pf-c-check__input"))
   end
 
-  def get_form_select_field(fo, fi, val) do
-    get_form_field(fo, fi, select(fo, fi, val, class: "pf-c-form-control", style: "width: 100%"))
+  def get_form_select_field(fo, fi, label_text, val) do
+    get_form_field(fo, fi, label_text, select(fo, fi, val, class: "pf-c-form-control", style: "width: 100%"))
   end
 
-  def get_form_multi_select_field(fo, fi, vals, sel ) do
-    get_form_field(fo, fi, multiple_select(fo, fi, vals, selected: sel, class: "pf-c-form-control",  style: "width: 100%"))
+  def get_form_multi_select_field(fo, fi, label_text, vals, sel ) do
+    get_form_field(fo, fi, label_text, multiple_select(fo, fi, vals, selected: sel, class: "pf-c-form-control",  style: "width: 100%"))
   end
 
 

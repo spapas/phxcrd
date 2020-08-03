@@ -2,4 +2,4 @@
 
 <%= render "form.html", Map.put(assigns, :action, AdminRoutes.user_path(@conn, :create)) %>
 
-<span><%= link "Back", to: AdminRoutes.user_path(@conn, :index), class: "pf-c-button pf-m-secondary" %></span>
+<span><%= link "Back", to: AdminRoutes.user_path(@conn, :index), class: "btn btn-secondary" %></span>

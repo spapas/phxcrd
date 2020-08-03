@@ -5,19 +5,19 @@
   </div>
 <% end %>
 
-<%= get_form_text_field(f, :username) %>
-<%= get_form_check_field(f, :is_enabled ) %>
-<%= get_form_text_field(f, :name) %>
-<%= get_form_text_field(f, :email) %>
-<%= get_form_text_field(f, :first_name) %>
-<%= get_form_text_field(f, :last_name) %>
+<%= get_form_text_field(f, :username, gettext("Username")) %>
+<%= get_form_check_field(f, :is_enabled, gettext("Is enabled") ) %>
+<%= get_form_text_field(f, :name, gettext("Name")) %>
+<%= get_form_text_field(f, :email, gettext("Email")) %>
+<%= get_form_text_field(f, :first_name, gettext("First name")) %>
+<%= get_form_text_field(f, :last_name, gettext("Last name")) %>
 
-<%= get_form_select_field(f, :authority_id, [
+<%= get_form_select_field(f, :authority_id, gettext("Authority"), [
       (with sv when not is_nil(sv) <- get_select_value(@changeset, :authority_id),
                                   a <- Phxcrd.Auth.get_authority!(sv), do: {a.name, a.id})
     ]) %>
 
-<%= get_form_multi_select_field(f, :permissions, (
+<%= get_form_multi_select_field(f, :permissions, gettext("Permissions"), (
   Phxcrd.Auth.list_permissions |> Enum.map(&{&1.name, &1.id})
   ), if(assigns[:user], do: Enum.map(@user.permissions, &(&1.id)), else: [])) %>
 
@@ -31,8 +31,7 @@ Current: <%= @changeset.data.photo_path %>
   </div>
 
 <div>
-  <%= submit gettext("Save"), class: "pf-c-button pf-m-primary" %>
+  <%= submit gettext("Save"), class: "btn btn-primary" %>
 </div>
-
 
 <% end %>
