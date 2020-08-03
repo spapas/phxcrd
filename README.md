@@ -128,6 +128,8 @@ set NEW_NAME="NewName"
 set NEW_OTP="new_name"
 ```
 
+Also notice it needs some utilities like sed and xargs which must be available to your github for windows installation folder.
+
 ## Deploying changes
 
 I've provided a simple fabric script for that: The script will
