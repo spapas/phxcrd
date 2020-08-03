@@ -102,29 +102,42 @@ defmodule PhxcrdWeb.ViewHelpers do
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">P·H·X·C·R·D</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbar">
-          <ul class="navbar-nav mr-auto mb-2 mb-md-0">
+          <ul class="navbar-nav mr-auto mb-2 mb-md-0 ">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Home</a>
+              <a class="nav-link" aria-current="page" href="/"><%= gettext("Home") %></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Dropdown</a>
-              <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
+            <%= if @user_signed_in? and @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false"><%= gettext("Management") %></a>
+                <ul class="dropdown-menu " aria-labelledby="dropdown01">
+                  <%= if @perms |> Enum.member?("superuser") do %>
+                    <li>
+                      <%= link gettext("Users"), to: AdminRoutes.user_path(@conn, :index), class: "dropdown-item"%>
+                    </li>
+                    <li>
+                      <%= link gettext("Permissions"), to: AdminRoutes.permission_path(@conn, :index), class: "dropdown-item"%>
+                    </li>
+                    <li>
+                      <%= link gettext("Versions"), to: AdminRoutes.version_path(@conn, :index), class: "dropdown-item" %>
+                    </li>
+                  <% end %>
+                  <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
+                    <li>
+                      <%= link gettext("Authorities"), to: AdminRoutes.authority_path(@conn, :index), class: "dropdown-item" %>
+                    </li>
+                    <li>
+                      <%= link gettext("Live Authorities"), to: AdminRoutes.authority_index_path(@conn, :index), class: "dropdown-item" %>
+                    </li>
+                  <% end %>
+
+                </ul>
+              </li>
+            <% end %>
           </ul>
           <div class="d-flex">
             <%= if @user_signed_in? do %>

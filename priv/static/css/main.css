@@ -173,3 +173,7 @@ body {
 a.phx-modal-close {
   text-decoration: none;
 }
+
+.dropdown-item:hover {
+  background-color: #ccc;
+}
