@@ -21,7 +21,7 @@ This doesn't include webpack or any other JS bundlers; just use good ol' vanilla
 * Scrievner for pagination (check authority_controller for usage)
 * Auditing models with ex_audit
 * Send mails with bamboo (smtp)
-* A milligram styled template
+* A bootstrap 5 styled template
 * A script to easily *rename* this project so it can be used as a template for your own projects
 * A way to define filters for a query among joins etc (check authority_controller for example - https://spapas.github.io/2019/07/25/declarative-ecto-query-filters/)
 * Allow sorting pages with click (https://spapas.github.io/2019/10/17/declarative-ecto-query-sorting/)
