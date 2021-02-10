@@ -1,7 +1,6 @@
 defmodule PhxcrdWeb.Router do
   use PhxcrdWeb, :router
   use Plug.ErrorHandler
-  use Sentry.Plug
   import Phoenix.LiveDashboard.Router
 
   pipeline :browser do

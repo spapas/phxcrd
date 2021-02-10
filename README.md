@@ -1,6 +1,6 @@
 # Phxcrd
 
-**Updated with Phoenix 1.5.1**
+**Updated with Phoenix 1.5.x**
 
 A project-template for starting CRUD apps with Phoenix framework. This is based mainly on my own requirements.
 
@@ -139,7 +139,7 @@ I've provided a simple fabric script for that: The script will
 * Install deps and run migrations
 * Restart server (using supervisorctl)
 
-Just run `fab env full_deploy` (env = uat or prod) and you should be good to go. Notice that I use fabric 1.x (because fabric 2.x does not support various things) thus you'll need to have python 2.x installed.
+Just run `fab env full_deploy` (env = uat or prod) and you should be good to go. Notice that I use the fabric 1.x syntax (because fabric 2.x does not support various things) thus you'll need to use fab-classic (`pip install fab-classic`).
 
 ## Signal handling
 
