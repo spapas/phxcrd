@@ -11,6 +11,8 @@ use Mix.Config
 # before starting your production server.
 config :phxcrd, PhxcrdWeb.Endpoint,
   http: [:inet4, port: System.get_env("PORT") || 4001],
+  # Or you can use a unix socket
+  # http: [port: 0, ip: {:local, "phxcrd.sock"}],
   url: [host: "foo.bar.gr", port: 4001],
   cache_static_manifest: "priv/static/cache_manifest.json"
 

@@ -27,7 +27,12 @@ defmodule Phxcrd.Application do
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Phxcrd.Supervisor]
-    Supervisor.start_link(children, opts)
+    # Old socket file must be deleted before starting again the app
+    # File.rm("phxcrd.sock")
+    val = Supervisor.start_link(children, opts)
+    # You can also changeg the socket perms here
+    # File.chmod("phxcrd.sock", 0o777)
+    val
   end
 
   # Tell Phoenix to update the endpoint configuration
