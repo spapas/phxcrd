@@ -102,54 +102,58 @@ defmodule PhxcrdWeb.ViewHelpers do
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">P·H·X·C·R·D</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbar">
-          <ul class="navbar-nav mr-auto mb-2 mb-md-0 ">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/"><%= gettext("Home") %></a>
-            </li>
-            <%= if @user_signed_in? and @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false"><%= gettext("Management") %></a>
-                <ul class="dropdown-menu " aria-labelledby="dropdown01">
-                  <%= if @perms |> Enum.member?("superuser") do %>
-                    <li>
-                      <%= link gettext("Users"), to: AdminRoutes.user_path(@conn, :index), class: "dropdown-item"%>
-                    </li>
-                    <li>
-                      <%= link gettext("Permissions"), to: AdminRoutes.permission_path(@conn, :index), class: "dropdown-item"%>
-                    </li>
-                    <li>
-                      <%= link gettext("Versions"), to: AdminRoutes.version_path(@conn, :index), class: "dropdown-item" %>
-                    </li>
-                  <% end %>
-                  <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
-                    <li>
-                      <%= link gettext("Authorities"), to: AdminRoutes.authority_path(@conn, :index), class: "dropdown-item" %>
-                    </li>
-                    <li>
-                      <%= link gettext("Live Authorities"), to: AdminRoutes.authority_index_path(@conn, :index), class: "dropdown-item" %>
-                    </li>
-                  <% end %>
-
-                </ul>
+          <div class='d-flex justify-content-between container-fluid'>
+            <ul class="navbar-nav mr-auto mb-2 mb-md-0 ">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/"><%= gettext("Home") %></a>
               </li>
-            <% end %>
-          </ul>
-          <div class="d-flex">
-            <%= if @user_signed_in? do %>
-              <%= form_for @conn, Routes.session_path(@conn, :delete), [ method: :delete, as: :user, id: "logout-form"], fn _ -> %>
-                <%= submit( (@username <> " | " <> gettext("Log out")), class: "btn btn-outline-info btn-sm") %>
+              <%= if @user_signed_in? and @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><%= gettext("Management") %></a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                    <%= if @perms |> Enum.member?("superuser") do %>
+                      <li>
+                        <%= link gettext("Users"), to: AdminRoutes.user_path(@conn, :index), class: "dropdown-item"%>
+                      </li>
+                      <li>
+                        <%= link gettext("Permissions"), to: AdminRoutes.permission_path(@conn, :index), class: "dropdown-item"%>
+                      </li>
+                      <li>
+                        <%= link gettext("Versions"), to: AdminRoutes.version_path(@conn, :index), class: "dropdown-item" %>
+                      </li>
+                    <% end %>
+                    <%= if @perms |> Enum.any?(&(&1 == "superuser" || &1 == "admin")) do %>
+                      <li>
+                        <%= link gettext("Authorities"), to: AdminRoutes.authority_path(@conn, :index), class: "dropdown-item" %>
+                      </li>
+                      <li>
+                        <%= link gettext("Live Authorities"), to: AdminRoutes.authority_index_path(@conn, :index), class: "dropdown-item" %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </li>
               <% end %>
-            <% else %>
-              <%= link gettext("Log in"), to: Routes.session_path(@conn, :new), class: "btn btn-outline-info btn-sm" %>
-            <% end %>
-          </div>
-        </div>
-      </div>
+            </ul>
+
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <%= if @user_signed_in? do %>
+                  <%= form_for @conn, Routes.session_path(@conn, :delete), [ method: :delete, as: :user, id: "logout-form"], fn _ -> %>
+                    <%= submit( (@username <> " | " <> gettext("Log out")), class: "btn btn-outline-info btn-sm") %>
+                  <% end %>
+                <% else %>
+                  <%= link gettext("Log in"), to: Routes.session_path(@conn, :new), class: "btn btn-outline-info btn-sm" %>
+                <% end %>
+              </li>
+            </ul>
+          </div> <!-- d-flex -->
+        </div> <!-- navbar -->
+      </div> <!-- container fluid -->
     </nav>
 
     """

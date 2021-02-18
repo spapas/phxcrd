@@ -11,11 +11,12 @@
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/select2.min.css") %>' />
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/nprogress.css") %>' />
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link phx-track-static href="<%= Routes.static_path(@conn, "/bootstrap/css/bootstrap.min.css") %>" rel="stylesheet">
+    <link phx-track-static href="<%= Routes.static_path(@conn, "/bootstrap/css/bootstrap-utilities.min.css") %>" rel="stylesheet">
 
     <link rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/main.css") %>' />
     <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css' />
-
+    <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/bootstrap/js/bootstrap.bundle.min.js") %>"></script>
     <script defer type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
     <%= render_existing view_module(@conn), "extra_style.html", assigns %>
 
@@ -45,9 +46,10 @@
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/jquery-3.4.1.min.js") %>'></script>
   <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
 
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  <link phx-track-static href="<%= Routes.static_path(@conn, "/bootstrap/css/bootstrap.min.css") %>" rel="stylesheet">
+  <link phx-track-static href="<%= Routes.static_path(@conn, "/bootstrap/css/bootstrap-utilities.min.css") %>" rel="stylesheet">
 
+  <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/bootstrap/js/bootstrap.bundle.min.js") %>"></script>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/select2.min.js") %>'></script>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/phoenix.js") %>'></script>
   <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/main.js") %>'></script>
@@ -58,43 +60,6 @@
 
   <script>
     $(function() {
-/*
-      $('body').click(function(e) {
-          if (!document.getElementById('kebab-container').contains(e.target)) {
-            $('#kebab-menu').hide()
-          }
-
-          if (!document.getElementById('burger-button').contains(e.target) && !document.getElementById('burger-menu').contains(e.target)  ) {
-            $('#burger-menu').hide()
-          }
-      });
-
-      $('#kebab-button').click(function() {
-        $('#kebab-menu').show()
-      })
-
-      $('#burger-button').click(function() {
-        console.log("B")
-        $('#burger-menu').show()
-      })
-
-      $("#scroll-left").click(function () {
-        var leftPos = $('.pf-c-nav__list').scrollLeft();
-        console.log("L")
-        $(".pf-c-nav__list").animate({scrollLeft: leftPos - 200}, 300);
-      });
-
-      $("#scroll-right").click(function () {
-        var leftPos = $('.pf-c-nav__list').scrollLeft();
-        console.log("R")
-        $(".pf-c-nav__list").animate({scrollLeft: leftPos + 200}, 300);
-      });
-
-      $('#logout-button').click(function() {
-        console.log("Z")
-        $('#logout-form').submit()
-      })
-      */
     });
   </script>
 
