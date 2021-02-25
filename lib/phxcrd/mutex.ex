@@ -13,6 +13,11 @@ defmodule Phxcrd.Mutex do
     end
   end
 
+  def get_state() do
+    {:ok, locks} = GenServer.call(__MODULE__, :get_state)
+    locks
+  end
+
   @impl true
   def init(locks) do
     Logger.info("Mutex start")
@@ -33,6 +38,11 @@ defmodule Phxcrd.Mutex do
         Map.put(map, pid, id)
       }}
     end
+  end
+
+  @impl true
+  def handle_call(:get_state, _from, locks) do
+    {:reply, {:ok, locks},  locks}
   end
 
   @impl true
