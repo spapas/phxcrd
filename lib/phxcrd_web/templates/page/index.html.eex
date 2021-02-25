@@ -76,6 +76,9 @@
         <%= link gettext("Test Live"), to: Routes.page_path(@conn, :test_live)%>
       </li>
       <li>
+        <%= link gettext("Mutex"), to: Routes.mutex_path(@conn, :index) %>
+      </li>
+      <li>
         <%= link gettext("Live Dashboard"), to: Routes.live_dashboard_path(@conn, :home) %>
       </li>
     <ul>

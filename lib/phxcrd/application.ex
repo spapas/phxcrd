@@ -19,7 +19,8 @@ defmodule Phxcrd.Application do
       {Phoenix.PubSub, name: Phxcrd.PubSub},
       PhxcrdWeb.Presence,
       # Start the endpoint when the application starts
-      PhxcrdWeb.Endpoint
+      PhxcrdWeb.Endpoint,
+      Phxcrd.Mutex
       # Starts a worker by calling: Phxcrd.Worker.start_link(arg)
       # {Phxcrd.Worker, arg},
     ]
