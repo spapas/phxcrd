@@ -84,7 +84,7 @@
         }
     }
 
-    liveSocket = new phoenix_live_view.LiveSocket("/live", Phoenix.Socket, { params: { _csrf_token: csrfToken }, hooks: Hooks })
+    liveSocket = new LiveView.LiveSocket("/live", Phoenix.Socket, { params: { _csrf_token: csrfToken }, hooks: Hooks })
     liveSocket.connect()
     window.liveSocket = liveSocket
     // liveSocket.enableLatencySim(2000)

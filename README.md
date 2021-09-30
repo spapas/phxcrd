@@ -1,6 +1,6 @@
 # Phxcrd
 
-**Updated with Phoenix 1.5.x**
+**Updated with Phoenix 1.6.x**
 
 A project-template for starting CRUD apps with Phoenix framework. This is based mainly on my own requirements.
 
@@ -52,38 +52,17 @@ This doesn't include webpack or any other JS bundlers; just use good ol' vanilla
 
 ~~TL;DR: You'll need to install the MS VS Build tools and then run vcvarsall.bat amd64. Notice that the location of vcvaralls.bat is different for different versions so just search it. Then run `mix compile` to properly compile argon.~~
 
-Depracted! I changed it with `pbkdf2_elixir` to avoid the compilation step on Windows!
+Depracated! I changed it with `pbkdf2_elixir` to avoid the compilation step on Windows!
 
 ## Requirements
 
-I've tested it on both Windows 10 with
+I've tested it on  Windows 10 with
 
 ```
-Erlang/OTP 21 [erts-10.1] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1]
+Erlang/OTP 24 [erts-12.0] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [jit]
 
-Elixir 1.9.0 (compiled with Erlang/OTP 20)
+Elixir 1.12.3 (compiled with Erlang/OTP 22)
 ```
-
-and Centos 6.5 with
-
-```
-Erlang/OTP 21 [erts-10.3.5] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:1] [hipe]
-
-Elixir 1.8.2 (compiled with Erlang/OTP 21)
-```
-
-Please notice that to install Erlang I've used the repository from https://packages.erlang-solutions.com/erlang/.
-To install elixir I've just compiled from source, it worked flawlessly. I then moved elixir to /opt/elixir-1.8.2/
-and added
-
-```
-PATH=$PATH:/opt/elixir-1.8.2/bin/
-export PATH
-```
-
-to my `~/.bash_profile`.
-
-You'll also need wkhtmltopdf to be installed to support PDF generation (if you don't want it comment out the corresponding lines from mix.exs)
 
 
 ## Deploying
