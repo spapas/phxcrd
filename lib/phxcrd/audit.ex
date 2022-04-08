@@ -4,7 +4,6 @@ defmodule Phxcrd.Audit do
   """
 
   import Ecto.Query, warn: false
-  import Ecto.Query, warn: false
   alias Phxcrd.Repo
   alias Phxcrd.Audit.Version
   alias Phxcrd.Auth.User
