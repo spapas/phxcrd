@@ -52,6 +52,7 @@
       <td><%= authority.name %></td>
 
         <td>
+
           <.link navigate='/'>Edit</.link>
           <.link navigate={AdminRoutes.authority_index_path(@socket, :edit, authority)}>Edit</.link>
           <span><%= live_redirect "Show", to: AdminRoutes.authority_show_path(@socket, :show, authority), class: "btn btn-sm btn-info" %></span>
