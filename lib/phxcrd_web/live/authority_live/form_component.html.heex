@@ -1,3 +1,4 @@
+<div>
 <%= title @title %>
 
 <%= f = form_for @changeset, "#",
@@ -11,7 +12,7 @@
 <%= get_form_select_field(f, :authority_kind_id, gettext("Authority kind"), Phxcrd.Auth.list_authority_kinds |> Enum.map(&{&1.name, &1.id})) %>
 
 
-<div phx-hook="FixSelect2" phx-update="ignore">
+<div phx-hook="FixSelect2" phx-update="ignore" id='fixsel'>
 <%= get_form_multi_select_field(
   f,
   :users,
@@ -21,4 +22,5 @@
   ) %>
 
   <%= submit "Save", phx_disable_with: "Saving...", class: "btn btn-primary" %>
-</form>
+</div>
+</div>
