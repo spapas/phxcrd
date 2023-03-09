@@ -1,6 +1,6 @@
 # Phxcrd
 
-**Updated with Phoenix 1.6.x**
+**Updated with Phoenix 1.7.x**
 
 A project-template for starting CRUD apps with Phoenix framework. This is based mainly on my own requirements.
 
