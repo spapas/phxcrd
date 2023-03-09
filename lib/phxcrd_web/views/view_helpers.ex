@@ -7,7 +7,7 @@ defmodule PhxcrdWeb.ViewHelpers do
 
   # Import basic rendering functionality (render, render_layout, etc)
   import Phoenix.View
-
+  import Phoenix.Component
   import PhxcrdWeb.Gettext
   import PhxcrdWeb.ErrorHelpers
   alias PhxcrdWeb.Router.Helpers, as: Routes
@@ -98,7 +98,7 @@ defmodule PhxcrdWeb.ViewHelpers do
   end
 
   def get_nav(assigns) do
-    ~E"""
+    ~H"""
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">P·H·X·C·R·D</a>
@@ -159,14 +159,14 @@ defmodule PhxcrdWeb.ViewHelpers do
     """
   end
 
-  def get_breadcrumbs() do
-    ~E"""
+  def get_breadcrumbs(assigns) do
+    ~H"""
     """
   end
 
 
   def get_sidebar(assigns) do
-    ~E"""
+    ~H"""
     <div class="pf-c-page__sidebar" id='burger-menu' hidden>
       <div class="pf-c-page__sidebar-body">
         <nav class="pf-c-nav" aria-label="Global">
@@ -205,8 +205,8 @@ defmodule PhxcrdWeb.ViewHelpers do
                   </li>
                 <% end %>
               </ul>
-            </section>
           <% end %>
+            </section>
         </nav>
       </div>
     </div>
