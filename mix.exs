@@ -37,7 +37,9 @@ defmodule Phxcrd.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7.0"},
+      {:phoenix, "~> 1.6.0", override: true},
+      {:phoenix_html, "~> 3.0", override: true},
+      {:phoenix_view, "~> 2.0"},
       {:phoenix_live_view, "~> 0.18.3"},
       {:phoenix_live_dashboard, "~> 0.7.2"},
 
@@ -63,8 +65,7 @@ defmodule Phxcrd.MixProject do
       {:cowlib, "~> 2.11.0", override: true},
       # {:scrivener, "~> 2.0"},
       {:scrivener_ecto, "~> 2.0"},
-      # {:scrivener_html, "~> 1.8"},
-      {:scrivener_html, github: "jaimeiniesta/scrivener_html", branch: "relax_phoenix_dep"},
+      {:scrivener_html, "~> 1.8"},
       {:sentry, "~> 8.0.4"},
       {:bamboo_smtp, "~> 4.1.0"},
       {:pdf_generator, "== 0.6.2"},
