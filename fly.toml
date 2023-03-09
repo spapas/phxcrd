@@ -1,15 +1,14 @@
-# fly.toml file generated for bitter-frog-7134 on 2021-10-08T09:54:53+03:00
+# fly.toml file generated for winter-butterfly-5480 on 2021-10-13T14:58:15+03:00
 
-app = "bitter-frog-7134"
-
+app = "winter-butterfly-5480"
 
 kill_signal = "SIGTERM"
 kill_timeout = 5
 
-[env]
-
 [deploy]
   release_command = "/app/bin/phxcrd eval Phxcrd.Release.migrate"
+
+[env]
 
 [[services]]
   internal_port = 4000
@@ -28,7 +27,7 @@ kill_timeout = 5
     port = 443
 
   [[services.tcp_checks]]
-    grace_period = "30s" # allow some time for startup
+    grace_period = "30s"
     interval = "15s"
     restart_limit = 6
     timeout = "2s"

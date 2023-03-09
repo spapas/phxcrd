@@ -37,8 +37,11 @@ defmodule Phxcrd.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6.0"},
-      {:phoenix_pubsub, "~> 2.0"},
+      {:phoenix, "~> 1.7.0"},
+      {:phoenix_live_view, "~> 0.18.3"},
+      {:phoenix_live_dashboard, "~> 0.7.2"},
+
+      {:phoenix_pubsub, "~> 2.1"},
       {:phoenix_ecto, "~> 4.4"},
       # {:ecto_sql, "~> 3.2.2"},
       {:postgrex, ">=  0.15.8"},
@@ -47,7 +50,7 @@ defmodule Phxcrd.MixProject do
       {:gettext, "~> 0.16"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.1"},
-      {:phoenix_live_dashboard, "~> 0.5"},
+
       {:telemetry_poller, "~> 0.5"},
       {:telemetry_metrics, "~> 0.6"},
 
@@ -55,7 +58,7 @@ defmodule Phxcrd.MixProject do
       {:exldap, "~> 0.6"},
       {:canada, "~> 2.0.0"},
       {:ex_audit, "~> 0.9"},
-      {:phoenix_live_view, "~> 0.16.4"},
+
       {:cowboy, "~> 2.9.0", override: true},
       {:cowlib, "~> 2.11.0", override: true},
       # {:scrivener, "~> 2.0"},
