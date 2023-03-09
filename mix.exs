@@ -7,7 +7,6 @@ defmodule Phxcrd.MixProject do
       version: "0.1.0",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -37,7 +36,7 @@ defmodule Phxcrd.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6.0", override: true},
+      {:phoenix, "~> 1.7.0", override: true},
       {:phoenix_html, "~> 3.0", override: true},
       {:phoenix_view, "~> 2.0"},
       {:phoenix_live_view, "~> 0.18.3"},
@@ -47,7 +46,6 @@ defmodule Phxcrd.MixProject do
       {:phoenix_ecto, "~> 4.4"},
       # {:ecto_sql, "~> 3.2.2"},
       {:postgrex, ">=  0.15.8"},
-      {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.16"},
       {:jason, "~> 1.0"},

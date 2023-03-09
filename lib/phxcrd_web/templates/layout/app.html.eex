@@ -1,9 +1,9 @@
 <div>
-    <%= if get_flash(@conn, :info) do %>
-        <div class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></div >
+    <%= if Phoenix.Flash.get(@flash, :info) do %>
+        <div class="alert alert-info" role="alert"><%= Phoenix.Flash.get(@flash,  :info) %></div >
     <% end %>
-    <%= if get_flash(@conn, :error) do %>
-        <div class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></div >
+    <%= if Phoenix.Flash.get(@flash,  :error) do %>
+        <div class="alert alert-danger" role="alert"><%= Phoenix.Flash.get(@flash,  :error) %></div >
     <% end %>
     <%= @inner_content %>
 </div>

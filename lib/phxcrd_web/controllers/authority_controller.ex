@@ -7,7 +7,7 @@ defmodule PhxcrdWeb.AuthorityController do
   alias PhxcrdWeb.QueryFilterEx
   alias Phxcrd.Repo
   import Canada, only: [can?: 2]
-  import Ecto.Query, only: [from: 2, order_by: 3]
+  import Ecto.Query, only: [from: 2]
 
   plug Plugs.UserSignedIn
   plug Plugs.ExAuditPlug

@@ -27,7 +27,7 @@ defmodule PhxcrdWeb.AuthorityLive.DelComponent do
       {:error, %Ecto.Changeset{errors: [users: {reason, _}]}} ->
         {:noreply, assign(socket, :errors, "Error while deleting (" <> reason <> ")!")}
 
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, %Ecto.Changeset{} = _changeset} ->
         {:noreply, assign(socket, :errors, "Error, cannot delete!")}
     end
   end

@@ -6,7 +6,7 @@ defmodule PhxcrdWeb.UserController do
   alias Phxcrd.Repo
   alias PhxcrdWeb.QueryFilterEx
   import Canada, only: [can?: 2]
-  import Ecto.Query, only: [from: 1, from: 2]
+  import Ecto.Query, only: [from: 2]
 
   plug Plugs.UserSignedIn
   plug :cancan

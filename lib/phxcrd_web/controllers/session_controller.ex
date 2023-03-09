@@ -4,7 +4,6 @@ defmodule PhxcrdWeb.SessionController do
   alias Phxcrd.Repo
   require Logger
   import Ecto.Query, only: [from: 2]
-  import IEx
 
   def new(conn, _) do
     render(conn, "new.html")

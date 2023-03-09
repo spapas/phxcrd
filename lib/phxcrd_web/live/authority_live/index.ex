@@ -4,7 +4,7 @@ defmodule PhxcrdWeb.AuthorityLive.Index do
   alias Phxcrd.Auth
   alias Phxcrd.Auth.{Authority, AuthorityKind}
   alias Phxcrd.Repo
-  import Ecto.Query, only: [from: 2, order_by: 3]
+  import Ecto.Query, only: [from: 2]
   import Canada, only: [can?: 2]
 
   defp cancan(socket, _options \\ []) do

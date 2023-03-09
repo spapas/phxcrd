@@ -70,7 +70,7 @@ defmodule PhxcrdWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {PhxcrdWeb.LayoutView, "live.html"}
+        layout: {PhxcrdWeb.LayoutView, :live}
 
       unquote(view_helpers())
     end

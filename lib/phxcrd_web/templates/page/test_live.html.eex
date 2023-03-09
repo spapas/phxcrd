@@ -2,4 +2,4 @@
   <h1>Testing phoenix live views</h1>
 </section>
 
-<%= live_render(@conn, PhxcrdWeb.ThermostatLiveView, session: %{"user_id" => @user_id}) %>
+<%= Phoenix.LiveView.Controller.live_render(@conn, PhxcrdWeb.ThermostatLiveView, session: %{"user_id" => @user_id}) %>
