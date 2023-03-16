@@ -16,7 +16,7 @@ config :phxcrd, PhxcrdWeb.Endpoint,
   secret_key_base: "45DslMwn2lvg4O3WxPNJk1iJxa93sJQ2ARgQa2C/8YfN6ZnMnjg38MaITvRzdAT6",
   # render_errors: [view: PhxcrdWeb.ErrorHTML, accepts: ~w(html json)],
   render_errors: [
-    formats: [html: LiveBeatsWeb.ErrorHTML, json: LiveBeatsWeb.ErrorJSON],
+    formats: [html: PhxcrdWeb.ErrorHTML, json: PhxcrdWeb.ErrorJSON],
     layout: false
   ],
   pubsub_server: Phxcrd.PubSub,
