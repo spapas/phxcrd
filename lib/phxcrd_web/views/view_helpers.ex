@@ -7,7 +7,7 @@ defmodule PhxcrdWeb.ViewHelpers do
 
   # Import basic rendering functionality (render, render_layout, etc)
   import Phoenix.View
-  import Phoenix.Component
+  use Phoenix.Component
   import PhxcrdWeb.Gettext
   import PhxcrdWeb.ErrorHelpers
   alias PhxcrdWeb.Router.Helpers, as: Routes
@@ -213,10 +213,94 @@ defmodule PhxcrdWeb.ViewHelpers do
     """
   end
 
+  attr :title, :string
+
+  def titleh(assigns) do
+    ~H"<h2 class=''><%= @title %></h2>"
+  end
   def title(title) do
     ~E"<h2 class=''><%= title %></h2>"
   end
 
+  attr :form, :any, doc: "The datastructure ffor the Phoenix.HTML form"
+  attr :field, :atom, doc: "The form field"
+  attr :label, :string
+
+  slot :input, required: true
+
+  def form_field(assigns) do
+    ~H"""
+    <div class="col-12">
+      <%= label @form, @field, @label, class: "form-label" %>
+      <%= render_slot(@inner_block) %>
+      <%= error_tag @form, @field %>
+    </div>
+    """
+  end
+
+  attr :form, :any, doc: "The datastructure for the Phoenix.HTML form"
+  attr :field, :atom, doc: "The form field"
+  attr :label, :string
+
+  # <.form_text_field form={@f} field={:username} label="Username">
+  def form_text_field(assigns) do
+    ~H"""
+    <.form_field form={@form} field={@field} label={@label}>
+      <%= text_input(@form, @field, class: ("form-control " <> (if has_error(@form, @field), do: "is-invalid", else: ""))) %>
+    </.form_field>
+    """
+  end
+
+  attr :form, :any, doc: "The datastructure for the Phoenix.HTML form"
+  attr :field, :atom, doc: "The form field"
+  attr :label, :string
+  def form_pass_field(assigns) do
+    ~H"""
+    <.form_field form={@form} field={@field} label={@label}>
+      <%= password_input(@form, @field, class: ("form-control " <> (if has_error(@form, @field), do: "is-invalid", else: ""))) %>
+    </.form_field>
+    """
+  end
+
+  attr :form, :any, doc: "The datastructure for the Phoenix.HTML form"
+  attr :field, :atom, doc: "The form field"
+  attr :label, :string
+  def form_check_field(assigns) do
+    ~H"""
+    <.form_field form={@form} field={@field} label={@label}>
+      <%= checkbox(@form, @field, class: ("form-control " <> (if has_error(@form, @field), do: "is-invalid", else: ""))) %>
+    </.form_field>
+    """
+  end
+
+  attr :form, :any, doc: "The datastructure for the Phoenix.HTML form"
+  attr :field, :atom, doc: "The form field"
+  attr :label, :string
+  attr :value, :string
+  def form_select_field(assigns) do
+    ~H"""
+    <.form_field form={@form} field={@field} label={@label}>
+      <%= select(@form, @field, @value, style: "width: 100%", class: ("form-control " <> (if has_error(@form, @field), do: "is-invalid", else: ""))) %>
+    </.form_field>
+    """
+  end
+
+
+  attr :form, :any, doc: "The datastructure for the Phoenix.HTML form"
+  attr :field, :atom, doc: "The form field"
+  attr :label, :string
+  attr :values, :string
+  attr :selected, :string
+  def form_multi_select_field(assigns) do
+    ~H"""
+    <.form_field form={@form} field={@field} label={@label}>
+      <%= multiple_select(@form, @field, @values, selected: @selected, style: "width: 100%", class: ("form-control " <> (if has_error(@form, @field), do: "is-invalid", else: ""))) %>
+    </.form_field>
+    """
+  end
+
+
+  ##########
   def get_form_field(fo, fi, label_text, input) do
     ~E"""
     <div class="col-12">
@@ -246,7 +330,6 @@ defmodule PhxcrdWeb.ViewHelpers do
   def get_form_multi_select_field(fo, fi, label_text, vals, sel ) do
     get_form_field(fo, fi, label_text, multiple_select(fo, fi, vals, selected: sel, class: "form-control",  style: "width: 100%"))
   end
-
 
 
 end
