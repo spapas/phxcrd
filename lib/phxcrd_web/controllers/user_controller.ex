@@ -66,18 +66,18 @@ defmodule PhxcrdWeb.UserController do
       |> QueryFilterEx.filter(changeset, @user_filters)
       |> QueryFilterEx.sort_by_params(params, @user_sort_fields)
       |> Repo.all()
-
-    render(conn, "index.html", users: users, changeset: changeset)
+    # import IEx; IEx.pry
+    render(conn, :index, users: users, changeset: changeset)
   end
 
   def show(conn, %{"id" => id}) do
     user = Auth.get_user!(id)
-    render(conn, "show.html", user: user)
+    render(conn, :show, user: user)
   end
 
   def new(conn, _params) do
     changeset = Auth.change_user(%User{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, :new, changeset: changeset)
   end
 
   def create(conn, %{"user" => user_params}) do
@@ -88,14 +88,14 @@ defmodule PhxcrdWeb.UserController do
         |> redirect(to: AdminRoutes.user_path(conn, :show, user))
 
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, :new, changeset: changeset)
     end
   end
 
   def edit(conn, %{"id" => id}) do
     user = Auth.get_user!(id)
     changeset = Auth.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+    render(conn, :edit, user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
@@ -110,14 +110,14 @@ defmodule PhxcrdWeb.UserController do
         |> redirect(to: AdminRoutes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        render(conn, :edit, user: user, changeset: changeset)
     end
   end
 
   def change_password_get(conn, %{"id" => id}) do
     user = Auth.get_user!(id)
     changeset = Auth.change_user(user)
-    render(conn, "change_password.html", user: user, changeset: changeset)
+    render(conn, :change_password, user: user, changeset: changeset)
   end
 
   def change_password_post(conn, %{"id" => id, "user" => user_params}) do
@@ -130,7 +130,7 @@ defmodule PhxcrdWeb.UserController do
         |> redirect(to: AdminRoutes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "change_password.html", user: user, changeset: changeset)
+        render(conn, :change_password, user: user, changeset: changeset)
     end
   end
 

@@ -1,5 +1,5 @@
 <%= title gettext "New User" %>
 
-<%= render "form.html", Map.put(assigns, :action, AdminRoutes.user_path(@conn, :create)) %>
+<%= _form(Map.put(assigns, :action, AdminRoutes.user_path(@conn, :create))) %>
 
 <span><%= link "Back", to: AdminRoutes.user_path(@conn, :index), class: "btn btn-secondary" %></span>

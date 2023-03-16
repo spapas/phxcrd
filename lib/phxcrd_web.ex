@@ -17,9 +17,11 @@ defmodule PhxcrdWeb do
   and import those modules here.
   """
 
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+
   def controller do
     quote do
-      use Phoenix.Controller, namespace: PhxcrdWeb
+      use Phoenix.Controller, namespace: PhxcrdWeb, formats: [:html, :json], layouts: [html: PhxcrdWeb.Layouts]
 
       import Plug.Conn
       import PhxcrdWeb.Gettext
@@ -39,6 +41,19 @@ defmodule PhxcrdWeb do
 
       unquote(view_helpers())
       # Use all HTML functionality (forms, tags, etc)
+    end
+  end
+
+  def html do
+    quote do
+      use Phoenix.Component
+
+      # Import convenience functions from controllers
+      import Phoenix.Controller,
+        only: [get_csrf_token: 0, view_module: 1, view_template: 1]
+
+      # Include general helpers for rendering HTML
+      unquote(html_helpers())
     end
   end
 
@@ -69,10 +84,18 @@ defmodule PhxcrdWeb do
 
   def live_view do
     quote do
-      use Phoenix.LiveView,
-        layout: {PhxcrdWeb.LayoutView, :live}
+      use Phoenix.LiveView
 
       unquote(view_helpers())
+    end
+  end
+
+  def verified_routes do
+    quote do
+      use Phoenix.VerifiedRoutes,
+        endpoint: PhxcrdWeb.Endpoint,
+        router: PhxcrdWeb.Router,
+        statics: PhxcrdWeb.static_paths()
     end
   end
 
@@ -93,6 +116,24 @@ defmodule PhxcrdWeb do
       import PhxcrdWeb.Gettext
       alias PhxcrdWeb.Router.Helpers, as: Routes
       alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
+    end
+  end
+
+  defp html_helpers do
+    quote do
+      # Use all HTML functionality (forms, tags, etc)
+      use Phoenix.HTML
+
+      # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
+      use Phoenix.Component
+
+      # import PhxcrdWeb.CoreComponents
+      import PhxcrdWeb.ViewHelpers
+      import PhxcrdWeb.Gettext
+      alias PhxcrdWeb.Router.Helpers, as: Routes
+      alias PhxcrdWeb.AdminRouter.Helpers, as: AdminRoutes
+      alias Phoenix.LiveView.JS
+      unquote(verified_routes())
     end
   end
 

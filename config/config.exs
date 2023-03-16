@@ -5,7 +5,7 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :phxcrd,
   ecto_repos: [Phxcrd.Repo]
@@ -14,7 +14,11 @@ config :phxcrd,
 config :phxcrd, PhxcrdWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "45DslMwn2lvg4O3WxPNJk1iJxa93sJQ2ARgQa2C/8YfN6ZnMnjg38MaITvRzdAT6",
-  render_errors: [view: PhxcrdWeb.ErrorView, accepts: ~w(html json)],
+  # render_errors: [view: PhxcrdWeb.ErrorHTML, accepts: ~w(html json)],
+  render_errors: [
+    formats: [html: LiveBeatsWeb.ErrorHTML, json: LiveBeatsWeb.ErrorJSON],
+    layout: false
+  ],
   pubsub_server: Phxcrd.PubSub,
   live_view: [signing_salt: "xLfrf2IO"]
 

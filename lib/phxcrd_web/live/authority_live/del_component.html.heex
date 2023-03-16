@@ -1,3 +1,4 @@
+<div>
 <h2><%= @title %></h2>
 
 <%= form_for :delete, "#",
@@ -12,5 +13,6 @@
   &nbsp;<span style="display: inline" class="help-block"><%= @errors %></span>
 
   </div>
-<br />
+
   <%= submit "Delete", phx_disable_with: "Deleting...", class: "btn btn-danger" %>
+</div>

@@ -1,6 +1,6 @@
 <%= title("User data") %>
 
-    <img src='<%= AdminRoutes.user_path(@conn, :get_photo, @user) %>' />
+    <img src={AdminRoutes.user_path(@conn, :get_photo, @user)} />
 
     <%= if @user.is_enabled do %>
     <h3>User is enabled</h3>

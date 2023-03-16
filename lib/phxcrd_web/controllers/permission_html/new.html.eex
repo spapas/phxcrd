@@ -1,5 +1,6 @@
 <%= title gettext "New Permission" %>
 
-<%= render "form.html", Map.put(assigns, :action, AdminRoutes.permission_path(@conn, :create)) %>
+
+<%= _form(Map.put(assigns, :action, AdminRoutes.permission_path(@conn, :create))) %>
 
 <span><%= link "Back", to: AdminRoutes.permission_path(@conn, :index), class: "btn btn-secondary" %></span>

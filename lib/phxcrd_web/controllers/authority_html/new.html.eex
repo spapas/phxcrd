@@ -1,4 +1,5 @@
 <%= title gettext("New authority") %>
 
-<%= render "form.html", Map.put(assigns, :action, AdminRoutes.authority_path(@conn, :create)) %>
+<%= _form(Map.put(assigns, :action, AdminRoutes.authority_path(@conn, :create))) %>
+
 <%= link gettext("Return"), to: AdminRoutes.authority_path(@conn, :index), class: "btn btn-secondary" %>

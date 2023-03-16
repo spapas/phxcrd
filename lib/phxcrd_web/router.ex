@@ -9,7 +9,7 @@ defmodule PhxcrdWeb.Router do
     # plug :fetch_flash
     # plug Phoenix.LiveView.Flash
     plug :fetch_live_flash
-    plug :put_root_layout, {PhxcrdWeb.LayoutView, :root}
+    plug :put_root_layout, {PhxcrdWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug Phxcrd.Plugs.SetCurrentUser
